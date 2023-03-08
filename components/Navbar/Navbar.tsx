@@ -23,6 +23,7 @@ import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { BsChevronDown } from "react-icons/bs";
 import { AiFillCaretDown } from "react-icons/ai";
+import { HiOutlineCode } from "react-icons/hi";
 const useStyles = createStyles((theme) => ({
   link: {
     display: "flex",
@@ -94,28 +95,9 @@ const useStyles = createStyles((theme) => ({
 
 const mockdata = [
   {
+    icon: HiOutlineCode,
     title: "Open source",
     description: "This Pokémon’s cry is very loud and distracting",
-  },
-  {
-    title: "Free for everyone",
-    description: "The fluid of Smeargle’s tail secretions changes",
-  },
-  {
-    title: "Documentation",
-    description: "Yanma is capable of seeing 360 degrees without",
-  },
-  {
-    title: "Security",
-    description: "The shell’s rounded shape and the grooves on its.",
-  },
-  {
-    title: "Analytics",
-    description: "This Pokémon uses its flying ability to quickly chase",
-  },
-  {
-    title: "Notifications",
-    description: "Combusken battles with the intensely hot flames it spews",
   },
 ];
 
@@ -129,7 +111,7 @@ export default function Navbar() {
     <UnstyledButton className={classes.subLink} key={item.title}>
       <Group noWrap align="flex-start">
         <ThemeIcon size={34} variant="default" radius="md">
-          {/* <item.icon size={rem(22)} color={theme.fn.primaryColor()} /> */}
+          <item.icon size={rem(22)} color={theme.fn.primaryColor()} />
         </ThemeIcon>
         <div>
           <Text size="sm" fw={500}>
@@ -144,11 +126,14 @@ export default function Navbar() {
   ));
 
   return (
-    <Box pb={120}>
+    <Box>
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: "100%" }}>
-          {/* <MantineLogo size={30} /> */}
-          <Link href={"/"}>Online Edu</Link>
+          <Link href={"/"}>
+            <Text fw={"bold"} tt={"uppercase"} fz={"md"}>
+              Online Edu
+            </Text>
+          </Link>
 
           <Group
             sx={{ height: "100%" }}
@@ -168,15 +153,14 @@ export default function Navbar() {
               <HoverCard.Target>
                 <a href="#" className={classes.link}>
                   <Center inline>
-                    <Box component="span" mr={5}>
+                    <Box component="span" mr={6}>
                       Features
                     </Box>
-                    {/* <IconChevronDown
+
+                    <AiFillCaretDown
                       size={16}
                       color={theme.fn.primaryColor()}
-                    /> */}
-
-                    <AiFillCaretDown color={theme.fn.primaryColor()} />
+                    />
                   </Center>
                 </a>
               </HoverCard.Target>
@@ -231,6 +215,7 @@ export default function Navbar() {
             opened={drawerOpened}
             onClick={toggleDrawer}
             className={classes.hiddenDesktop}
+            size={"sm"}
           />
         </Group>
       </Header>
@@ -240,7 +225,7 @@ export default function Navbar() {
         onClose={closeDrawer}
         size="100%"
         padding="md"
-        title="Navigation"
+        title="ONLINE EDU"
         className={classes.hiddenDesktop}
         zIndex={1000000}
       >
@@ -255,10 +240,11 @@ export default function Navbar() {
           </a>
           <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
-              <Box component="span" mr={5}>
+              <Box component="span" mr={10}>
                 Features
               </Box>
-              {/* <IconChevronDown size={16} color={theme.fn.primaryColor()} /> */}
+
+              <BsChevronDown size={16} color={theme.fn.primaryColor()} />
             </Center>
           </UnstyledButton>
           <Collapse in={linksOpened}>{links}</Collapse>
