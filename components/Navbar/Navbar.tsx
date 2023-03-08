@@ -17,6 +17,7 @@ import {
   Collapse,
   ScrollArea,
   rem,
+  Container,
 } from "@mantine/core";
 
 import { useDisclosure } from "@mantine/hooks";
@@ -24,6 +25,8 @@ import Link from "next/link";
 import { BsChevronDown } from "react-icons/bs";
 import { AiFillCaretDown } from "react-icons/ai";
 import { HiOutlineCode } from "react-icons/hi";
+import { TbBrandMantine } from "react-icons/tb";
+
 const useStyles = createStyles((theme) => ({
   link: {
     display: "flex",
@@ -53,7 +56,7 @@ const useStyles = createStyles((theme) => ({
 
   subLink: {
     width: "100%",
-    padding: `${theme.spacing.xs} ${theme.spacing.md}`,
+    padding: `${theme.spacing.xs} ${theme.spacing.xs}`,
     borderRadius: theme.radius.md,
 
     ...theme.fn.hover({
@@ -98,6 +101,7 @@ const mockdata = [
     icon: HiOutlineCode,
     title: "Open source",
     description: "This Pokémon’s cry is very loud and distracting",
+    url: "",
   },
 ];
 
@@ -127,97 +131,97 @@ export default function Navbar() {
 
   return (
     <Box>
-      <Header height={60} px="md">
-        <Group position="apart" sx={{ height: "100%" }}>
-          <Link href={"/"}>
-            <Text fw={"bold"} tt={"uppercase"} fz={"md"}>
-              Online Edu
-            </Text>
-          </Link>
+      <Header height={70}>
+        <Container sx={{ height: "100%" }} size="xl">
+          <Group position="apart" sx={{ height: "100%" }}>
+            <Link href={"/"} style={{ marginTop: "5px" }}>
+              <TbBrandMantine size={36} />
+            </Link>
 
-          <Group
-            sx={{ height: "100%" }}
-            spacing={0}
-            className={classes.hiddenMobile}
-          >
-            <a href="#" className={classes.link}>
-              Home
-            </a>
-            <HoverCard
-              width={600}
-              position="bottom"
-              radius="md"
-              shadow="md"
-              withinPortal
+            <Group
+              sx={{ height: "100%" }}
+              spacing={0}
+              className={classes.hiddenMobile}
             >
-              <HoverCard.Target>
-                <a href="#" className={classes.link}>
-                  <Center inline>
-                    <Box component="span" mr={6}>
-                      Features
-                    </Box>
+              <Link href="/" className={classes.link}>
+                Home
+              </Link>
+              <HoverCard
+                width={600}
+                position="bottom"
+                radius="md"
+                shadow="md"
+                withinPortal
+              >
+                <HoverCard.Target>
+                  <a href="#" className={classes.link}>
+                    <Center inline>
+                      <Box component="span" mr={6}>
+                        Course
+                      </Box>
 
-                    <AiFillCaretDown
-                      size={16}
-                      color={theme.fn.primaryColor()}
-                    />
-                  </Center>
-                </a>
-              </HoverCard.Target>
+                      <BsChevronDown
+                        size={16}
+                        color={theme.fn.primaryColor()}
+                      />
+                    </Center>
+                  </a>
+                </HoverCard.Target>
 
-              <HoverCard.Dropdown sx={{ overflow: "hidden" }}>
-                <Group position="apart" px="md">
-                  <Text fw={500}>Features</Text>
-                  <Anchor href="#" fz="xs">
-                    View all
-                  </Anchor>
-                </Group>
-
-                <Divider
-                  my="sm"
-                  mx="-md"
-                  color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-                />
-
-                <SimpleGrid cols={2} spacing={0}>
-                  {links}
-                </SimpleGrid>
-
-                <div className={classes.dropdownFooter}>
-                  <Group position="apart">
-                    <div>
-                      <Text fw={500} fz="sm">
-                        Get started
-                      </Text>
-                      <Text size="xs" color="dimmed">
-                        Their food sources have decreased, and their numbers
-                      </Text>
-                    </div>
-                    <Button variant="default">Get started</Button>
+                <HoverCard.Dropdown sx={{ overflow: "hidden" }}>
+                  <Group position="apart" px="md">
+                    <Text fw={500}>Features</Text>
+                    <Anchor href="#" fz="xs">
+                      View all
+                    </Anchor>
                   </Group>
-                </div>
-              </HoverCard.Dropdown>
-            </HoverCard>
-            <a href="#" className={classes.link}>
-              Learn
-            </a>
-            <a href="#" className={classes.link}>
-              Academy
-            </a>
-          </Group>
 
-          <Group className={classes.hiddenMobile}>
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
-          </Group>
+                  <Divider
+                    my="sm"
+                    mx="-md"
+                    color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
+                  />
 
-          <Burger
-            opened={drawerOpened}
-            onClick={toggleDrawer}
-            className={classes.hiddenDesktop}
-            size={"sm"}
-          />
-        </Group>
+                  <SimpleGrid cols={2} spacing={0}>
+                    {links}
+                  </SimpleGrid>
+
+                  <div className={classes.dropdownFooter}>
+                    <Group position="apart">
+                      <div>
+                        <Text fw={500} fz="sm">
+                          Get started
+                        </Text>
+                        <Text size="xs" color="dimmed">
+                          Their food sources have decreased, and their numbers
+                        </Text>
+                      </div>
+                      <Button variant="default">Get started</Button>
+                    </Group>
+                  </div>
+                </HoverCard.Dropdown>
+              </HoverCard>
+              <Link href="" className={classes.link}>
+                Learn
+              </Link>
+              <Link href="/dashboard" className={classes.link}>
+                Dashboard
+              </Link>
+            </Group>
+
+            <Group className={classes.hiddenMobile}>
+              <Button variant="default">Log in</Button>
+              <Button>Sign up</Button>
+            </Group>
+
+            <Burger
+              opened={drawerOpened}
+              onClick={toggleDrawer}
+              className={classes.hiddenDesktop}
+              size={"sm"}
+            />
+          </Group>
+        </Container>
       </Header>
 
       <Drawer
@@ -225,35 +229,30 @@ export default function Navbar() {
         onClose={closeDrawer}
         size="100%"
         padding="md"
-        title="ONLINE EDU"
+        title=" "
         className={classes.hiddenDesktop}
         zIndex={1000000}
       >
         <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
-          <Divider
-            my="sm"
-            color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-          />
-
-          <a href="#" className={classes.link}>
+          <Link href="" className={classes.link}>
             Home
-          </a>
+          </Link>
           <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
               <Box component="span" mr={10}>
-                Features
+                Course
               </Box>
 
               <BsChevronDown size={16} color={theme.fn.primaryColor()} />
             </Center>
           </UnstyledButton>
           <Collapse in={linksOpened}>{links}</Collapse>
-          <a href="#" className={classes.link}>
+          <Link href="" className={classes.link}>
             Learn
-          </a>
-          <a href="#" className={classes.link}>
-            Academy
-          </a>
+          </Link>
+          <Link href="" className={classes.link}>
+            Dashboard
+          </Link>
 
           <Divider
             my="sm"
@@ -262,7 +261,7 @@ export default function Navbar() {
 
           <Group position="center" grow pb="xl" px="md">
             <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
+            <Button variant={"default"}>Sign up</Button>
           </Group>
         </ScrollArea>
       </Drawer>

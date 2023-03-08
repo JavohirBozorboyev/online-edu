@@ -1,7 +1,12 @@
+import { Container } from "@mantine/core";
 import React, { ReactElement } from "react";
 
 const Dashboard = () => {
-  return <div>salom</div>;
+  return (
+    <>
+      <Container></Container>
+    </>
+  );
 };
 
 export default Dashboard;

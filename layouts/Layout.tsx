@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
 import * as React from "react";
 import { ReactElement } from "react";
@@ -11,6 +12,7 @@ export function Layout({ children }: ILayoutProps) {
     <div>
       <Navbar />
       {children}
+      <Footer />
     </div>
   );
 }
