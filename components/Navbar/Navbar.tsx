@@ -18,14 +18,19 @@ import {
   ScrollArea,
   rem,
   Container,
+  Accordion,
+  ActionIcon,
 } from "@mantine/core";
 
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { BsChevronDown } from "react-icons/bs";
-import { AiFillCaretDown } from "react-icons/ai";
+
+import { MdOutlineLightMode, MdOutlineDarkMode, MdLogin } from "react-icons/md";
+import { HiMenuAlt4 } from "react-icons/hi";
 import { HiOutlineCode } from "react-icons/hi";
 import { TbBrandMantine } from "react-icons/tb";
+import { useMantineColorScheme } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -110,6 +115,7 @@ export default function Navbar() {
     useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
@@ -131,11 +137,11 @@ export default function Navbar() {
 
   return (
     <Box>
-      <Header height={70}>
+      <Header height={60}>
         <Container sx={{ height: "100%" }} size="xl">
           <Group position="apart" sx={{ height: "100%" }}>
             <Link href={"/"} style={{ marginTop: "5px" }}>
-              <TbBrandMantine size={36} />
+              <TbBrandMantine size={36} color={theme.fn.primaryColor()} />
             </Link>
 
             <Group
@@ -143,9 +149,6 @@ export default function Navbar() {
               spacing={0}
               className={classes.hiddenMobile}
             >
-              <Link href="/" className={classes.link}>
-                Home
-              </Link>
               <HoverCard
                 width={600}
                 position="bottom"
@@ -154,18 +157,16 @@ export default function Navbar() {
                 withinPortal
               >
                 <HoverCard.Target>
-                  <a href="#" className={classes.link}>
+                  <div>
                     <Center inline>
-                      <Box component="span" mr={6}>
-                        Course
-                      </Box>
-
-                      <BsChevronDown
-                        size={16}
-                        color={theme.fn.primaryColor()}
-                      />
+                      <Button
+                        variant="default"
+                        rightIcon={<BsChevronDown size={16} />}
+                      >
+                        Course{" "}
+                      </Button>
                     </Center>
-                  </a>
+                  </div>
                 </HoverCard.Target>
 
                 <HoverCard.Dropdown sx={{ overflow: "hidden" }}>
@@ -201,25 +202,42 @@ export default function Navbar() {
                   </div>
                 </HoverCard.Dropdown>
               </HoverCard>
-              <Link href="" className={classes.link}>
-                Learn
-              </Link>
-              <Link href="/dashboard" className={classes.link}>
-                Dashboard
-              </Link>
             </Group>
 
-            <Group className={classes.hiddenMobile}>
-              <Button variant="default">Log in</Button>
-              <Button>Sign up</Button>
-            </Group>
-
-            <Burger
-              opened={drawerOpened}
-              onClick={toggleDrawer}
-              className={classes.hiddenDesktop}
-              size={"sm"}
-            />
+            <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
+              <ActionIcon
+                variant="light"
+                onClick={() => toggleColorScheme()}
+                sx={(theme) => ({
+                  backgroundColor:
+                    theme.colorScheme === "dark"
+                      ? theme.colors.dark[6]
+                      : theme.colors.gray[0],
+                  color:
+                    theme.colorScheme === "dark"
+                      ? theme.colors.yellow[4]
+                      : theme.colors.blue[6],
+                })}
+                size={"lg"}
+              >
+                {colorScheme === "dark" ? (
+                  <MdOutlineDarkMode size="1.2rem" />
+                ) : (
+                  <MdOutlineLightMode size="1.2rem" />
+                )}
+              </ActionIcon>
+              <ActionIcon
+                onClick={toggleDrawer}
+                variant="light"
+                className={classes.hiddenDesktop}
+                size={"lg"}
+              >
+                <HiMenuAlt4 size="1.2rem" />
+              </ActionIcon>
+              <Group className={classes.hiddenMobile}>
+                <Button leftIcon={<MdLogin size="1rem" />}>Login</Button>
+              </Group>
+            </Box>
           </Group>
         </Container>
       </Header>
@@ -234,9 +252,6 @@ export default function Navbar() {
         zIndex={1000000}
       >
         <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
-          <Link href="" className={classes.link}>
-            Home
-          </Link>
           <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
               <Box component="span" mr={10}>
@@ -247,12 +262,6 @@ export default function Navbar() {
             </Center>
           </UnstyledButton>
           <Collapse in={linksOpened}>{links}</Collapse>
-          <Link href="" className={classes.link}>
-            Learn
-          </Link>
-          <Link href="" className={classes.link}>
-            Dashboard
-          </Link>
 
           <Divider
             my="sm"
@@ -260,8 +269,7 @@ export default function Navbar() {
           />
 
           <Group position="center" grow pb="xl" px="md">
-            <Button variant="default">Log in</Button>
-            <Button variant={"default"}>Sign up</Button>
+            <Button leftIcon={<MdLogin size="1rem" />}>Login</Button>
           </Group>
         </ScrollArea>
       </Drawer>

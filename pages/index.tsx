@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Navbar from "@/components/Navbar/Navbar";
 import { ReactElement } from "react";
-import HomeHeroHeader from "@/PageComponents/Home/HomeHeroHeader";
+import HomeHeroHeader from "@/src/Page/Home/HomeHeroHeader";
 
 export default function Home() {
   return (
