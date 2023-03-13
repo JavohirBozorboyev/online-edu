@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   AppShell,
+  Navbar,
   Header,
   Footer,
   Aside,
@@ -9,8 +10,8 @@ import {
   Burger,
   useMantineTheme,
 } from "@mantine/core";
-import DashboardNav from "@/components/Navbar/DashboardNav";
-import Navbar from "@/components/Navbar/Navbar";
+import DashHeader from "@/components/Navbar/DashHeader";
+import DashNav from "@/components/Navbar/DashNav";
 
 export default function DashboardLayout({ children }: any) {
   const theme = useMantineTheme();
@@ -27,8 +28,13 @@ export default function DashboardLayout({ children }: any) {
       }}
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
-      navbar={<DashboardNav />}
-      header={<Navbar />}
+      navbar={<DashNav opened={opened} />}
+      // footer={
+      //   <Footer height={60} p="md">
+      //     Application footer
+      //   </Footer>
+      // }
+      header={<DashHeader opened={opened} setOpened={setOpened} />}
     >
       {children}
     </AppShell>

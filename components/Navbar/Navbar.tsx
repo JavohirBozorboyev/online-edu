@@ -113,7 +113,7 @@ const mockdata = [
 export default function Navbar() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
-  const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
+
   const { classes, theme } = useStyles();
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
@@ -137,7 +137,7 @@ export default function Navbar() {
 
   return (
     <Box>
-      <Header height={60} sx={{ position: "fixed" }} px={'sm'}>
+      <Header height={60} sx={{ position: "fixed" }} px={"sm"}>
         <>
           <Group position="apart" sx={{ height: "100%" }}>
             <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
@@ -230,6 +230,19 @@ export default function Navbar() {
               Kirish
             </Button>
           </Group>
+          <Box
+             
+          >
+            <Link href={"/"} className={classes.link}>
+              Home
+            </Link>
+            <Link href={"/"} className={classes.link}>
+              Kurslar
+            </Link>
+            <Link href={"/dashboard"} className={classes.link}>
+              Kabinet
+            </Link>
+          </Box>
         </ScrollArea>
       </Drawer>
     </Box>
