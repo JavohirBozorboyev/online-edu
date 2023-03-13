@@ -27,7 +27,7 @@ export default function DashboardLayout({ children }: any) {
       }}
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
-      // navbar={<DashboardNav />}
+      navbar={<DashboardNav />}
       header={<Navbar />}
     >
       {children}

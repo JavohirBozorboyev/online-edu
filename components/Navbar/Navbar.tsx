@@ -137,30 +137,46 @@ export default function Navbar() {
 
   return (
     <Box>
-      <Header height={60} sx={{ position: "fixed" }}>
-        <Container sx={{ height: "100%" }} size="xl">
+      <Header height={60} sx={{ position: "fixed" }} px={'sm'}>
+        <>
           <Group position="apart" sx={{ height: "100%" }}>
             <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
               <ActionIcon
                 onClick={toggleDrawer}
                 variant="light"
                 className={classes.hiddenDesktop}
-                
               >
                 <HiMenuAlt4 size="1.2rem" />
               </ActionIcon>
               <Link
                 href={"/"}
                 style={{
-                  
                   display: "flex",
                   alignItems: "center",
                   gap: "10px",
-
-                  
                 }}
               >
                 <TbBrandMantine size={42} color={theme.fn.primaryColor()} />
+              </Link>
+            </Box>
+            <Box
+              sx={{
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+
+                justifyContent: "center",
+              }}
+              className={classes.hiddenMobile}
+            >
+              <Link href={"/"} className={classes.link}>
+                Home
+              </Link>
+              <Link href={"/"} className={classes.link}>
+                Kurslar
+              </Link>
+              <Link href={"/dashboard"} className={classes.link}>
+                Kabinet
               </Link>
             </Box>
 
@@ -178,7 +194,6 @@ export default function Navbar() {
                       ? theme.colors.yellow[4]
                       : theme.colors.blue[6],
                 })}
-                
               >
                 {colorScheme !== "dark" ? (
                   <MdOutlineDarkMode size="1.2rem" />
@@ -192,7 +207,7 @@ export default function Navbar() {
               </Group>
             </Box>
           </Group>
-        </Container>
+        </>
       </Header>
 
       <Drawer
