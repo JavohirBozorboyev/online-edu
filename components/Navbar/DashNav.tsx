@@ -1,4 +1,4 @@
-import { Navbar, Text } from "@mantine/core";
+import { Box, NavLink, Navbar, Text } from "@mantine/core";
 import React from "react";
 import DashNavLinksGroup from "./DashNavLinksGroup";
 

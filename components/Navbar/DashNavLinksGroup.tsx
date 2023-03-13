@@ -9,7 +9,13 @@ import {
   createStyles,
   rem,
 } from "@mantine/core";
-import { TbCalendarStats, TbChevronLeft, TbChevronRight } from "react-icons/tb";
+import {
+  TbCalendarStats,
+  TbChevronLeft,
+  TbChevronRight,
+    TbHome,
+  TbSettings
+} from "react-icons/tb";
 
 const useStyles = createStyles((theme) => ({
   control: {
@@ -119,15 +125,25 @@ export function LinksGroup({
   );
 }
 
-const mockdata = {
-  label: "Releases",
-  icon: TbCalendarStats,
-  links: [
-    { label: "Upcoming releases", link: "/" },
-    { label: "Previous releases", link: "/" },
-    { label: "Releases schedule", link: "/" },
-  ],
-};
+const mockdata = [
+  {
+    label: "Home",
+    icon: TbHome,
+  },
+  {
+    label: "Releases",
+    icon: TbCalendarStats,
+    links: [
+      { label: "Upcoming releases", link: "/" },
+      { label: "Previous releases", link: "/" },
+      { label: "Releases schedule", link: "/" },
+    ],
+  },
+  {
+    label: "Settings",
+    icon: TbSettings,
+  },
+];
 
 export default function DashNavLinksGroup() {
   return (
@@ -137,9 +153,15 @@ export default function DashNavLinksGroup() {
           theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.white,
         borderRadius: "4px",
         overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
       })}
     >
-      <LinksGroup {...mockdata} />
+      {/* <LinksGroup {...mockdata} /> */}
+      {mockdata.map((item) => {
+        return <LinksGroup {...item} />;
+      })}
     </Box>
   );
 }
