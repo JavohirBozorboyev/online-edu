@@ -137,72 +137,32 @@ export default function Navbar() {
 
   return (
     <Box>
-      <Header height={60}>
+      <Header height={60} sx={{ position: "fixed" }}>
         <Container sx={{ height: "100%" }} size="xl">
           <Group position="apart" sx={{ height: "100%" }}>
-            <Link href={"/"} style={{ marginTop: "5px" }}>
-              <TbBrandMantine size={36} color={theme.fn.primaryColor()} />
-            </Link>
-
-            <Group
-              sx={{ height: "100%" }}
-              spacing={0}
-              className={classes.hiddenMobile}
-            >
-              <HoverCard
-                width={600}
-                position="bottom"
-                radius="md"
-                shadow="md"
-                withinPortal
+            <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
+              <ActionIcon
+                onClick={toggleDrawer}
+                variant="light"
+                className={classes.hiddenDesktop}
+                
               >
-                <HoverCard.Target>
-                  <div>
-                    <Center inline>
-                      <Button
-                        variant="default"
-                        rightIcon={<BsChevronDown size={16} />}
-                      >
-                        Course{" "}
-                      </Button>
-                    </Center>
-                  </div>
-                </HoverCard.Target>
+                <HiMenuAlt4 size="1.2rem" />
+              </ActionIcon>
+              <Link
+                href={"/"}
+                style={{
+                  
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
 
-                <HoverCard.Dropdown sx={{ overflow: "hidden" }}>
-                  <Group position="apart" px="md">
-                    <Text fw={500}>Features</Text>
-                    <Anchor href="#" fz="xs">
-                      View all
-                    </Anchor>
-                  </Group>
-
-                  <Divider
-                    my="sm"
-                    mx="-md"
-                    color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-                  />
-
-                  <SimpleGrid cols={2} spacing={0}>
-                    {links}
-                  </SimpleGrid>
-
-                  <div className={classes.dropdownFooter}>
-                    <Group position="apart">
-                      <div>
-                        <Text fw={500} fz="sm">
-                          Get started
-                        </Text>
-                        <Text size="xs" color="dimmed">
-                          Their food sources have decreased, and their numbers
-                        </Text>
-                      </div>
-                      <Button variant="default">Get started</Button>
-                    </Group>
-                  </div>
-                </HoverCard.Dropdown>
-              </HoverCard>
-            </Group>
+                  
+                }}
+              >
+                <TbBrandMantine size={42} color={theme.fn.primaryColor()} />
+              </Link>
+            </Box>
 
             <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
               <ActionIcon
@@ -218,24 +178,17 @@ export default function Navbar() {
                       ? theme.colors.yellow[4]
                       : theme.colors.blue[6],
                 })}
-                size={"lg"}
+                
               >
-                {colorScheme === "dark" ? (
+                {colorScheme !== "dark" ? (
                   <MdOutlineDarkMode size="1.2rem" />
                 ) : (
                   <MdOutlineLightMode size="1.2rem" />
                 )}
               </ActionIcon>
-              <ActionIcon
-                onClick={toggleDrawer}
-                variant="light"
-                className={classes.hiddenDesktop}
-                size={"lg"}
-              >
-                <HiMenuAlt4 size="1.2rem" />
-              </ActionIcon>
+
               <Group className={classes.hiddenMobile}>
-                <Button leftIcon={<MdLogin size="1rem" />}>Login</Button>
+                <Button leftIcon={<MdLogin size="1rem" />}>Kirish</Button>
               </Group>
             </Box>
           </Group>
@@ -245,31 +198,22 @@ export default function Navbar() {
       <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}
-        size="100%"
+        size="75%"
         padding="md"
         title=" "
         className={classes.hiddenDesktop}
         zIndex={1000000}
       >
-        <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
-          <UnstyledButton className={classes.link} onClick={toggleLinks}>
-            <Center inline>
-              <Box component="span" mr={10}>
-                Course
-              </Box>
-
-              <BsChevronDown size={16} color={theme.fn.primaryColor()} />
-            </Center>
-          </UnstyledButton>
-          <Collapse in={linksOpened}>{links}</Collapse>
-
-          <Divider
+        <ScrollArea h={`calc(100vh - ${rem(70)})`} mx="-md">
+          {/* <Divider
             my="sm"
             color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-          />
+          /> */}
 
           <Group position="center" grow pb="xl" px="md">
-            <Button leftIcon={<MdLogin size="1rem" />}>Login</Button>
+            <Button size="lg" leftIcon={<MdLogin size="1rem" />}>
+              Kirish
+            </Button>
           </Group>
         </ScrollArea>
       </Drawer>

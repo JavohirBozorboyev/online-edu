@@ -1,5 +1,5 @@
-import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
+import { AppShell, Header } from "@mantine/core";
 import * as React from "react";
 import { ReactElement } from "react";
 
@@ -9,10 +9,21 @@ export interface ILayoutProps {
 
 export function Layout({ children }: ILayoutProps) {
   return (
-    <div>
-      <Navbar />
-      {children}
-      <Footer />
-    </div>
+    <>
+      <AppShell
+        padding="md"
+        navbar={<Navbar />}
+        styles={(theme) => ({
+          main: {
+            backgroundColor:
+              theme.colorScheme === "dark"
+                ? theme.colors.dark[8]
+                : theme.colors.gray[0],
+          },
+        })}
+      >
+        {children}
+      </AppShell>
+    </>
   );
 }

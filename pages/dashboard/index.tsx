@@ -1,3 +1,4 @@
+import DashboardLayout from "@/layouts/DashboardLayout";
 import { Container } from "@mantine/core";
 import React, { ReactElement } from "react";
 
@@ -11,6 +12,10 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-// Dashboard.getLayout = function PageLayout(page: ReactElement) {
-//   return <>{page}</>;
-// };
+Dashboard.getLayout = function PageLayout(page: ReactElement) {
+  return (
+    <>
+      <DashboardLayout>{page}</DashboardLayout>
+    </>
+  );
+};
