@@ -31,7 +31,9 @@ import { HiMenuAlt4 } from "react-icons/hi";
 import { HiOutlineCode } from "react-icons/hi";
 import { TbBrandMantine } from "react-icons/tb";
 import { useMantineColorScheme } from "@mantine/core";
-
+import DashNavLinksGroup from "./DashNavLinksGroup";
+import { TbHome, TbSettings } from "react-icons/tb";
+import { RxDashboard } from "react-icons/rx";
 const useStyles = createStyles((theme) => ({
   link: {
     display: "flex",
@@ -103,10 +105,15 @@ const useStyles = createStyles((theme) => ({
 
 const mockdata = [
   {
-    icon: HiOutlineCode,
-    title: "Open source",
-    description: "This Pokémon’s cry is very loud and distracting",
-    url: "",
+    label: "Asosiy",
+    icon: TbHome,
+    url: "/",
+  },
+
+  {
+    label: "Dashboard",
+    icon: RxDashboard,
+    url: "/dashboard",
   },
 ];
 
@@ -116,24 +123,6 @@ export default function Navbar() {
 
   const { classes, theme } = useStyles();
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-
-  const links = mockdata.map((item) => (
-    <UnstyledButton className={classes.subLink} key={item.title}>
-      <Group noWrap align="flex-start">
-        <ThemeIcon size={34} variant="default" radius="md">
-          <item.icon size={rem(22)} color={theme.fn.primaryColor()} />
-        </ThemeIcon>
-        <div>
-          <Text size="sm" fw={500}>
-            {item.title}
-          </Text>
-          <Text size="xs" color="dimmed">
-            {item.description}
-          </Text>
-        </div>
-      </Group>
-    </UnstyledButton>
-  ));
 
   return (
     <Box>
@@ -145,6 +134,7 @@ export default function Navbar() {
                 onClick={toggleDrawer}
                 variant="light"
                 className={classes.hiddenDesktop}
+                size={"lg"}
               >
                 <HiMenuAlt4 size="1.2rem" />
               </ActionIcon>
@@ -169,15 +159,13 @@ export default function Navbar() {
               }}
               className={classes.hiddenMobile}
             >
-              <Link href={"/"} className={classes.link}>
-                Home
-              </Link>
-              <Link href={"/"} className={classes.link}>
-                Kurslar
-              </Link>
-              <Link href={"/dashboard"} className={classes.link}>
-                Kabinet
-              </Link>
+              {mockdata.map((item, i) => {
+                return (
+                  <Link href={item.url} key={i} className={classes.link}>
+                    {item.label}
+                  </Link>
+                );
+              })}
             </Box>
 
             <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
@@ -194,6 +182,7 @@ export default function Navbar() {
                       ? theme.colors.yellow[4]
                       : theme.colors.blue[6],
                 })}
+                size={"lg"}
               >
                 {colorScheme !== "dark" ? (
                   <MdOutlineDarkMode size="1.2rem" />
@@ -220,29 +209,19 @@ export default function Navbar() {
         zIndex={1000000}
       >
         <ScrollArea h={`calc(100vh - ${rem(70)})`} mx="-md">
-          {/* <Divider
-            my="sm"
+          <Divider
+            mb={"xs"}
             color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-          /> */}
+          />
 
           <Group position="center" grow pb="xl" px="md">
             <Button size="lg" leftIcon={<MdLogin size="1rem" />}>
               Kirish
             </Button>
           </Group>
-          <Box
-             
-          >
-            <Link href={"/"} className={classes.link}>
-              Home
-            </Link>
-            <Link href={"/"} className={classes.link}>
-              Kurslar
-            </Link>
-            <Link href={"/dashboard"} className={classes.link}>
-              Kabinet
-            </Link>
-          </Box>
+          <Group position="center" grow pb="xl" px="md">
+            <DashNavLinksGroup links={mockdata} />
+          </Group>
         </ScrollArea>
       </Drawer>
     </Box>

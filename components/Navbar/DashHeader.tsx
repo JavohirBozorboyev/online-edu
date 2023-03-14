@@ -68,6 +68,7 @@ const DashHeader = ({ opened, setOpened }: DashType) => {
                     ? theme.colors.yellow[4]
                     : theme.colors.blue[6],
               })}
+              size={'lg'}
             >
               {colorScheme !== "dark" ? (
                 <MdOutlineDarkMode size="1.2rem" />
@@ -88,6 +89,7 @@ const DashHeader = ({ opened, setOpened }: DashType) => {
                     ? theme.colors.yellow[4]
                     : theme.colors.blue[6],
               })}
+              size={'lg'}
             >
               {!fullscreen ? (
                 <RxEnterFullScreen size="1.2rem" />

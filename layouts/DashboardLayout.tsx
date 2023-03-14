@@ -11,7 +11,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import DashHeader from "@/components/Navbar/DashHeader";
-import DashNav from "@/components/Navbar/DashNav";
+import DashNav from "@/components/Navbar/DashNavbar";
 
 export default function DashboardLayout({ children }: any) {
   const theme = useMantineTheme();

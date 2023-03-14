@@ -9,13 +9,8 @@ import {
   createStyles,
   rem,
 } from "@mantine/core";
-import {
-  TbCalendarStats,
-  TbChevronLeft,
-  TbChevronRight,
-    TbHome,
-  TbSettings
-} from "react-icons/tb";
+import { TbChevronLeft, TbChevronRight } from "react-icons/tb";
+import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
   control: {
@@ -25,11 +20,12 @@ const useStyles = createStyles((theme) => ({
     padding: `${theme.spacing.xs} ${theme.spacing.md}`,
     color: theme.colorScheme === "dark" ? theme.colors.dark[0] : theme.black,
     fontSize: theme.fontSizes.sm,
+    transition: "all 0.5s ease",
 
     "&:hover": {
       backgroundColor:
         theme.colorScheme === "dark"
-          ? theme.colors.dark[6]
+          ? theme.colors.dark[4]
           : theme.colors.gray[0],
       color: theme.colorScheme === "dark" ? theme.white : theme.black,
     },
@@ -50,6 +46,7 @@ const useStyles = createStyles((theme) => ({
     borderLeft: `${rem(1)} solid ${
       theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
     }`,
+    transition: "all 0.5s ease",
 
     "&:hover": {
       backgroundColor:
@@ -68,6 +65,7 @@ const useStyles = createStyles((theme) => ({
 interface LinksGroupProps {
   icon: React.FC<any>;
   label: string;
+  url?: string;
   initiallyOpened?: boolean;
   links?: { label: string; link: string }[];
 }
@@ -75,6 +73,7 @@ interface LinksGroupProps {
 export function LinksGroup({
   icon: Icon,
   label,
+  url,
   initiallyOpened,
   links,
 }: LinksGroupProps) {
@@ -83,15 +82,11 @@ export function LinksGroup({
   const [opened, setOpened] = useState(initiallyOpened || false);
   const ChevronIcon = theme.dir === "ltr" ? TbChevronRight : TbChevronLeft;
   const items = (hasLinks ? links : []).map((link) => (
-    <Text<"a">
-      component="a"
-      className={classes.link}
-      href={link.link}
-      key={link.label}
-      onClick={(event) => event.preventDefault()}
-    >
-      {link.label}
-    </Text>
+    <Link href={link.link} key={link.label}>
+      <Text<"div"> component="div" className={classes.link}>
+        {link.label}
+      </Text>
+    </Link>
   ));
 
   return (
@@ -100,67 +95,96 @@ export function LinksGroup({
         onClick={() => setOpened((o) => !o)}
         className={classes.control}
       >
-        <Group position="apart" spacing={0}>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <ThemeIcon variant="light" size={30}>
-              <Icon size="1.1rem" />
-            </ThemeIcon>
-            <Box ml="md">{label}</Box>
-          </Box>
-          {hasLinks && (
-            <ChevronIcon
-              className={classes.chevron}
-              size="1rem"
-              style={{
-                transform: opened
-                  ? `rotate(${theme.dir === "rtl" ? -90 : 90}deg)`
-                  : "none",
-              }}
-            />
-          )}
-        </Group>
+        {!hasLinks ? (
+          <Link href={`${url}`}>
+            <Group position="apart" spacing={0}>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <ThemeIcon
+                  variant="light"
+                  size={30}
+                  sx={(theme) => ({
+                    color:
+                      theme.colorScheme === "dark"
+                        ? theme.colors.yellow[4]
+                        : theme.colors.blue[6],
+                  })}
+                >
+                  <Icon size="1.1rem" />
+                </ThemeIcon>
+                <Box ml="md">{label}</Box>
+              </Box>
+              {hasLinks && (
+                <ChevronIcon
+                  className={classes.chevron}
+                  size="1rem"
+                  style={{
+                    transform: opened
+                      ? `rotate(${theme.dir === "rtl" ? -90 : 90}deg)`
+                      : "none",
+                  }}
+                />
+              )}
+            </Group>
+          </Link>
+        ) : (
+          <Group position="apart" spacing={0}>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <ThemeIcon
+                variant="light"
+                size={30}
+                sx={(theme) => ({
+                  color:
+                    theme.colorScheme === "dark"
+                      ? theme.colors.yellow[4]
+                      : theme.colors.blue[6],
+                })}
+              >
+                <Icon size="1.1rem" />
+              </ThemeIcon>
+              <Box ml="md">{label}</Box>
+            </Box>
+            {hasLinks && (
+              <ChevronIcon
+                className={classes.chevron}
+                size="1rem"
+                style={{
+                  transform: opened
+                    ? `rotate(${theme.dir === "rtl" ? -90 : 90}deg)`
+                    : "none",
+                }}
+              />
+            )}
+          </Group>
+        )}
       </UnstyledButton>
-      {hasLinks ? <Collapse in={opened}>{items}</Collapse> : null}
+      {hasLinks ? (
+        <Collapse transitionDuration={500} in={opened}>
+          {items}
+        </Collapse>
+      ) : null}
     </>
   );
 }
 
-const mockdata = [
-  {
-    label: "Home",
-    icon: TbHome,
-  },
-  {
-    label: "Releases",
-    icon: TbCalendarStats,
-    links: [
-      { label: "Upcoming releases", link: "/" },
-      { label: "Previous releases", link: "/" },
-      { label: "Releases schedule", link: "/" },
-    ],
-  },
-  {
-    label: "Settings",
-    icon: TbSettings,
-  },
-];
-
-export default function DashNavLinksGroup() {
+interface DashNavLinkType {
+  icon?: React.FC<any>;
+  label?: string;
+  url?: string;
+  initiallyOpened?: boolean;
+  links?: { label: string; link: string }[];
+}
+export default function DashNavLinksGroup({ links }: any) {
   return (
     <Box
       sx={(theme) => ({
         backgroundColor:
           theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.white,
         borderRadius: "4px",
-        overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
-        gap: "10px",
+        overflowX: "hidden",
       })}
     >
-      {/* <LinksGroup {...mockdata} /> */}
-      {mockdata.map((item) => {
-        return <LinksGroup {...item} />;
+      {links.map((item: any, i: number) => {
+        return <LinksGroup key={i} {...item} />;
       })}
     </Box>
   );
