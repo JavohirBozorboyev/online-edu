@@ -1,39 +1,29 @@
+import React, { useMemo } from "react";
 import {
   createStyles,
   Header,
-  HoverCard,
   Group,
   Button,
-  UnstyledButton,
-  Text,
-  SimpleGrid,
-  ThemeIcon,
-  Anchor,
   Divider,
-  Center,
   Box,
-  Burger,
   Drawer,
-  Collapse,
   ScrollArea,
   rem,
-  Container,
-  Accordion,
   ActionIcon,
+  Container,
 } from "@mantine/core";
-
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
-import { BsChevronDown } from "react-icons/bs";
 
 import { MdOutlineLightMode, MdOutlineDarkMode, MdLogin } from "react-icons/md";
 import { HiMenuAlt4 } from "react-icons/hi";
-import { HiOutlineCode } from "react-icons/hi";
-import { TbBrandMantine } from "react-icons/tb";
+import { TbBrandMantine, TbDashboard } from "react-icons/tb";
 import { useMantineColorScheme } from "@mantine/core";
-import DashNavLinksGroup from "./DashNavLinksGroup";
-import { TbHome, TbSettings } from "react-icons/tb";
+
+import { TbHome } from "react-icons/tb";
 import { RxDashboard } from "react-icons/rx";
+import NavbarLinksGroup from "./NavbarLinksGroup";
+
 const useStyles = createStyles((theme) => ({
   link: {
     display: "flex",
@@ -103,31 +93,33 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const mockdata = [
+const Links = [
   {
-    label: "Asosiy",
+    label: "Home",
     icon: TbHome,
     url: "/",
   },
-
   {
     label: "Dashboard",
-    icon: RxDashboard,
+    icon: TbDashboard,
     url: "/dashboard",
   },
 ];
-
-export default function Navbar() {
+export default function AppNavigation() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
 
   const { classes, theme } = useStyles();
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
+  const LinksMemo = useMemo(() => {
+    return Links;
+  }, []);
+
   return (
     <Box>
-      <Header height={60} sx={{ position: "fixed" }} px={"sm"}>
-        <>
+      <Header height={60} sx={{ position: "fixed" }} >
+        <Container size={"xl"} sx={{ height: "100%" }}>
           <Group position="apart" sx={{ height: "100%" }}>
             <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
               <ActionIcon
@@ -159,7 +151,7 @@ export default function Navbar() {
               }}
               className={classes.hiddenMobile}
             >
-              {mockdata.map((item, i) => {
+              {Links.map((item, i) => {
                 return (
                   <Link href={item.url} key={i} className={classes.link}>
                     {item.label}
@@ -196,7 +188,7 @@ export default function Navbar() {
               </Group>
             </Box>
           </Group>
-        </>
+        </Container>
       </Header>
 
       <Drawer
@@ -220,7 +212,7 @@ export default function Navbar() {
             </Button>
           </Group>
           <Group position="center" grow pb="xl" px="md">
-            <DashNavLinksGroup links={mockdata} />
+            <NavbarLinksGroup links={LinksMemo} />
           </Group>
         </ScrollArea>
       </Drawer>

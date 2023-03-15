@@ -9,7 +9,7 @@ import {
   createStyles,
   rem,
 } from "@mantine/core";
-import { TbChevronLeft, TbChevronRight } from "react-icons/tb";
+import { TbCalendarStats, TbChevronLeft, TbChevronRight } from "react-icons/tb";
 import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
@@ -20,12 +20,13 @@ const useStyles = createStyles((theme) => ({
     padding: `${theme.spacing.xs} ${theme.spacing.md}`,
     color: theme.colorScheme === "dark" ? theme.colors.dark[0] : theme.black,
     fontSize: theme.fontSizes.sm,
-    transition: "all 0.5s ease",
+    borderRadius: "4px",
+    transition: "all 0.4s ease",
 
     "&:hover": {
       backgroundColor:
         theme.colorScheme === "dark"
-          ? theme.colors.dark[4]
+          ? theme.colors.dark[5]
           : theme.colors.gray[0],
       color: theme.colorScheme === "dark" ? theme.white : theme.black,
     },
@@ -46,12 +47,12 @@ const useStyles = createStyles((theme) => ({
     borderLeft: `${rem(1)} solid ${
       theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
     }`,
-    transition: "all 0.5s ease",
+    transition: "all 0.4s ease",
 
     "&:hover": {
       backgroundColor:
         theme.colorScheme === "dark"
-          ? theme.colors.dark[7]
+          ? theme.colors.dark[5]
           : theme.colors.gray[0],
       color: theme.colorScheme === "dark" ? theme.white : theme.black,
     },
@@ -95,20 +96,11 @@ export function LinksGroup({
         onClick={() => setOpened((o) => !o)}
         className={classes.control}
       >
-        {!hasLinks ? (
+        {url ? (
           <Link href={`${url}`}>
             <Group position="apart" spacing={0}>
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <ThemeIcon
-                  variant="light"
-                  size={30}
-                  sx={(theme) => ({
-                    color:
-                      theme.colorScheme === "dark"
-                        ? theme.colors.yellow[4]
-                        : theme.colors.blue[6],
-                  })}
-                >
+                <ThemeIcon variant="light" size={30}>
                   <Icon size="1.1rem" />
                 </ThemeIcon>
                 <Box ml="md">{label}</Box>
@@ -129,16 +121,7 @@ export function LinksGroup({
         ) : (
           <Group position="apart" spacing={0}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <ThemeIcon
-                variant="light"
-                size={30}
-                sx={(theme) => ({
-                  color:
-                    theme.colorScheme === "dark"
-                      ? theme.colors.yellow[4]
-                      : theme.colors.blue[6],
-                })}
-              >
+              <ThemeIcon variant="light" size={30}>
                 <Icon size="1.1rem" />
               </ThemeIcon>
               <Box ml="md">{label}</Box>
@@ -166,26 +149,20 @@ export function LinksGroup({
   );
 }
 
-interface DashNavLinkType {
-  icon?: React.FC<any>;
-  label?: string;
-  url?: string;
-  initiallyOpened?: boolean;
-  links?: { label: string; link: string }[];
-}
-export default function DashNavLinksGroup({ links }: any) {
+export default function NavbarLinksGroup({ links }: any) {
   return (
     <Box
       sx={(theme) => ({
         backgroundColor:
           theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.white,
         borderRadius: "4px",
-        overflowX: "hidden",
       })}
     >
-      {links.map((item: any, i: number) => {
-        return <LinksGroup key={i} {...item} />;
-      })}
+      {links?.map(
+        (item: JSX.IntrinsicAttributes & LinksGroupProps, i: number) => {
+          return <LinksGroup key={i} {...item} />;
+        }
+      )}
     </Box>
   );
 }

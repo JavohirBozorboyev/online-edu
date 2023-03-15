@@ -12,10 +12,10 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-Dashboard.getLayout = function PageLayout(page: ReactElement) {
-  return (
-    <>
-      <DashboardLayout>{page}</DashboardLayout>
-    </>
-  );
-};
+// Dashboard.getLayout = function PageLayout(page: ReactElement) {
+//   return (
+//     <>
+//       <DashboardLayout>{page}</DashboardLayout>
+//     </>
+//   );
+// };
