@@ -32,7 +32,12 @@ export default function Layout({ children }: LayoutType) {
             theme.colorScheme === "dark"
               ? theme.colors.dark[8]
               : theme.colors.gray[0],
-          padding: 0,
+          padding: "0",
+          margin: 0,
+          width: "100%",
+          [theme.fn.smallerThan("sm")]: {
+            padding: 0,
+          },
         },
       }}
       navbarOffsetBreakpoint="sm"
