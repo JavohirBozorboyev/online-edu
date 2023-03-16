@@ -151,7 +151,7 @@ export default function AppNavigation() {
               }}
               className={classes.hiddenMobile}
             >
-              {Links.map((item, i) => {
+              {LinksMemo.map((item, i) => {
                 return (
                   <Link href={item.url} key={i} className={classes.link}>
                     {item.label}
