@@ -24,6 +24,7 @@ export default function Layout({ children }: LayoutType) {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const router = useRouter();
+  const act = router.route.startsWith("/dashboard");
   return (
     <AppShell
       styles={{
@@ -32,24 +33,19 @@ export default function Layout({ children }: LayoutType) {
             theme.colorScheme === "dark"
               ? theme.colors.dark[8]
               : theme.colors.gray[0],
-          padding: "0",
-          margin: 0,
-          width: "100%",
+          padding: `${act ? null : 0}`,
+
           [theme.fn.smallerThan("sm")]: {
-            padding: 0,
+            paddingX: 0,
           },
         },
       }}
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
-      navbar={
-        router.route.startsWith("/dashboard") ? (
-          <DashNavbar opened={opened} />
-        ) : undefined
-      }
-      footer={router.route.startsWith("/dashboard") ? undefined : <AppFooter />}
+      navbar={act ? <DashNavbar opened={opened} /> : undefined}
+      footer={act ? undefined : <AppFooter />}
       header={
-        router.route.startsWith("/dashboard") ? (
+        act ? (
           <DashNavigation opened={opened} setOpened={setOpened} />
         ) : (
           <AppNavigation />

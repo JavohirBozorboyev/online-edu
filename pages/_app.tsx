@@ -11,7 +11,6 @@ import type { AppContext, AppProps } from "next/app";
 
 import Layout from "@/layouts/Layout";
 import { useRouter } from "next/router";
-import DashboardLayout from "@/layouts/DashboardLayout";
 import RouterTransition from "@/components/RouterTransition";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {

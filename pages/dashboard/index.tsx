@@ -1,11 +1,14 @@
-import DashboardLayout from "@/layouts/DashboardLayout";
+import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
+
 import { Container } from "@mantine/core";
 import React, { ReactElement } from "react";
 
 const Dashboard = () => {
   return (
     <>
-      <Container></Container>
+      <Container p={0} size={"xl"}>
+        <Breadcrumb />
+      </Container>
     </>
   );
 };

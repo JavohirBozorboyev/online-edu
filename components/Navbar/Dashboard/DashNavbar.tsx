@@ -1,7 +1,7 @@
 import { Navbar, Text } from "@mantine/core";
 import React, { useMemo } from "react";
 import NavbarLinksGroup from "../NavbarLinksGroup";
-import { TbCalendarStats, TbHome } from "react-icons/tb";
+import { TbCalendarStats, TbHome, TbLayout, TbLayoutDashboard, TbShoppingBag } from "react-icons/tb";
 
 type Props = {
   opened?: boolean;
@@ -9,20 +9,25 @@ type Props = {
 
 const Links = [
   {
-    label: "Home",
-    icon: TbHome,
-    url: "/",
+    label: "Dashboard",
+    icon: TbLayoutDashboard,
+    url: "/dashboard",
   },
   {
-    label: "Releases",
-    icon: TbCalendarStats,
-    initiallyOpened: true,
-    links: [
-      { label: "Upcoming releases", link: "/a" },
-      { label: "Previous releases", link: "/b" },
-      { label: "Releases schedule", link: "/" },
-    ],
+    label: "My Course",
+    icon: TbShoppingBag,
+    url: "/dashboard/course",
   },
+  // {
+  //   label: "Releases",
+  //   icon: TbCalendarStats,
+  //   initiallyOpened: true,
+  //   links: [
+  //     { label: "Upcoming releases", link: "/a" },
+  //     { label: "Previous releases", link: "/b" },
+  //     { label: "Releases schedule", link: "/" },
+  //   ],
+  // },
 ];
 
 const DashNavbar = ({ opened }: Props) => {
