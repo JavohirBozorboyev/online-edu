@@ -128,10 +128,10 @@ export default function HeroHeader() {
               variant="default"
               color="gray"
             >
-              Ro'yhatdan O'tish
+            {"Ro'yhatdan O'tish"}
             </Button>
             <Button className={classes.control} size="lg">
-              Honaga Kirish
+              {"Honaga Kirish"}
             </Button>
           </div>
         </div>

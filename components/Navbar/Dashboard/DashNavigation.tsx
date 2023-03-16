@@ -28,7 +28,7 @@ const DashNavigation = ({ opened, setOpened }: Props) => {
 
   return (
     <>
-      <Header height={{ base: 50, md: 60 }} p="md">
+      <Header height={{ base: 60, md: 60 }} p="md">
         <Box
           sx={{
             display: "flex",
