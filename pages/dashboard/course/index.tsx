@@ -1,5 +1,6 @@
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import { Container } from "@mantine/core";
+import DashCourseCard from "@/src/Page/Dashboard/Course/DashCourseCard";
+import { Box, Container } from "@mantine/core";
 import React from "react";
 
 type Props = {};
@@ -7,9 +8,12 @@ type Props = {};
 const index = (props: Props) => {
   return (
     <>
+      <Box mb={'xl'}>
+        <Breadcrumb />
+      </Box>
       <main>
         <Container size={"xl"} p={0}>
-          <Breadcrumb />
+          <DashCourseCard />
         </Container>
       </main>
     </>

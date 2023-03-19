@@ -118,7 +118,7 @@ export default function AppNavigation() {
 
   return (
     <Box>
-      <Header height={60} sx={{ position: "fixed" }} >
+      <Header height={60} sx={{ position: "fixed" }}>
         <Container size={"xl"} sx={{ height: "100%" }}>
           <Group position="apart" sx={{ height: "100%" }}>
             <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
@@ -212,7 +212,7 @@ export default function AppNavigation() {
             </Button>
           </Group>
           <Group position="center" grow pb="xl" px="md">
-            <NavbarLinksGroup links={LinksMemo} />
+            <NavbarLinksGroup links={LinksMemo} setOpened={toggleDrawer} />
           </Group>
         </ScrollArea>
       </Drawer>

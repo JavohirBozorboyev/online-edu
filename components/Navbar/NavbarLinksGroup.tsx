@@ -9,8 +9,9 @@ import {
   createStyles,
   rem,
 } from "@mantine/core";
-import { TbCalendarStats, TbChevronLeft, TbChevronRight } from "react-icons/tb";
+import { TbChevronLeft, TbChevronRight } from "react-icons/tb";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const useStyles = createStyles((theme) => ({
   control: {
@@ -40,10 +41,10 @@ const useStyles = createStyles((theme) => ({
     paddingLeft: rem(31),
     marginLeft: rem(30),
     fontSize: theme.fontSizes.sm,
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[0]
-        : theme.colors.gray[7],
+    // color:
+    //   theme.colorScheme === "dark"
+    //     ? theme.colors.dark[0]
+    //     : theme.colors.gray[7],
     borderLeft: `${rem(1)} solid ${
       theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
     }`,
@@ -54,7 +55,8 @@ const useStyles = createStyles((theme) => ({
         theme.colorScheme === "dark"
           ? theme.colors.dark[5]
           : theme.colors.gray[0],
-      color: theme.colorScheme === "dark" ? theme.white : theme.black,
+      color:
+        theme.colorScheme === "dark" ? theme.white : theme.colors.yellow[5],
     },
   },
 
@@ -69,6 +71,7 @@ interface LinksGroupProps {
   url?: string;
   initiallyOpened?: boolean;
   links?: { label: string; link: string }[];
+  setOpenedNav?: any;
 }
 
 export function LinksGroup({
@@ -77,14 +80,27 @@ export function LinksGroup({
   url,
   initiallyOpened,
   links,
+  setOpenedNav,
 }: LinksGroupProps) {
   const { classes, theme } = useStyles();
   const hasLinks = Array.isArray(links);
   const [opened, setOpened] = useState(initiallyOpened || false);
   const ChevronIcon = theme.dir === "ltr" ? TbChevronRight : TbChevronLeft;
+  const router = useRouter();
   const items = (hasLinks ? links : []).map((link) => (
-    <Link href={link.link} key={link.label}>
-      <Text<"div"> component="div" className={classes.link}>
+    <Link href={link.link} key={link.label} onClick={() => setOpenedNav(false)}>
+      <Text
+        color={`${
+          router.route === link.link
+            ? theme.colorScheme === "dark"
+              ? theme.colors.yellow[2]
+              : theme.colors.yellow[5]
+            : theme.colorScheme === "dark"
+            ? theme.colors.blue[2]
+            : theme.colors.blue[5]
+        }`}
+        className={classes.link}
+      >
         {link.label}
       </Text>
     </Link>
@@ -97,13 +113,30 @@ export function LinksGroup({
         className={classes.control}
       >
         {url ? (
-          <Link href={`${url}`}>
+          <Link href={`${url}`} onClick={() => setOpenedNav(false)}>
             <Group position="apart" spacing={0}>
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <ThemeIcon variant="light" size={30}>
+                <ThemeIcon
+                  variant="light"
+                  color={`${router.route === url ? "yellow" : "blue"}`}
+                  size={30}
+                >
                   <Icon size="1.1rem" />
                 </ThemeIcon>
-                <Box ml="md">{label}</Box>
+                <Text
+                  ml="md"
+                  color={`${
+                    router.route === url
+                      ? theme.colorScheme === "dark"
+                        ? theme.colors.yellow[2]
+                        : theme.colors.yellow[5]
+                      : theme.colorScheme === "dark"
+                      ? theme.colors.blue[2]
+                      : theme.colors.blue[5]
+                  }`}
+                >
+                  {label}
+                </Text>
               </Box>
               {hasLinks && (
                 <ChevronIcon
@@ -124,7 +157,16 @@ export function LinksGroup({
               <ThemeIcon variant="light" size={30}>
                 <Icon size="1.1rem" />
               </ThemeIcon>
-              <Box ml="md">{label}</Box>
+              <Text
+                ml="md"
+                color={`${
+                  theme.colorScheme === "dark"
+                    ? theme.colors.blue[2]
+                    : theme.colors.blue[5]
+                } `}
+              >
+                {label}
+              </Text>
             </Box>
             {hasLinks && (
               <ChevronIcon
@@ -149,7 +191,12 @@ export function LinksGroup({
   );
 }
 
-export default function NavbarLinksGroup({ links }: any) {
+interface NavType {
+  links: any;
+  setOpened?: any;
+}
+
+export default function NavbarLinksGroup({ links, setOpened }: NavType) {
   return (
     <Box
       sx={(theme) => ({
@@ -160,7 +207,7 @@ export default function NavbarLinksGroup({ links }: any) {
     >
       {links?.map(
         (item: JSX.IntrinsicAttributes & LinksGroupProps, i: number) => {
-          return <LinksGroup key={i} {...item} />;
+          return <LinksGroup key={i} {...item} setOpenedNav={setOpened} />;
         }
       )}
     </Box>

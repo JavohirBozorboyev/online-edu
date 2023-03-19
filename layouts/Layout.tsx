@@ -42,7 +42,9 @@ export default function Layout({ children }: LayoutType) {
       }}
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
-      navbar={act ? <DashNavbar opened={opened} /> : undefined}
+      navbar={
+        act ? <DashNavbar opened={opened} setOpened={setOpened} /> : undefined
+      }
       footer={act ? undefined : <AppFooter />}
       header={
         act ? (
