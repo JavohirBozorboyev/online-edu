@@ -12,6 +12,7 @@ import { useDisclosure } from "@mantine/hooks";
 import React from "react";
 import { TbChartBar, TbPlayerPlayFilled } from "react-icons/tb";
 import DashCourseCardStats from "./DashCourseCardStats";
+import Link from "next/link";
 
 type Props = {};
 
@@ -119,14 +120,16 @@ const DashCourseCard = (props: Props) => {
                 </Button>
               </Grid.Col>
               <Grid.Col span={"auto"}>
-                <Button
-                  leftIcon={<TbPlayerPlayFilled size={"1.2rem"} />}
-                  fullWidth
-                  color="blue"
-                  radius="sm"
-                >
-                  Kursni Boshlash
-                </Button>
+                <Link href={"/dashboard/course/js"}>
+                  <Button
+                    leftIcon={<TbPlayerPlayFilled size={"1.2rem"} />}
+                    fullWidth
+                    color="blue"
+                    radius="sm"
+                  >
+                    Kursni Boshlash
+                  </Button>
+                </Link>
               </Grid.Col>
             </Grid>
           </Card>
