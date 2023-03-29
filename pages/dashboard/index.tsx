@@ -1,9 +1,16 @@
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 
 import { Container } from "@mantine/core";
+
 import React, { ReactElement } from "react";
+import { authOptions } from "../api/auth/[...nextauth]";
+import { useSession } from "next-auth/react";
+
+import { getServerSession } from "next-auth/next";
 
 const Dashboard = () => {
+  const { data: session } = useSession();
+  // console.log(session);
   return (
     <>
       <Container p={0} size={"xl"}>
@@ -22,3 +29,20 @@ export default Dashboard;
 //     </>
 //   );
 // };
+
+export async function getServerSideProps(context: any) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}

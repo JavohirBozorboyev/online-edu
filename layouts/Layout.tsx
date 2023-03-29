@@ -33,7 +33,7 @@ export default function Layout({ children }: LayoutType) {
             theme.colorScheme === "dark"
               ? theme.colors.dark[8]
               : theme.colors.gray[0],
-          padding: `${act ? null : 0}`,
+          // padding: `${act ? null : "0px"}`,
 
           [theme.fn.smallerThan("sm")]: {
             paddingX: 0,

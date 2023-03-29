@@ -26,14 +26,14 @@ const Links = [
   {
     label: "Kirish",
     icon: TbShoppingBag,
-    url: "/dashboard/course",
+    url: "/dashboard/course/js",
   },
   {
     label: "1-dars",
     icon: TbPlayerPlayFilled,
     initiallyOpened: true,
     links: [
-      { label: "Dars", link: "/dashboard/course" },
+      { label: "Dars", link: "/dashboard/course/js/1dars" },
       { label: "Topshiriqlar", link: "" },
       { label: "Imtixon", link: "" },
     ],

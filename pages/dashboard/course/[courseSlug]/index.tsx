@@ -1,10 +1,12 @@
+import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import CourseLayout from "@/layouts/CourseLayout";
 import React, { ReactElement } from "react";
 
 type Props = {};
 
 const index = (props: Props) => {
-  return <div>Course Layout Page</div>;
+  return <div>
+  </div>;
 };
 
 export default index;

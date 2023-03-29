@@ -22,7 +22,6 @@ const Breadcrumb = () => {
     <>
       <Breadcrumbs>
         {Links.map((link: string, i: number) => {
-          
           return (
             <Anchor
               key={i}

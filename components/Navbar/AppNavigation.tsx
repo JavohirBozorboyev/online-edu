@@ -11,18 +11,19 @@ import {
   rem,
   ActionIcon,
   Container,
+  Avatar,
+  Menu,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
-
+import { useRouter } from "next/router";
 import { MdOutlineLightMode, MdOutlineDarkMode, MdLogin } from "react-icons/md";
 import { HiMenuAlt4 } from "react-icons/hi";
-import { TbBrandMantine, TbDashboard } from "react-icons/tb";
+import { TbBrandMantine, TbDashboard, TbLogout } from "react-icons/tb";
 import { useMantineColorScheme } from "@mantine/core";
-
 import { TbHome } from "react-icons/tb";
-import { RxDashboard } from "react-icons/rx";
 import NavbarLinksGroup from "./NavbarLinksGroup";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -106,6 +107,7 @@ const Links = [
   },
 ];
 export default function AppNavigation() {
+  const router = useRouter();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
 
@@ -115,6 +117,8 @@ export default function AppNavigation() {
   const LinksMemo = useMemo(() => {
     return Links;
   }, []);
+
+  const { data: session } = useSession();
 
   return (
     <Box>
@@ -183,8 +187,43 @@ export default function AppNavigation() {
                 )}
               </ActionIcon>
 
-              <Group className={classes.hiddenMobile}>
-                <Button leftIcon={<MdLogin size="1rem" />}>Kirish</Button>
+              <Group>
+                {session ? (
+                  <Menu
+                    shadow="md"
+                    width={200}
+                    transitionProps={{
+                      duration: 350,
+                    }}
+                  >
+                    <Menu.Target>
+                      <Avatar size={"md"} variant="light" color="blue" />
+                    </Menu.Target>
+
+                    <Menu.Dropdown>
+                      <Menu.Label>Account</Menu.Label>
+
+                      <Menu.Item
+                        onClick={() => {
+                          signOut();
+                        }}
+                        color="blue"
+                        icon={<TbLogout />}
+                      >
+                        Chiqish
+                      </Menu.Item>
+                    </Menu.Dropdown>
+                  </Menu>
+                ) : (
+                  <Button
+                    onClick={() => {
+                      router.push("/login");
+                    }}
+                    leftIcon={<MdLogin size="1rem" />}
+                  >
+                    Kirish
+                  </Button>
+                )}
               </Group>
             </Box>
           </Group>
@@ -206,11 +245,6 @@ export default function AppNavigation() {
             color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
           />
 
-          <Group position="center" grow pb="xl" px="md">
-            <Button size="lg" leftIcon={<MdLogin size="1rem" />}>
-              Kirish
-            </Button>
-          </Group>
           <Group position="center" grow pb="xl" px="md">
             <NavbarLinksGroup links={LinksMemo} setOpened={toggleDrawer} />
           </Group>

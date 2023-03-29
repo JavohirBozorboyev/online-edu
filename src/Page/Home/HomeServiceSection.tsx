@@ -36,6 +36,7 @@ const useStyles = createStyles((theme) => ({
   bg: {
     background:
       theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+
     width: "100%",
   },
   title: {

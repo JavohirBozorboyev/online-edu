@@ -8,6 +8,7 @@ import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 import type { ReactElement, ReactNode } from "react";
 import type { NextPage, NextPageContext } from "next";
 import type { AppContext, AppProps } from "next/app";
+import { SessionProvider } from "next-auth/react";
 
 import Layout from "@/layouts/Layout";
 import { useRouter } from "next/router";
@@ -21,7 +22,10 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
+export default function App({
+  Component,
+  pageProps: { sesion, ...pageProps },
+}: AppPropsWithLayout) {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: "mantine-color-scheme",
     defaultValue: "light",
@@ -52,7 +56,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           }}
         >
           <RouterTransition />
-          {getLayout(<Component {...pageProps} />)}
+          <SessionProvider session={sesion}>
+            {getLayout(<Component {...pageProps} />)}
+          </SessionProvider>
         </MantineProvider>
       </ColorSchemeProvider>
     </>

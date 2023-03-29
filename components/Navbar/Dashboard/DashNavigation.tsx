@@ -8,13 +8,15 @@ import {
   useMantineColorScheme,
   Box,
   Avatar,
+  Menu,
 } from "@mantine/core";
 import { useFullscreen } from "@mantine/hooks";
 import Link from "next/link";
 import React from "react";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
-import { TbBrandMantine } from "react-icons/tb";
+import { TbBrandMantine, TbLogout } from "react-icons/tb";
 import { BiFullscreen, BiExitFullscreen } from "react-icons/bi";
+import { signOut } from "next-auth/react";
 
 type Props = {
   opened: boolean;
@@ -88,7 +90,31 @@ const DashNavigation = ({ opened, setOpened }: Props) => {
                 <BiExitFullscreen size="1.2rem" />
               )}
             </ActionIcon>
-            <Avatar color="blue" />
+            <Menu
+              shadow="md"
+              width={200}
+              transitionProps={{
+                duration: 350,
+              }}
+            >
+              <Menu.Target>
+                <Avatar size={"md"} variant="light" color="blue" />
+              </Menu.Target>
+
+              <Menu.Dropdown>
+                <Menu.Label>Account</Menu.Label>
+
+                <Menu.Item
+                  onClick={() => {
+                    signOut();
+                  }}
+                  color="blue"
+                  icon={<TbLogout />}
+                >
+                  Chiqish
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
           </Box>
         </Box>
       </Header>

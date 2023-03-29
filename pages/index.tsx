@@ -6,9 +6,13 @@ import HomeFaq from "@/src/Page/Home/HomeFaq";
 import HomeContactSection from "@/src/Page/Home/HomeContactSection";
 import HomeServiceSection from "@/src/Page/Home/HomeServiceSection";
 import HomeStatsSection from "@/src/Page/Home/HomeStatsSection";
+import { useSession } from "next-auth/react";
+
 
 
 export default function Home() {
+   const { data: session } = useSession();
+   console.log(session);
   return (
     <>
       <main>
@@ -25,3 +29,5 @@ export default function Home() {
 // Home.getLayout = function PageLayout(page: ReactElement) {
 //   return <>{page}</>;
 // };
+
+
