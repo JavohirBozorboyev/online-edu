@@ -26,7 +26,7 @@ export default function CourseLayout({ children }: CourseLayoutType) {
         main: {
           background:
             theme.colorScheme === "dark"
-              ? theme.colors.dark[8]
+              ? theme.colors.dark[9]
               : theme.colors.gray[0],
         },
       }}

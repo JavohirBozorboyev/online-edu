@@ -16,10 +16,6 @@ export const authOptions = {
     async authorize(credentials, req) {
       
       const user = { id: "1", name: credentials?.username, email: 'test' }
-      
-      
-      
-      
      
       if (user) {
         return {
@@ -33,7 +29,6 @@ export const authOptions = {
       } else {
         return null
       }
-
       
     }
   })
@@ -63,8 +58,10 @@ export const authOptions = {
       return token
     }
   },
+  
 };
 export default NextAuth(authOptions);
+
 
 
 

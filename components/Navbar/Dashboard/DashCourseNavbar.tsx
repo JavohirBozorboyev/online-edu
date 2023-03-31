@@ -77,10 +77,14 @@ const DashCourseNavbar = ({ opened, setOpened }: Props) => {
   return (
     <div>
       <Navbar
-        p="sm"
+        p="xs"
         hiddenBreakpoint="sm"
         hidden={!opened}
-        width={{ sm: 250, lg: 300 }}
+        width={{ sm: 250, lg: 280 }}
+        sx={(theme) => ({
+          backgroundColor:
+            theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
+        })}
       >
         <ScrollArea>
           <DashVideoLinksGroup links={LinksMemo} setOpened={setOpened} />

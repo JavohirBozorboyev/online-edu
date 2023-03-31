@@ -30,7 +30,16 @@ const DashNavigation = ({ opened, setOpened }: Props) => {
 
   return (
     <>
-      <Header height={{ base: 60, md: 60 }} p="md">
+      <Header
+        height={{ base: 60, md: 60 }}
+        p="md"
+        sx={(theme) => ({
+          backgroundColor:
+            theme.colorScheme === "dark"
+              ? theme.colors.dark[8]
+              : theme.white,
+        })}
+      >
         <Box
           sx={{
             display: "flex",

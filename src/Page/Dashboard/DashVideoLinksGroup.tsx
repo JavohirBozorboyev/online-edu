@@ -28,7 +28,7 @@ const useStyles = createStyles((theme) => ({
     "&:hover": {
       backgroundColor:
         theme.colorScheme === "dark"
-          ? theme.colors.dark[5]
+          ? theme.colors.dark[6]
           : theme.colors.gray[0],
       color: theme.colorScheme === "dark" ? theme.white : theme.black,
     },
@@ -55,7 +55,7 @@ const useStyles = createStyles((theme) => ({
     "&:hover": {
       backgroundColor:
         theme.colorScheme === "dark"
-          ? theme.colors.dark[5]
+          ? theme.colors.dark[6]
           : theme.colors.gray[0],
       color:
         theme.colorScheme === "dark" ? theme.white : theme.colors.yellow[5],
@@ -122,7 +122,7 @@ export function LinksGroup({
           <Link href={`${url || "/"}`} onClick={() => setOpenedNav(false)}>
             <Group position="apart" spacing={0}>
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Checkbox size={"md"} />
+                <Checkbox size={"md"} disabled />
                 <Text
                   ml="md"
                   color={`${
@@ -154,7 +154,7 @@ export function LinksGroup({
         ) : (
           <Group position="apart" spacing={0}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Checkbox size={"md"} />
+              <Checkbox size={"md"} disabled checked />
 
               <Text
                 ml="md"
@@ -200,7 +200,7 @@ export default function DashVideoLinksGroup({ links, setOpened }: NavType) {
     <Box
       sx={(theme) => ({
         backgroundColor:
-          theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.white,
+          theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
         borderRadius: "4px",
       })}
     >

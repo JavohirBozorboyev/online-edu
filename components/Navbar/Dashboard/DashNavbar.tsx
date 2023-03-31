@@ -3,8 +3,6 @@ import React, { useMemo } from "react";
 import NavbarLinksGroup from "../NavbarLinksGroup";
 import {
   TbCalendarStats,
-  TbHome,
-  TbLayout,
   TbLayoutDashboard,
   TbShoppingBag,
 } from "react-icons/tb";
@@ -25,16 +23,16 @@ const Links = [
     icon: TbShoppingBag,
     url: "/dashboard/course",
   },
-  // {
-  //   label: "Releases",
-  //   icon: TbCalendarStats,
-  //   initiallyOpened: true,
-  //   links: [
-  //     { label: "Upcoming releases", link: "/a" },
-  //     { label: "Previous releases", link: "/b" },
-  //     { label: "Releases schedule", link: "/c" },
-  //   ],
-  // },
+  {
+    label: "Releases",
+    icon: TbCalendarStats,
+    initiallyOpened: true,
+    links: [
+      { label: "Upcoming releases", link: "/a" },
+      { label: "Previous releases", link: "/b" },
+      { label: "Releases schedule", link: "/c" },
+    ],
+  },
 ];
 
 const DashNavbar = ({ opened, setOpened }: Props) => {
@@ -44,10 +42,14 @@ const DashNavbar = ({ opened, setOpened }: Props) => {
   return (
     <div>
       <Navbar
-        p="sm"
+        p="xs"
         hiddenBreakpoint="sm"
         hidden={!opened}
-        width={{ sm: 250, lg: 300 }}
+        width={{ sm: 250, lg: 280 }}
+        sx={(theme) => ({
+          backgroundColor:
+            theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
+        })}
       >
         <NavbarLinksGroup links={LinksMemo} setOpened={setOpened} />
       </Navbar>
