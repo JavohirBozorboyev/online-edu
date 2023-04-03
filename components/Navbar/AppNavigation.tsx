@@ -23,7 +23,9 @@ import { TbBrandMantine, TbDashboard, TbLogout } from "react-icons/tb";
 import { useMantineColorScheme } from "@mantine/core";
 import { TbHome } from "react-icons/tb";
 import NavbarLinksGroup from "./NavbarLinksGroup";
-import { signIn, signOut, useSession } from "next-auth/react";
+
+import UserAvatarMenu from "../Other/UserAvatarMenu";
+import ColorSchemaButton from "../Other/ColorSchemaButton";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -118,8 +120,6 @@ export default function AppNavigation() {
     return Links;
   }, []);
 
-  const { data: session } = useSession();
-
   return (
     <Box>
       <Header height={60} sx={{ position: "fixed" }}>
@@ -165,65 +165,10 @@ export default function AppNavigation() {
             </Box>
 
             <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
-              <ActionIcon
-                variant="light"
-                onClick={() => toggleColorScheme()}
-                sx={(theme) => ({
-                  backgroundColor:
-                    theme.colorScheme === "dark"
-                      ? theme.colors.dark[6]
-                      : theme.colors.gray[0],
-                  color:
-                    theme.colorScheme === "dark"
-                      ? theme.colors.yellow[4]
-                      : theme.colors.blue[6],
-                })}
-                size={"lg"}
-              >
-                {colorScheme !== "dark" ? (
-                  <MdOutlineDarkMode size="1.2rem" />
-                ) : (
-                  <MdOutlineLightMode size="1.2rem" />
-                )}
-              </ActionIcon>
+              <ColorSchemaButton />
 
               <Group>
-                {session ? (
-                  <Menu
-                    shadow="md"
-                    width={200}
-                    transitionProps={{
-                      duration: 350,
-                    }}
-                  >
-                    <Menu.Target>
-                      <Avatar size={"md"} variant="light" color="blue" />
-                    </Menu.Target>
-
-                    <Menu.Dropdown>
-                      <Menu.Label>Account</Menu.Label>
-
-                      <Menu.Item
-                        onClick={() => {
-                          signOut();
-                        }}
-                        color="blue"
-                        icon={<TbLogout />}
-                      >
-                        Chiqish
-                      </Menu.Item>
-                    </Menu.Dropdown>
-                  </Menu>
-                ) : (
-                  <Button
-                    onClick={() => {
-                      router.push("/login");
-                    }}
-                    leftIcon={<MdLogin size="1rem" />}
-                  >
-                    Kirish
-                  </Button>
-                )}
+                <UserAvatarMenu />
               </Group>
             </Box>
           </Group>

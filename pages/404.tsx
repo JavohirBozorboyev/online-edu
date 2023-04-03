@@ -55,7 +55,7 @@ export default function NotFoundTitle() {
   return (
     <Container className={classes.root}>
       <div className={classes.label}>404</div>
-      <Title className={classes.title}>You have found a secret place.</Title>
+      <Title className={classes.title}>Bunday Sahifa Topilmadi</Title>
       <Text
         color="dimmed"
         size="lg"
@@ -67,7 +67,7 @@ export default function NotFoundTitle() {
       </Text>
       <Group position="center">
         <Button variant="subtle" size="md">
-          Take me back to home page
+         Asosiy sahifaga qaytish
         </Button>
       </Group>
     </Container>

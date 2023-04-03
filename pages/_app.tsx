@@ -13,6 +13,7 @@ import { SessionProvider } from "next-auth/react";
 import Layout from "@/layouts/Layout";
 import { useRouter } from "next/router";
 import RouterTransition from "@/components/RouterTransition";
+import { Notifications } from "@mantine/notifications";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -56,6 +57,7 @@ export default function App({
           }}
         >
           <RouterTransition />
+          <Notifications />
           <SessionProvider session={sesion}>
             {getLayout(<Component {...pageProps} />)}
           </SessionProvider>

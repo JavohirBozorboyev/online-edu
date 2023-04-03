@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 import {
@@ -12,6 +12,8 @@ import {
   Button,
   Container,
 } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+import { TbUser } from "react-icons/tb";
 
 const index = () => {
   const router = useRouter();
@@ -19,22 +21,26 @@ const index = () => {
   const username = useRef<any>("");
   const password = useRef<any>("");
 
-  const handleAuth = async () => {
+  const handleAuth = useCallback(async () => {
     signIn("credentials", {
       username: username.current.value,
       password: password.current.value,
-      tel: "23456",
       redirect: false,
     })
       .then((res: any) => {
         if (res.ok) {
+          notifications.show({
+            title: "Assalomu Alaykom",
+            message: "Shaxsiy saxifangizga hush kelibsiz.",
+            icon: <TbUser />,
+          });
           router.push("/dashboard");
         }
       })
       .catch((err) => {
         null;
       });
-  };
+  }, []);
 
   return (
     <Container size={420} my={40}>
