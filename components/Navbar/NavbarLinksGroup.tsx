@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, memo } from "react";
 import {
   Group,
   Box,
@@ -196,7 +196,7 @@ interface NavType {
   setOpened?: any;
 }
 
-export default function NavbarLinksGroup({ links, setOpened }: NavType) {
+const NavbarLinksGroup = ({ links, setOpened }: NavType) => {
   return (
     <Box
       sx={(theme) => ({
@@ -212,4 +212,6 @@ export default function NavbarLinksGroup({ links, setOpened }: NavType) {
       )}
     </Box>
   );
-}
+};
+
+export default memo(NavbarLinksGroup);

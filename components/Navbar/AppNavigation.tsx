@@ -17,10 +17,10 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { MdOutlineLightMode, MdOutlineDarkMode, MdLogin } from "react-icons/md";
+
 import { HiMenuAlt4 } from "react-icons/hi";
 import { TbBrandMantine, TbDashboard, TbLogout } from "react-icons/tb";
-import { useMantineColorScheme } from "@mantine/core";
+
 import { TbHome } from "react-icons/tb";
 import NavbarLinksGroup from "./NavbarLinksGroup";
 
@@ -114,7 +114,6 @@ export default function AppNavigation() {
     useDisclosure(false);
 
   const { classes, theme } = useStyles();
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
   const LinksMemo = useMemo(() => {
     return Links;

@@ -7,6 +7,7 @@ import { authOptions } from "../api/auth/[...nextauth]";
 import { useSession } from "next-auth/react";
 
 import { getServerSession } from "next-auth/next";
+import Chart from "@/src/Page/Dashboard/Home/Chart";
 
 const Dashboard = () => {
   const { data: session } = useSession();
@@ -15,6 +16,7 @@ const Dashboard = () => {
     <>
       <Container p={0} size={"xl"}>
         <Breadcrumb />
+        <Chart />
       </Container>
     </>
   );
