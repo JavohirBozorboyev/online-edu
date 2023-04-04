@@ -11,18 +11,29 @@ import {
   Anchor,
   Button,
   Container,
+  Box,
+  Center,
+  SegmentedControl,
+  Grid,
+  Text,
+  Divider,
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-import { TbUser } from "react-icons/tb";
+import { TbMail, TbPhone, TbUser } from "react-icons/tb";
 import Link from "next/link";
+import { GoogleButton, AppleButton } from "@/src/Page/Login/SocilaButtons";
 
 const index = () => {
+  const [segment, setSegment] = useState("pochta");
+
   const router = useRouter();
 
   const name = useRef<any>("");
   const lastName = useRef<any>("");
   const email = useRef<any>("");
   const password = useRef<any>("");
+  const tel = useRef<any>("");
+  const cmsKey = useRef<any>("");
 
   const handleAuth = useCallback(async () => {
     signIn("credentials", {
@@ -46,30 +57,105 @@ const index = () => {
   }, [router]);
 
   return (
-    <Container size={420} my={40}>
-      <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-        <TextInput ref={name} label="Ism" placeholder="Ism" required />
-        <TextInput
-          ref={lastName}
-          label="Familiya"
-          placeholder="Familiya"
-          mt="md"
-          required
+    <Container size={620}>
+      <Paper withBorder shadow="md" p={30} radius="md">
+        <Box mb={"md"}>
+          <Text size="xl" weight={700} tt={"uppercase"} ta={"center"}>
+            {"Ro'yhatdan O'tish"}
+          </Text>
+          <Group grow mb="md" mt="lg">
+            <Box>
+              <GoogleButton />
+            </Box>
+            <Box>
+              <AppleButton />
+            </Box>
+          </Group>
+
+          <Divider
+            label="Or continue with email and Phone Number"
+            labelPosition="center"
+            my="lg"
+          />
+        </Box>
+        <SegmentedControl
+          value={segment}
+          onChange={setSegment}
+          w={"100%"}
+          data={[
+            {
+              label: (
+                <Center>
+                  <TbMail size="1rem" />
+                  <Box ml={10}>Pochta</Box>
+                </Center>
+              ),
+              value: "pochta",
+            },
+            {
+              label: (
+                <Center>
+                  <TbPhone size="1rem" />
+                  <Box ml={10}>Mobil Raqam</Box>
+                </Center>
+              ),
+              value: "tel",
+            },
+          ]}
         />
-        <TextInput
-          ref={email}
-          label="Pochta"
-          placeholder="abs@gmail.com"
-          mt="md"
-          required
-        />
-        <PasswordInput
-          label="Parol"
-          placeholder="Your Parol"
-          required
-          mt="md"
-          ref={password}
-        />
+
+        <Box mt={"md"}>
+          <Grid>
+            <Grid.Col span={12} xs={6}>
+              <TextInput ref={name} label="Ism" placeholder="Ism" required />
+            </Grid.Col>
+            <Grid.Col span={12} xs={6}>
+              <TextInput
+                ref={lastName}
+                label="Familiya"
+                placeholder="Familiya"
+                required
+              />
+            </Grid.Col>
+          </Grid>
+          <Box>
+            {segment === "pochta" ? (
+              <>
+                <TextInput
+                  ref={email}
+                  label="Pochta"
+                  placeholder="abs@gmail.com"
+                  mt="md"
+                  required
+                />
+                <PasswordInput
+                  label="Parol"
+                  placeholder="Your Parol"
+                  required
+                  mt="md"
+                  ref={password}
+                />
+              </>
+            ) : (
+              <>
+                <TextInput
+                  ref={tel}
+                  label="Mobil Raqam"
+                  placeholder="+998 99 391 25 05"
+                  required
+                  mt="md"
+                />
+                <PasswordInput
+                  label="CMS Kod"
+                  placeholder="....."
+                  required
+                  mt="md"
+                  ref={cmsKey}
+                />
+              </>
+            )}
+          </Box>
+        </Box>
         <Group position="apart" mt="lg">
           <Checkbox label="Remember me" />
           <Link href={"/login/signin"}>

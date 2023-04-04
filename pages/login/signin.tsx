@@ -53,7 +53,7 @@ const signin = () => {
   }, [router]);
 
   return (
-    <Container size={420} >
+    <Container size={480} >
       <Paper withBorder shadow="md" p={30}  radius="md">
         <Box mb={"md"}>
           <Text size="xl" weight={700} tt={"uppercase"} ta={"center"}>
