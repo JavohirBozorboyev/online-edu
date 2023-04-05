@@ -1,5 +1,7 @@
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import CourseLayout from "@/layouts/CourseLayout";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { getServerSession } from "next-auth";
 import React, { ReactElement } from "react";
 
 type Props = {};
@@ -18,3 +20,21 @@ index.getLayout = function PageLayout(page: ReactElement) {
     </>
   );
 };
+
+
+export async function getServerSideProps(context: any) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login/signin",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}

@@ -34,8 +34,8 @@ export default function HomeContactSection() {
   });
 
   return (
-    <div className={classes.bg}>
-      <Container size={"sm"} py={"80px"} >
+    <div >
+      <Container size={"sm"} py={"80px"} p={'0'} >
         <form onSubmit={form.onSubmit(() => {})}>
           <Title
             order={2}
@@ -97,6 +97,7 @@ export default function HomeContactSection() {
           </Group>
         </form>
       </Container>
+      
     </div>
   );
 }

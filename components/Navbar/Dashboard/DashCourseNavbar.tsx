@@ -10,7 +10,7 @@ import {
   TbShoppingBag,
   TbVideo,
 } from "react-icons/tb";
-import DashVideoLinksGroup from "@/src/Page/Dashboard/DashVideoLinksGroup";
+import DashVideoLinksGroup from "@/src/Page/Dashboard/Other/DashVideoLinksGroup";
 
 type Props = {
   opened: boolean;

@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import DashNavigation from "@/components/Navbar/Dashboard/DashNavigation";
 import DashNavbar from "@/components/Navbar/Dashboard/DashNavbar";
 import AppFooter from "@/components/Footer/AppFooter";
+import DashTabs from "@/src/Page/Dashboard/Other/DashTabs";
 
 interface LayoutType {
   children: React.ReactElement;
@@ -34,6 +35,7 @@ export default function Layout({ children }: LayoutType) {
               ? theme.colors.dark[9]
               : theme.colors.gray[0],
           // padding: `${act ? null : "0px"}`,
+          overflowX: "hidden",
 
           [theme.fn.smallerThan("sm")]: {
             paddingX: 0,
@@ -54,6 +56,7 @@ export default function Layout({ children }: LayoutType) {
         )
       }
     >
+      {act ? <DashTabs /> : null}
       {children}
     </AppShell>
   );

@@ -103,7 +103,7 @@ export default function HeroHeader() {
 
   return (
     <>
-      <Container className={classes.wrapper} size={"xl"}>
+      <Container className={classes.wrapper} size={"xl"} p={0}>
         <div className={classes.inner}>
           <Title className={classes.title}>
             

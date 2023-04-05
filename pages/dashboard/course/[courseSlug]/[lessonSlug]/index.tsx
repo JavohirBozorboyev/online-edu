@@ -1,7 +1,9 @@
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import LessonVideo from "@/components/Video/LessonVideo";
 import CourseLayout from "@/layouts/CourseLayout";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { Container } from "@mantine/core";
+import { getServerSession } from "next-auth";
 import React, { ReactElement } from "react";
 
 type Props = {};
@@ -23,3 +25,22 @@ index.getLayout = function PageLayout(page: ReactElement) {
     </>
   );
 };
+
+
+
+export async function getServerSideProps(context: any) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login/signin",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}

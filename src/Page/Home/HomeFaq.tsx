@@ -42,7 +42,7 @@ export default function HomeFaq() {
   const { classes } = useStyles();
   return (
     <div className={classes.wrapper}>
-      <Container size="xl" my={'xl'}>
+      <Container size="xl" my={'xl'} p={0}>
         <Grid id="faq-grid" gutter={50}>
           <Col span={12} md={6}>
             <Image src={image.src} alt="Frequently Asked Questions" />

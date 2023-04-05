@@ -33,12 +33,12 @@ const mockdata = [
 ];
 
 const useStyles = createStyles((theme) => ({
-  bg: {
-    background:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+  // bg: {
+  //   background:
+  //     theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
 
-    width: "100%",
-  },
+  //   width: "100%",
+  // },
   title: {
     fontSize: rem(26),
     fontWeight: 900,
@@ -103,8 +103,8 @@ export default function HomeServiceSection() {
   ));
 
   return (
-    <div className={classes.bg}>
-      <Container size="xl" py="60px">
+    <div >
+      <Container size="xl" py="60px" p={'0'}>
         <Title order={2} className={classes.title} ta="center" mt="sm">
           Bizning Hizmatlarimmiz
         </Title>

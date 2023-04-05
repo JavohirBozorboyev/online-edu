@@ -17,6 +17,7 @@ import {
   Grid,
   Text,
   Divider,
+  PinInput,
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { TbMail, TbPhone, TbUser } from "react-icons/tb";
@@ -145,13 +146,7 @@ const index = () => {
                   required
                   mt="md"
                 />
-                <PasswordInput
-                  label="CMS Kod"
-                  placeholder="....."
-                  required
-                  mt="md"
-                  ref={cmsKey}
-                />
+                <PinInput mt={"md"} ref={cmsKey} />
               </>
             )}
           </Box>

@@ -23,16 +23,16 @@ const Links = [
     icon: TbShoppingBag,
     url: "/dashboard/course",
   },
-  {
-    label: "Releases",
-    icon: TbCalendarStats,
-    initiallyOpened: true,
-    links: [
-      { label: "Upcoming releases", link: "/a" },
-      { label: "Previous releases", link: "/b" },
-      { label: "Releases schedule", link: "/c" },
-    ],
-  },
+  // {
+  //   label: "Releases",
+  //   icon: TbCalendarStats,
+  //   initiallyOpened: true,
+  //   links: [
+  //     { label: "Upcoming releases", link: "/a" },
+  //     { label: "Previous releases", link: "/b" },
+  //     { label: "Releases schedule", link: "/c" },
+  //   ],
+  // },
 ];
 
 const DashNavbar = ({ opened, setOpened }: Props) => {
