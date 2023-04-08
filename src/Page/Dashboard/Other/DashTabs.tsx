@@ -1,14 +1,15 @@
-import { ActionIcon, Tabs, useMantineTheme } from "@mantine/core";
+import { Box, Tabs, createStyles } from "@mantine/core";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import {
-  TbDashboard,
-  TbHome,
-  TbLayoutDashboard,
-  TbMessageCircle,
-  TbShoppingBag,
-} from "react-icons/tb";
+import { TbLayoutDashboard, TbShoppingBag } from "react-icons/tb";
 
+const useStyles = createStyles((theme) => ({
+  hiddenDesktop: {
+    [theme.fn.largerThan("sm")]: {
+      display: "none",
+    },
+  },
+}));
 const Links = [
   {
     label: "Dashboard",
@@ -26,9 +27,9 @@ type Props = {};
 
 const DashTabs = (props: Props) => {
   const router = useRouter();
-  const theme = useMantineTheme();
+  const { classes, theme } = useStyles();
   return (
-    <div>
+    <Box className={classes.hiddenDesktop}>
       <Tabs
         value={router.route as string}
         onTabChange={(value) => router.push(`${value}`)}
@@ -63,12 +64,12 @@ const DashTabs = (props: Props) => {
                   />
                 }
                 value={item.url}
-               />
+              />
             );
           })}
         </Tabs.List>
       </Tabs>
-    </div>
+    </Box>
   );
 };
 

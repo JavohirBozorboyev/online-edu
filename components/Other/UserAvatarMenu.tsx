@@ -4,7 +4,7 @@ import { Menu, Avatar, Button } from "@mantine/core";
 import { signOut, useSession } from "next-auth/react";
 import router from "next/router";
 import { MdLogin } from "react-icons/md";
-import { TbLogout } from "react-icons/tb";
+import { TbLayoutDashboard, TbLogout } from "react-icons/tb";
 
 const UserAvatarMenu = () => {
   const { data: session } = useSession();
@@ -24,13 +24,20 @@ const UserAvatarMenu = () => {
 
           <Menu.Dropdown>
             <Menu.Label>Account</Menu.Label>
-
+            <Menu.Item
+              onClick={() => {
+                router.push("/dashboard");
+              }}
+              icon={<TbLayoutDashboard size={"1rem"} />}
+            >
+              Dashbaord
+            </Menu.Item>
             <Menu.Item
               onClick={() => {
                 signOut();
               }}
               color="blue"
-              icon={<TbLogout />}
+              icon={<TbLogout size={"1rem"} />}
             >
               Chiqish
             </Menu.Item>

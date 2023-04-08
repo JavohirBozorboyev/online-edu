@@ -201,7 +201,7 @@ const NavbarLinksGroup = ({ links, setOpened }: NavType) => {
     <Box
       sx={(theme) => ({
         backgroundColor:
-          theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
+         "transparent",
         borderRadius: "4px",
       })}
     >

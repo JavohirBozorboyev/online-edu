@@ -1,15 +1,5 @@
 import { useState } from "react";
-import {
-  AppShell,
-  Navbar,
-  Header,
-  Footer,
-  Aside,
-  Text,
-  MediaQuery,
-  Burger,
-  useMantineTheme,
-} from "@mantine/core";
+import { AppShell, useMantineTheme } from "@mantine/core";
 import AppNavigation from "@/components/Navbar/AppNavigation";
 import { useRouter } from "next/router";
 import DashNavigation from "@/components/Navbar/Dashboard/DashNavigation";
@@ -26,6 +16,7 @@ export default function Layout({ children }: LayoutType) {
   const [opened, setOpened] = useState(false);
   const router = useRouter();
   const act = router.route.startsWith("/dashboard");
+
   return (
     <AppShell
       styles={{
@@ -56,7 +47,7 @@ export default function Layout({ children }: LayoutType) {
         )
       }
     >
-      {act ? <DashTabs /> : null}
+      {act && <DashTabs />}
       {children}
     </AppShell>
   );
