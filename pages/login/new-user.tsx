@@ -36,7 +36,7 @@ const index = () => {
   const tel = useRef<any>("");
   const cmsKey = useRef<any>("");
 
-  const handleAuth = useCallback(async () => {
+  const handleAuth = async () => {
     signIn("credentials", {
       email: email.current.value,
       password: password.current.value,
@@ -55,7 +55,7 @@ const index = () => {
       .catch((err) => {
         null;
       });
-  }, [router]);
+  };
 
   return (
     <Container size={620}>

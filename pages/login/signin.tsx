@@ -32,7 +32,7 @@ const signin = () => {
   const tel = useRef<any>("");
   const cmsKey = useRef<any>("");
 
-  const handleAuth = useCallback(async () => {
+  const handleAuth = async () => {
     signIn("credentials", {
       email: email.current.value,
       password: password.current.value,
@@ -51,7 +51,7 @@ const signin = () => {
       .catch((err) => {
         null;
       });
-  }, [router]);
+  };
 
   return (
     <Container size={480}>
@@ -128,7 +128,7 @@ const signin = () => {
                 required
                 mt="md"
               />
-              <PinInput mt={'md'} ref={cmsKey} />
+              <PinInput mt={"md"} ref={cmsKey} />
             </>
           )}
         </Box>

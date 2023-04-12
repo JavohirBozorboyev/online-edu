@@ -32,6 +32,7 @@ const DashNavigation = ({ opened, setOpened }: Props) => {
           backgroundColor:
             theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
         })}
+        // withBorder={false}
       >
         <Box
           sx={{
