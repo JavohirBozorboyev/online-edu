@@ -18,11 +18,11 @@ type Props = {
 };
 
 const Links = [
-  //   {
-  //     label: "Dashboard",
-  //     icon: TbLayoutDashboard,
-  //     url: "/dashboard",
-  //   },
+    {
+      label: "Dashboard",
+      icon: TbLayoutDashboard,
+      url: "/dashboard",
+    },
   {
     label: "Kirish",
     icon: TbShoppingBag,

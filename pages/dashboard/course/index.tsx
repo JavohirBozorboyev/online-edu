@@ -10,9 +10,9 @@ type Props = {};
 const index = (props: Props) => {
   return (
     <>
-      <Box mb={'xl'}>
+      {/* <Box mb={'xl'}>
         <Breadcrumb />
-      </Box>
+      </Box> */}
       <main>
         <Container size={"xl"} p={0}>
           <DashCourseCard />

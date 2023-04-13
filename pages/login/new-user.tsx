@@ -44,12 +44,12 @@ const index = () => {
     })
       .then((res: any) => {
         if (res.ok) {
+          router.push("/dashboard");
           notifications.show({
             title: "Assalomu Alaykom",
             message: "Shaxsiy saxifangizga hush kelibsiz.",
             icon: <TbUser />,
           });
-          router.push("/dashboard");
         }
       })
       .catch((err) => {

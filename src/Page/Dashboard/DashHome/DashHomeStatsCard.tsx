@@ -74,13 +74,13 @@ const data = [
     title: "Revenue",
     icon: TbCoin,
     value: "13,456",
-    diff: 34,
+    diff: 44,
   },
   {
     title: "Revenue",
     icon: TbCoin,
     value: "13,456",
-    diff: 34,
+    diff: 4,
   },
   
 ];
