@@ -6,6 +6,7 @@ import {
   TbLayoutDashboard,
   TbShoppingBag,
 } from "react-icons/tb";
+import { DashTabNavbar } from "./DashTabNavbar";
 
 type Props = {
   opened: boolean;
@@ -42,7 +43,7 @@ const DashNavbar = ({ opened, setOpened }: Props) => {
   return (
     <div>
       <Navbar
-        p="xs"
+        p="0"
         hiddenBreakpoint="sm"
         hidden={!opened}
         withBorder={false}
@@ -52,7 +53,8 @@ const DashNavbar = ({ opened, setOpened }: Props) => {
             theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
         })}
       >
-        <NavbarLinksGroup links={LinksMemo} setOpened={setOpened} />
+        <DashTabNavbar />
+        {/* <NavbarLinksGroup links={LinksMemo} setOpened={setOpened} /> */}
       </Navbar>
     </div>
   );

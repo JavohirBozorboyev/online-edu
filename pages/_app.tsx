@@ -12,7 +12,7 @@ import { SessionProvider } from "next-auth/react";
 
 import Layout from "@/layouts/Layout";
 import { useRouter } from "next/router";
-import RouterTransition from "@/components/RouterTransition";
+import RouterTransition from "@/components/Other/RouterTransition";
 import { Notifications } from "@mantine/notifications";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
