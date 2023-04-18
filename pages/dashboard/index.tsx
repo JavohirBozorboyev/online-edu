@@ -17,10 +17,8 @@ const Dashboard = () => {
     <>
       <Container p={0} size={"xl"}>
         {/* <Breadcrumb /> */}
-        <DashHomeInfoCard
-          
-        />
-        {/* <Chart /> */}
+        <DashHomeInfoCard />
+        <Chart />
       </Container>
     </>
   );

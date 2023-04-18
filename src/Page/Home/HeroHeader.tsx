@@ -10,9 +10,11 @@ import {
 const useStyles = createStyles((theme) => ({
   wrapper: {
     position: "relative",
-    paddingTop: rem(150),
-    paddingBottom: rem(120),
-    // minHeight: "500px",
+
+    minHeight: "65vh",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
 
     [theme.fn.smallerThan("sm")]: {
       paddingTop: rem(80),
@@ -106,7 +108,6 @@ export default function HeroHeader() {
       <Container className={classes.wrapper} size={"xl"} p={0}>
         <div className={classes.inner}>
           <Title className={classes.title}>
-            
             <Text component="span" className={classes.highlight} inherit>
               Online Edu
             </Text>{" "}
@@ -128,7 +129,7 @@ export default function HeroHeader() {
               variant="default"
               color="gray"
             >
-            {"Ro'yhatdan O'tish"}
+              {"Ro'yhatdan O'tish"}
             </Button>
             <Button className={classes.control} size="lg">
               {"Honaga Kirish"}

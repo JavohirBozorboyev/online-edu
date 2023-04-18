@@ -272,7 +272,6 @@ export function DashTabNavbar({ setOpened }: any) {
               height: "100%",
             }}
             color="blue"
-            value={"/dashboard/course"}
             onTabChange={(value) => router.push(`${value}`)}
             radius={"0"}
           >
@@ -285,7 +284,7 @@ export function DashTabNavbar({ setOpened }: any) {
           </Title> */}
 
           {/* {links} */}
-          <ScrollArea h={"100%"} >
+          <ScrollArea h={"100%"}>
             <DashVideoLinksGroup setOpened={setOpened} links={Links} />
           </ScrollArea>
         </div>

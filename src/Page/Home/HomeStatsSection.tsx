@@ -3,9 +3,8 @@ import { createStyles, Text, rem, Container } from "@mantine/core";
 const useStyles = createStyles((theme) => ({
   root: {
     display: "flex",
-    backgroundImage: `linear-gradient(-60deg, ${
-      theme.colors[theme.primaryColor][8]
-    } 0%, ${theme.colors[theme.primaryColor][7]} 100%)`,
+    backgroundColor:
+      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
     padding: `calc(${theme.spacing.xl} * 1.5)`,
     borderRadius: theme.radius.md,
 
@@ -16,14 +15,14 @@ const useStyles = createStyles((theme) => ({
   },
 
   title: {
-    color: theme.white,
+    color: theme.colorScheme === "dark" ? theme.white : theme.colors.gray[7],
     textTransform: "uppercase",
     fontWeight: 700,
     fontSize: theme.fontSizes.sm,
   },
 
   count: {
-    color: theme.white,
+    color: theme.colors.blue[6],
     fontSize: rem(32),
     lineHeight: 1,
     fontWeight: 700,
@@ -32,7 +31,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   description: {
-    color: theme.colors[theme.primaryColor][0],
+    color: theme.colorScheme === "dark" ? theme.white : theme.colors.gray[6],
     fontSize: theme.fontSizes.sm,
     marginTop: rem(5),
   },
@@ -89,7 +88,7 @@ export default function HomeStatsSection() {
   ));
   return (
     <>
-      <Container size={"xl"}>
+      <Container size={"xl"} p={"0"}>
         <div className={classes.root}>{stats}</div>
       </Container>
     </>

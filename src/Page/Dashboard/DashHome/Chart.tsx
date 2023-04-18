@@ -9,6 +9,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { Box, List } from "@mantine/core";
 
 ChartJS.register(
   CategoryScale,
@@ -51,5 +52,12 @@ export const data = {
 };
 
 export default function Chart() {
-  return <Bar options={options} data={data} />;
+  return (
+    <Box mt={'lg'}  sx={(thema) => ({
+      background: thema.colorScheme === "dark" ? thema.colors.dark[8] : thema.white,
+      borderRadius: thema.radius['sm']
+    })}>
+      <Bar options={options} data={data} />
+    </Box>
+  );
 }
