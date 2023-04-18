@@ -11,6 +11,7 @@ import {
   TbVideo,
 } from "react-icons/tb";
 import DashVideoLinksGroup from "@/src/Page/Dashboard/Other/DashVideoLinksGroup";
+import { DashTabNavbar } from "./DashTabNavbar";
 
 type Props = {
   opened: boolean;
@@ -18,11 +19,11 @@ type Props = {
 };
 
 const Links = [
-    {
-      label: "Dashboard",
-      icon: TbLayoutDashboard,
-      url: "/dashboard",
-    },
+  {
+    label: "Dashboard",
+    icon: TbLayoutDashboard,
+    url: "/dashboard",
+  },
   {
     label: "Kirish",
     icon: TbShoppingBag,
@@ -77,18 +78,17 @@ const DashCourseNavbar = ({ opened, setOpened }: Props) => {
   return (
     <div>
       <Navbar
-        p="xs"
+        p="0"
         hiddenBreakpoint="sm"
         hidden={!opened}
-        width={{ sm: 250, lg: 280 }}
+        width={{ sm: 280, lg: 300 }}
         sx={(theme) => ({
           backgroundColor:
             theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
         })}
       >
-        <ScrollArea>
-          <DashVideoLinksGroup links={LinksMemo} setOpened={setOpened} />
-        </ScrollArea>
+        {/* <DashVideoLinksGroup links={LinksMemo} setOpened={setOpened} /> */}
+        <DashTabNavbar setOpened={setOpened} />
       </Navbar>
     </div>
   );

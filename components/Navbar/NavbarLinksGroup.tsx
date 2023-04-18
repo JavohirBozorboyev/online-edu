@@ -119,7 +119,7 @@ export function LinksGroup({
                 <ThemeIcon
                   variant="light"
                   color={`${router.route === url ? "yellow" : "blue"}`}
-                  size={30}
+                  size={40}
                 >
                   <Icon size="1.1rem" />
                 </ThemeIcon>

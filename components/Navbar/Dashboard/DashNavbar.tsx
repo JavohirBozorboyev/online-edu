@@ -53,8 +53,8 @@ const DashNavbar = ({ opened, setOpened }: Props) => {
             theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
         })}
       >
-        <DashTabNavbar />
-        {/* <NavbarLinksGroup links={LinksMemo} setOpened={setOpened} /> */}
+        {/* <DashTabNavbar /> */}
+        <NavbarLinksGroup links={LinksMemo} setOpened={setOpened} />
       </Navbar>
     </div>
   );
