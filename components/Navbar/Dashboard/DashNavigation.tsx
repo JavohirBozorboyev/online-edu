@@ -4,6 +4,7 @@ import {
   Burger,
   useMantineTheme,
   Box,
+  ActionIcon,
 } from "@mantine/core";
 
 import Link from "next/link";
@@ -44,13 +45,14 @@ const DashNavigation = ({ opened, setOpened }: Props) => {
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <MediaQuery largerThan="sm" styles={{ display: "none" }}>
-              <Burger
-                opened={opened}
-                onClick={() => setOpened((o: boolean) => !o)}
-                size="sm"
-                color={theme.colors.gray[6]}
-                mr="xs"
-              />
+              <ActionIcon variant="light" mr={"xs"} size={"lg"} component="div">
+                <Burger
+                  opened={opened}
+                  onClick={() => setOpened((o: boolean) => !o)}
+                  size="16px"
+                  color={theme.colors.gray[6]}
+                />
+              </ActionIcon>
             </MediaQuery>
             <Link href={"/"} style={{ marginTop: "5px" }}>
               <TbBrandMantine size={42} color={theme.fn.primaryColor()} />

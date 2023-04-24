@@ -7,39 +7,43 @@ type Props = {};
 
 const data = [
   {
-    title: "Javascript",
+    title: "Unit-1",
     text: " Boshlang'ich darslardan 30 ta savol. Harbir Savol uchun 2 daqiqa beriadi.",
     type: "free",
     time: " 12.02.2023",
+    len: 30,
   },
   {
-    title: "Python",
+    title: "Unit-2",
     text: " Boshlang'ich darslardan 30 ta savol. Harbir Savol uchun 2 daqiqa beriadi.",
     type: "free",
     time: " 07.02.2023",
+    len: 10,
   },
   {
-    title: "Java",
+    title: "Unit-3",
     text: " Boshlang'ich darslardan 30 ta savol. Harbir Savol uchun 2 daqiqa beriadi.",
     type: "free",
     time: " 14.02.2023",
+    len: 20,
   },
   {
-    title: "C++",
+    title: "Unit-4",
     text: " Boshlang'ich darslardan 30 ta savol. Harbir Savol uchun 2 daqiqa beriadi.",
     type: "free",
     time: " 05.02.2023",
+    len: 25,
   },
 ];
 
-const DashQuizCard = (props: Props) => {
+const DashQuizSlugCard = (props: Props) => {
   const { classes } = useCardBg();
   return (
     <>
       <Grid>
         {data.map((item, i) => {
           return (
-            <Grid.Col key={i} sm={6} lg={4}>
+            <Grid.Col key={i} sm={6} lg={4} xl={3}>
               <Card
                 className={classes.cardBg}
                 shadow="sm"
@@ -49,7 +53,7 @@ const DashQuizCard = (props: Props) => {
                 <Group position="apart" mb="xs">
                   <Text weight={500}>{item.title}</Text>
                   <Badge variant="light" radius={"sm"}>
-                    {item.type}
+                    {item.len} - ta savol
                   </Badge>
                 </Group>
 
@@ -60,17 +64,15 @@ const DashQuizCard = (props: Props) => {
                   {item.time}
                 </Text>
 
-                <Link href={'quiz/javascript'}>
-                  <Button
-                    variant="light"
-                    color="blue"
-                    fullWidth
-                    mt="md"
-                    radius="sm"
-                  >
-                    Boshlash
-                  </Button>
-                </Link>
+                <Button
+                  variant="light"
+                  color="blue"
+                  fullWidth
+                  mt="md"
+                  radius="sm"
+                >
+                  Boshlash
+                </Button>
               </Card>
             </Grid.Col>
           );
@@ -80,4 +82,4 @@ const DashQuizCard = (props: Props) => {
   );
 };
 
-export default DashQuizCard;
+export default DashQuizSlugCard;

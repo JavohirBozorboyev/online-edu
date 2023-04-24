@@ -5,4 +5,10 @@ export const useCardBg = createStyles((theme) => ({
     background:
       theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
   },
+  lessonBg: {
+    background:
+      theme.colorScheme === "dark"
+        ? theme.colors.dark[9]
+        : theme.colors.gray[0],
+  },
 }));

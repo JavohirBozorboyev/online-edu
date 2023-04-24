@@ -178,11 +178,6 @@ const linksMockdata = [
 
 const Links = [
   {
-    label: "Dashboard",
-    icon: TbLayoutDashboard,
-    url: "/dashboard",
-  },
-  {
     label: "Kirish",
     icon: TbShoppingBag,
     url: "/dashboard/course/js",
@@ -229,7 +224,7 @@ const Links = [
   },
 ];
 
-export function DashTabNavbar({ setOpened }: any) {
+export default function DashCourseTabNavbar({ setOpened }: any) {
   const { classes, cx } = useStyles();
   const [active, setActive] = useState("Releases");
   const [activeLink, setActiveLink] = useState("Settings");
