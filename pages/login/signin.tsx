@@ -18,7 +18,7 @@ import {
   Divider,
   PinInput,
 } from "@mantine/core";
-import { notifications } from "@mantine/notifications";
+// import { notifications } from "@mantine/notifications";
 import { TbUser, TbEye, TbMail, TbPhone } from "react-icons/tb";
 import Link from "next/link";
 import { AppleButton, GoogleButton } from "@/src/Page/Login/SocilaButtons";
@@ -40,13 +40,12 @@ const signin = () => {
     })
       .then((res: any) => {
         if (res.ok) {
-           router.push("/dashboard");
-          notifications.show({
-            title: "Assalomu Alaykom",
-            message: "Shaxsiy saxifangizga hush kelibsiz.",
-            icon: <TbUser />,
-          });
-         
+          router.push("/dashboard");
+          // notifications.show({
+          //   title: "Assalomu Alaykom",
+          //   message: "Shaxsiy saxifangizga hush kelibsiz.",
+          //   icon: <TbUser />,
+          // });
         }
       })
       .catch((err) => {
@@ -55,9 +54,9 @@ const signin = () => {
   };
 
   return (
-    <Container size={480}>
+    <Container size={480} p={'0'}>
       <Paper withBorder shadow="md" p={30} radius="md">
-        <Box mb={"md"}>
+        {/* <Box mb={"md"}>
           <Text size="xl" weight={700} tt={"uppercase"} ta={"center"}>
             Tizimga Kirish
           </Text>
@@ -75,7 +74,7 @@ const signin = () => {
             labelPosition="center"
             my="lg"
           />
-        </Box>
+        </Box> */}
         <SegmentedControl
           value={segment}
           onChange={setSegment}

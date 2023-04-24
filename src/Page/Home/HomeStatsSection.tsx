@@ -6,7 +6,7 @@ const useStyles = createStyles((theme) => ({
     backgroundColor:
       theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
     padding: `calc(${theme.spacing.xl} * 1.5)`,
-    borderRadius: theme.radius.md,
+    borderRadius: theme.radius.sm,
 
     [theme.fn.smallerThan("sm")]: {
       flexDirection: "column",

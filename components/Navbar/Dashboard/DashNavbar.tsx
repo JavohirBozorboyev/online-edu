@@ -4,7 +4,9 @@ import NavbarLinksGroup from "../NavbarLinksGroup";
 import {
   TbCalendarStats,
   TbLayoutDashboard,
+  TbListDetails,
   TbShoppingBag,
+  TbVideo,
 } from "react-icons/tb";
 import { DashTabNavbar } from "./DashTabNavbar";
 
@@ -15,14 +17,19 @@ type Props = {
 
 const Links = [
   {
-    label: "Dashboard",
+    label: "Asosiy",
     icon: TbLayoutDashboard,
     url: "/dashboard",
   },
   {
-    label: "My Course",
-    icon: TbShoppingBag,
+    label: "Kurslarim",
+    icon: TbVideo,
     url: "/dashboard/course",
+  },
+  {
+    label: "Imtxonlar",
+    icon: TbListDetails,
+    url: "/dashboard/quiz",
   },
   // {
   //   label: "Releases",
@@ -47,7 +54,7 @@ const DashNavbar = ({ opened, setOpened }: Props) => {
         hiddenBreakpoint="sm"
         hidden={!opened}
         withBorder={false}
-        width={{ sm: 250, lg: 270 }}
+        width={{ sm: 220, md: 250, lg: 270 }}
         sx={(theme) => ({
           backgroundColor:
             theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,

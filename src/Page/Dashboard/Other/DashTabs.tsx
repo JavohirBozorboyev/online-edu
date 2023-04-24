@@ -1,10 +1,21 @@
 import { Box, Tabs, createStyles } from "@mantine/core";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { TbLayoutDashboard, TbShoppingBag } from "react-icons/tb";
+import {
+  TbHome,
+  TbHome2,
+  TbLayoutDashboard,
+  TbListDetails,
+  TbShoppingBag,
+  TbVideo,
+} from "react-icons/tb";
 
 const useStyles = createStyles((theme) => ({
   hiddenDesktop: {
+    width: "100%",
+    position: "fixed",
+    bottom: "0%",
+    zIndex: 99,
     [theme.fn.largerThan("sm")]: {
       display: "none",
     },
@@ -12,14 +23,24 @@ const useStyles = createStyles((theme) => ({
 }));
 const Links = [
   {
+    label: "Home",
+    icon: TbHome,
+    url: "/",
+  },
+  {
     label: "Dashboard",
     icon: TbLayoutDashboard,
     url: "/dashboard",
   },
   {
     label: "My Course",
-    icon: TbShoppingBag,
+    icon: TbVideo,
     url: "/dashboard/course",
+  },
+  {
+    label: "My Course",
+    icon: TbListDetails,
+    url: "/dashboard/quiz",
   },
 ];
 
@@ -33,14 +54,16 @@ const DashTabs = (props: Props) => {
       <Tabs
         value={router.route as string}
         onTabChange={(value) => router.push(`${value}`)}
-        m={"-md"}
-        mb={"lg"}
+        // m={"-sx"}
+        mb={"0"}
         radius={0}
-        color="yellow"
         sx={(theme) => ({
           backgroundColor:
             theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
-          borderRadius: "4px",
+          borderTop:
+            theme.colorScheme === "dark"
+              ? `1px solid ${theme.colors.dark[7]}`
+              : `1px solid ${theme.colors.gray[1]}`,
         })}
       >
         <Tabs.List grow>
@@ -48,18 +71,18 @@ const DashTabs = (props: Props) => {
             return (
               <Tabs.Tab
                 key={i}
-                p={"sm"}
+                p={"md"}
                 icon={
                   <item.icon
                     size="1.5rem"
                     color={`${
                       router.route === item.url
                         ? theme.colorScheme === "dark"
-                          ? theme.colors.yellow[2]
-                          : theme.colors.yellow[5]
+                          ? theme.colors.blue[5]
+                          : theme.colors.blue[5]
                         : theme.colorScheme === "dark"
-                        ? theme.colors.blue[2]
-                        : theme.colors.blue[5]
+                        ? theme.white
+                        : theme.colors.dark[4]
                     }`}
                   />
                 }

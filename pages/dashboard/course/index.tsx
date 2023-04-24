@@ -1,6 +1,6 @@
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import DashCourseCard from "@/src/Page/Dashboard/Course/DashCourseCard";
+import DashCourseCard from "@/src/Page/Dashboard/DashCourse/DashCourseCard";
 import { Box, Container } from "@mantine/core";
 import { getServerSession } from "next-auth";
 import React from "react";

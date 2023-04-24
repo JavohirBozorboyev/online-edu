@@ -58,10 +58,16 @@ const index = () => {
   };
 
   return (
-    <Container size={620}>
+    <Container size={620} p={0}>
       <Paper withBorder shadow="md" p={30} radius="md">
-        <Box mb={"md"}>
-          <Text size="xl" weight={700} tt={"uppercase"} ta={"center"}>
+        {/* <Box mb={"md"}>
+          <Text
+            size="xl"
+            color="blue"
+            weight={700}
+            tt={"capitalize"}
+            ta={"left"}
+          >
             {"Ro'yhatdan O'tish"}
           </Text>
           <Group grow mb="md" mt="lg">
@@ -78,7 +84,7 @@ const index = () => {
             labelPosition="center"
             my="lg"
           />
-        </Box>
+        </Box> */}
         <SegmentedControl
           value={segment}
           onChange={setSegment}

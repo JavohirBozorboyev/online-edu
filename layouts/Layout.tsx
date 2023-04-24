@@ -30,6 +30,7 @@ export default function Layout({ children }: LayoutType) {
 
           [theme.fn.smallerThan("sm")]: {
             paddingX: 0,
+            paddingBottom: 65,
           },
         },
       }}
@@ -38,7 +39,12 @@ export default function Layout({ children }: LayoutType) {
       navbar={
         act ? <DashNavbar opened={opened} setOpened={setOpened} /> : undefined
       }
-      footer={act ? undefined : <AppFooter />}
+      footer={
+        <>
+          <DashTabs />
+          {!act && <AppFooter />}
+        </>
+      }
       header={
         act ? (
           <DashNavigation opened={opened} setOpened={setOpened} />
@@ -47,7 +53,6 @@ export default function Layout({ children }: LayoutType) {
         )
       }
     >
-      {act && <DashTabs />}
       {children}
     </AppShell>
   );

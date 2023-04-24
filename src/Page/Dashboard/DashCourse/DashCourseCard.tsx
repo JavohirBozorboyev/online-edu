@@ -7,6 +7,7 @@ import {
   Text,
   Grid,
   Modal,
+  createStyles,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
@@ -15,6 +16,13 @@ import DashCourseCardStats from "./DashCourseCardStats";
 import Link from "next/link";
 
 type Props = {};
+
+const useStyles = createStyles((theme) => ({
+  cardBg: {
+    background:
+      theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
+  },
+}));
 
 const Data = [
   {
@@ -33,11 +41,12 @@ const Data = [
 
 const DashCourseCard = (props: Props) => {
   const [opened, { open, close }] = useDisclosure(false);
+  const { classes, theme } = useStyles();
   return (
     <>
       <Grid>
         <Grid.Col md={6}>
-          <Card shadow="sm" padding="lg" radius="md" withBorder>
+          <Card shadow="sm" padding="lg" radius="sm" className={classes.cardBg}>
             <Card.Section>
               <Image
                 src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
@@ -85,7 +94,7 @@ const DashCourseCard = (props: Props) => {
           </Card>
         </Grid.Col>
         <Grid.Col md={6}>
-          <Card shadow="sm" padding="lg" radius="md" withBorder>
+          <Card shadow="sm" padding="lg" radius="sm" className={classes.cardBg}>
             <Card.Section>
               <Image
                 src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"

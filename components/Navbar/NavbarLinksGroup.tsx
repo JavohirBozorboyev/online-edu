@@ -8,6 +8,7 @@ import {
   UnstyledButton,
   createStyles,
   rem,
+  ActionIcon,
 } from "@mantine/core";
 import { TbChevronLeft, TbChevronRight } from "react-icons/tb";
 import Link from "next/link";
@@ -116,23 +117,26 @@ export function LinksGroup({
           <Link href={`${url}`} onClick={() => setOpenedNav(false)}>
             <Group position="apart" spacing={0}>
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <ThemeIcon
-                  variant="light"
-                  color={`${router.route === url ? "yellow" : "blue"}`}
+                <ActionIcon
+                  component="div"
+                  variant={"light"}
+                  color={`${router.route === url ? "blue" : "gray"}`}
                   size={40}
                 >
                   <Icon size="1.1rem" />
-                </ThemeIcon>
+                </ActionIcon>
                 <Text
                   ml="md"
+                  fw={"bold"}
+                  lts={"0.8px"}
                   color={`${
                     router.route === url
                       ? theme.colorScheme === "dark"
-                        ? theme.colors.yellow[2]
-                        : theme.colors.yellow[5]
+                        ? theme.colors.blue[3]
+                        : theme.colors.blue[5]
                       : theme.colorScheme === "dark"
-                      ? theme.colors.blue[2]
-                      : theme.colors.blue[5]
+                      ? theme.colors.gray[4]
+                      : theme.colors.gray[6]
                   }`}
                 >
                   {label}
@@ -154,11 +158,13 @@ export function LinksGroup({
         ) : (
           <Group position="apart" spacing={0}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <ThemeIcon variant="light" size={30}>
+              <ActionIcon component="div" variant="light" size={40}>
                 <Icon size="1.1rem" />
-              </ThemeIcon>
+              </ActionIcon>
               <Text
                 ml="md"
+                fw={"bold"}
+                lts={"0.8px"}
                 color={`${
                   theme.colorScheme === "dark"
                     ? theme.colors.blue[2]
@@ -200,8 +206,7 @@ const NavbarLinksGroup = ({ links, setOpened }: NavType) => {
   return (
     <Box
       sx={(theme) => ({
-        backgroundColor:
-         "transparent",
+        backgroundColor: "transparent",
         borderRadius: "4px",
       })}
     >

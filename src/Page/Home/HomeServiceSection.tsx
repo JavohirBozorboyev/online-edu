@@ -1,8 +1,6 @@
+import { useCardBg } from "@/styles/styleJs/useCardBg";
 import {
   createStyles,
-  Badge,
-  Group,
-  Title,
   Text,
   Card,
   SimpleGrid,
@@ -33,43 +31,6 @@ const mockdata = [
 ];
 
 const useStyles = createStyles((theme) => ({
-  // bg: {
-  //   background:
-  //     theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-
-  //   width: "100%",
-  // },
-  title: {
-    fontSize: rem(26),
-    fontWeight: 900,
-
-    [theme.fn.smallerThan("sm")]: {
-      fontSize: rem(24),
-    },
-  },
-
-  description: {
-    maxWidth: 600,
-    margin: "auto",
-
-    "&::after": {
-      content: '""',
-      display: "block",
-      backgroundColor: theme.fn.primaryColor(),
-      width: rem(45),
-      height: rem(2),
-      marginTop: theme.spacing.sm,
-      marginLeft: "auto",
-      marginRight: "auto",
-    },
-  },
-
-  card: {
-    border: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[1]
-    }`,
-  },
-
   cardTitle: {
     "&::after": {
       content: '""',
@@ -84,12 +45,14 @@ const useStyles = createStyles((theme) => ({
 
 export default function HomeServiceSection() {
   const { classes, theme } = useStyles();
+  const CardBg = useCardBg();
+
   const features = mockdata.map((feature) => (
     <Card
       key={feature.title}
       shadow="md"
       radius="md"
-      className={classes.card}
+      className={CardBg.classes.cardBg}
       padding="xl"
     >
       <feature.icon size={rem(50)} color={theme.fn.primaryColor()} />
@@ -103,27 +66,11 @@ export default function HomeServiceSection() {
   ));
 
   return (
-    <div >
-      <Container size="xl" py="60px" p={'0'}>
-        <Title order={2} className={classes.title} ta="center" mt="sm">
-          Bizning Hizmatlarimmiz
-        </Title>
-
-        <Text
-          fz={"md"}
-          c="dimmed"
-          className={classes.description}
-          ta="center"
-          mt="md"
-        >
-          Every once in a while, you’ll see a Golbat that’s missing some fangs.
-          This happens when hunger drives it to try biting a Steel-type Pokémon.
-        </Text>
-
+    <div>
+      <Container size="xl" p={"0"}>
         <SimpleGrid
           cols={3}
           spacing="xl"
-          mt={50}
           breakpoints={[{ maxWidth: "md", cols: 1 }]}
         >
           {features}

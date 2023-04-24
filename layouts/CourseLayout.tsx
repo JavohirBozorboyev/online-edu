@@ -12,6 +12,7 @@ import {
 } from "@mantine/core";
 import DashNavigation from "@/components/Navbar/Dashboard/DashNavigation";
 import DashCourseNavbar from "@/components/Navbar/Dashboard/DashCourseNavbar";
+import DashTabs from "@/src/Page/Dashboard/Other/DashTabs";
 
 interface CourseLayoutType {
   children: React.ReactElement;
@@ -40,11 +41,9 @@ export default function CourseLayout({ children }: CourseLayoutType) {
       //       </Aside>
       //     </MediaQuery>
       //   }
-      //   footer={
-      //     <Footer height={60} p="md">
-      //       Application footer
-      //     </Footer>
-      //   }
+        footer={
+          <DashTabs />
+        }
       header={<DashNavigation opened={opened} setOpened={setOpened} />}
     >
       {children}
