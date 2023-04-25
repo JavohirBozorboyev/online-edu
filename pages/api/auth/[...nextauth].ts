@@ -44,26 +44,13 @@ export const authOptions = {
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }: any) {
-      if (account.provider === "google") {
-        return profile.email_verified && profile.email.endsWith("@gmail.com");
-      }
-      if (user) {
-        return true;
-      }
-      return false;
+      return true;
     },
 
     async session({ session, user, token }: any) {
-      if (token) {
-        session.id = token.id;
-      }
       return session;
     },
     async jwt({ token, user, account, profile, isNewUser }: any) {
-      if (user) {
-        token.id = user.id;
-      }
-
       return token;
     },
   },

@@ -58,7 +58,7 @@ const useStyles = createStyles((theme) => ({
           ? theme.colors.dark[6]
           : theme.colors.gray[0],
       color:
-        theme.colorScheme === "dark" ? theme.white : theme.colors.yellow[5],
+        theme.colorScheme === "dark" ? theme.white : theme.colors.blue[5],
     },
   },
 
@@ -89,6 +89,7 @@ export function LinksGroup({
   const [opened, setOpened] = useState(initiallyOpened || false);
   const ChevronIcon = theme.dir === "ltr" ? TbChevronRight : TbChevronLeft;
   const router = useRouter();
+
   const items = (hasLinks ? links : []).map((link) => (
     <Link
       href={link.link || "/"}
@@ -97,13 +98,13 @@ export function LinksGroup({
     >
       <Text
         color={`${
-          router.route === link.link
+          router.asPath === link.link
             ? theme.colorScheme === "dark"
-              ? theme.colors.yellow[2]
-              : theme.colors.yellow[5]
+              ? theme.colors.blue[4]
+              : theme.colors.blue[4]
             : theme.colorScheme === "dark"
-            ? theme.colors.blue[2]
-            : theme.colors.blue[5]
+            ? theme.colors.gray[4]
+            : theme.colors.gray[5]
         }`}
         className={classes.link}
       >
@@ -128,11 +129,11 @@ export function LinksGroup({
                   color={`${
                     router.route === url
                       ? theme.colorScheme === "dark"
-                        ? theme.colors.yellow[2]
-                        : theme.colors.yellow[5]
+                        ? theme.colors.blue[3]
+                        : theme.colors.blue[5]
                       : theme.colorScheme === "dark"
-                      ? theme.colors.blue[2]
-                      : theme.colors.blue[5]
+                      ? theme.colors.gray[4]
+                      : theme.colors.gray[6]
                   }`}
                 >
                   {label}
@@ -160,8 +161,8 @@ export function LinksGroup({
                 ml="md"
                 color={`${
                   theme.colorScheme === "dark"
-                    ? theme.colors.blue[2]
-                    : theme.colors.blue[5]
+                    ? theme.colors.gray[4]
+                    : theme.colors.gray[6]
                 } `}
               >
                 {label}

@@ -41,9 +41,7 @@ export default function CourseLayout({ children }: CourseLayoutType) {
       //       </Aside>
       //     </MediaQuery>
       //   }
-        footer={
-          <DashTabs />
-        }
+      footer={<DashTabs />}
       header={<DashNavigation opened={opened} setOpened={setOpened} />}
     >
       {children}

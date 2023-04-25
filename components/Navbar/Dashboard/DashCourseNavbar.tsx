@@ -1,11 +1,59 @@
 import { Navbar } from "@mantine/core";
 import React from "react";
-import DashCourseTabNavbar from "./DashCourseTabNavbar";
+import DashVideoLinksGroup from "@/src/Page/Dashboard/Other/DashVideoLinksGroup";
 
 type Props = {
   opened: boolean;
   setOpened: any;
 };
+
+const Links = [
+  {
+    label: "Kirish",
+
+    url: "/dashboard/course/js",
+  },
+  {
+    label: "1-dars",
+
+    initiallyOpened: true,
+    links: [
+      { label: "Dars", link: "/dashboard/course/js/1dars" },
+      { label: "Topshiriqlar", link: "" },
+      { label: "Imtixon", link: "" },
+    ],
+  },
+  {
+    label: "2-dars",
+
+    // initiallyOpened: true,
+    links: [
+      { label: "Dars", link: "" },
+      { label: "Topshiriqlar", link: "" },
+      { label: "Imtixon", link: "" },
+    ],
+  },
+  {
+    label: "3-dars",
+
+    // initiallyOpened: true,
+    links: [
+      { label: "Dars", link: "" },
+      { label: "Topshiriqlar", link: "" },
+      { label: "Imtixon", link: "" },
+    ],
+  },
+  {
+    label: "4-dars",
+
+    // initiallyOpened: true,
+    links: [
+      { label: "Dars", link: "" },
+      { label: "Topshiriqlar", link: "" },
+      { label: "Imtixon", link: "" },
+    ],
+  },
+];
 
 const DashCourseNavbar = ({ opened, setOpened }: Props) => {
   return (
@@ -20,7 +68,7 @@ const DashCourseNavbar = ({ opened, setOpened }: Props) => {
             theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
         })}
       >
-        <DashCourseTabNavbar setOpened={setOpened} />
+        <DashVideoLinksGroup setOpened={setOpened} links={Links} />
       </Navbar>
     </div>
   );

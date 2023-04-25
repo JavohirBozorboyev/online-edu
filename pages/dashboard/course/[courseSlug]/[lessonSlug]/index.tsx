@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/jsx-no-undef */
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import LessonTabs from "@/components/Tabs/LessonTabs";
 
 import LessonVideo from "@/components/Video/LessonVideo";
 import CourseLayout from "@/layouts/CourseLayout";
@@ -20,9 +19,7 @@ const index = (props: Props) => {
   const [activeTab, setActiveTab] = useState<string | null>("3");
   return (
     <>
-      <Box m={"-md"} mb={"md"}>
-        <LessonTabs />
-      </Box>
+      <Box m={"-md"} mb={"md"}></Box>
       <LessonVideo />
     </>
   );
