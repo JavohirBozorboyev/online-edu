@@ -51,6 +51,10 @@ export const authOptions = {
       return session;
     },
     async jwt({ token, user, account, profile, isNewUser }: any) {
+      if (user) {
+        token.id = user.id;
+      }
+
       return token;
     },
   },
