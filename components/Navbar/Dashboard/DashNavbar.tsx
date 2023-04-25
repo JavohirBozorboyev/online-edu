@@ -8,7 +8,7 @@ import {
   TbShoppingBag,
   TbVideo,
 } from "react-icons/tb";
-import { DashTabNavbar } from "./DashCourseTabNavbar";
+import  DashTabNavbar  from "./DashCourseTabNavbar";
 
 type Props = {
   opened: boolean;
