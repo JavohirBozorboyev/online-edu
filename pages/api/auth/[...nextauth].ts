@@ -1,23 +1,12 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions = {
   pages: {
     signIn: "/login/signin",
+    error: "/",
   },
   providers: [
-    // GoogleProvider({
-    //   clientId: process.env.GOOGLE_ID,
-    //   clientSecret: process.env.GOOGLE_SECRET,
-    //   authorization: {
-    //     params: {
-    //       prompt: "consent",
-    //       access_type: "offline",
-    //       response_type: "code",
-    //     },
-    //   },
-    // }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -43,19 +32,20 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }: any) {
-      return true;
-    },
-
-    async session({ session, user, token }: any) {
-      return session;
-    },
     async jwt({ token, user, account, profile, isNewUser }: any) {
       if (user) {
         token.id = user.id;
       }
 
       return token;
+    },
+
+    async signIn({ user, account, profile, email, credentials }: any) {
+      return true;
+    },
+
+    async session({ session, user, token }: any) {
+      return session;
     },
   },
 };

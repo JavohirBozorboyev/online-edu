@@ -11,8 +11,8 @@ import Chart from "@/src/Page/Dashboard/DashHome/Chart";
 import DashHomeInfoCard from "@/src/Page/Dashboard/DashHome/DashHomeStatsCard";
 
 const Dashboard = () => {
-  // const { data: session } = useSession();
-  // console.log(session);
+  const { data: session } = useSession();
+  console.log(session);
   return (
     <>
       <Container p={0} size={"xl"}>

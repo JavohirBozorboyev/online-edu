@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useState, useRef } from "react";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 import {
@@ -14,14 +14,12 @@ import {
   SegmentedControl,
   Box,
   Center,
-  Text,
-  Divider,
   PinInput,
 } from "@mantine/core";
 // import { notifications } from "@mantine/notifications";
-import { TbUser, TbEye, TbMail, TbPhone } from "react-icons/tb";
+import { TbMail, TbPhone, TbUser } from "react-icons/tb";
 import Link from "next/link";
-import { AppleButton, GoogleButton } from "@/src/Page/Login/SocilaButtons";
+import { notifications } from "@mantine/notifications";
 
 const signin = () => {
   const [segment, setSegment] = useState("pochta");
@@ -41,11 +39,11 @@ const signin = () => {
       .then((res: any) => {
         if (res.ok) {
           router.push("/dashboard");
-          // notifications.show({
-          //   title: "Assalomu Alaykom",
-          //   message: "Shaxsiy saxifangizga hush kelibsiz.",
-          //   icon: <TbUser />,
-          // });
+          notifications.show({
+            title: "Assalomu Alaykom",
+            message: "Shaxsiy saxifangizga hush kelibsiz.",
+            icon: <TbUser />,
+          });
         }
       })
       .catch((err) => {
