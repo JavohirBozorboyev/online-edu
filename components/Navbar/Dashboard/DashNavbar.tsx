@@ -4,6 +4,7 @@ import NavbarLinksGroup from "../NavbarLinksGroup";
 import {
   TbLayoutDashboard,
   TbListDetails,
+  TbPlayerPlayFilled,
   TbUser,
   TbVideo,
 } from "react-icons/tb";
@@ -21,7 +22,7 @@ const Links = [
   },
   {
     label: "Kurslar",
-    icon: TbVideo,
+    icon: TbPlayerPlayFilled,
     url: "/dashboard/course",
   },
   {

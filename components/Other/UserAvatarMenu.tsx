@@ -17,6 +17,7 @@ const UserAvatarMenu = () => {
           transitionProps={{
             duration: 350,
           }}
+          withArrow
         >
           <Menu.Target>
             <Avatar size={"md"} variant="light" color="blue" />

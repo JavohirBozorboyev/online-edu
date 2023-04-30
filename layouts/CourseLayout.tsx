@@ -1,18 +1,20 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import {
   AppShell,
-  Navbar,
-  Header,
-  Footer,
   Aside,
-  Text,
+  Box,
+  Button,
+  List,
   MediaQuery,
-  Burger,
+  Paper,
   useMantineTheme,
 } from "@mantine/core";
 import DashNavigation from "@/components/Navbar/Dashboard/DashNavigation";
 import DashCourseNavbar from "@/components/Navbar/Dashboard/DashCourseNavbar";
 import DashTabs from "@/src/Page/Dashboard/Other/DashTabs";
+import DashNavbar from "@/components/Navbar/Dashboard/DashNavbar";
+import DashCourseAside from "@/components/Navbar/Dashboard/DashCourseAside";
+import { TbList } from "react-icons/tb";
 
 interface CourseLayoutType {
   children: React.ReactElement;
@@ -21,6 +23,11 @@ interface CourseLayoutType {
 export default function CourseLayout({ children }: CourseLayoutType) {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+  const [asideActive, setAsideActive] = useState(false);
+
+  const toggleAsideBar = useCallback(() => {
+    setAsideActive(!asideActive);
+  }, [asideActive]);
   return (
     <AppShell
       styles={{
@@ -33,17 +40,57 @@ export default function CourseLayout({ children }: CourseLayoutType) {
       }}
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
-      navbar={<DashCourseNavbar opened={opened} setOpened={setOpened} />}
-      //   aside={
-      //     <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-      //       <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 250 }}>
-      //         <Text>Application sidebar</Text>
-      //       </Aside>
-      //     </MediaQuery>
-      //   }
+      navbar={<DashNavbar opened={opened} setOpened={setOpened} />}
+      aside={
+        <MediaQuery
+          smallerThan="sm"
+          styles={{ display: `${asideActive ? "block" : "none"}` }}
+        >
+          <Aside
+            p="0"
+            hiddenBreakpoint="sm"
+            width={{ sm: 250, lg: 300 }}
+            sx={{
+              background:
+                theme.colorScheme === "dark"
+                  ? theme.colors.dark[8]
+                  : theme.white,
+
+              zIndex: 10,
+              [theme.fn.smallerThan("sm")]: { marginTop: "40px" },
+            }}
+          >
+            <DashCourseAside toggleAsideBar={toggleAsideBar} />
+          </Aside>
+        </MediaQuery>
+      }
       footer={<DashTabs />}
       header={<DashNavigation opened={opened} setOpened={setOpened} />}
     >
+      <MediaQuery largerThan="sm" styles={{ display: "none" }}>
+        <Box
+          m={"-md"}
+          mb={"xl"}
+          py={"2px"}
+          sx={{
+            background:
+              theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+        >
+          <Button
+            variant="light"
+            leftIcon={<TbList size={"1.2rem"} />}
+            radius={"0"}
+            color="gray"
+            onClick={toggleAsideBar}
+          >
+            {"Darslar Ro'yhati"}
+          </Button>
+        </Box>
+      </MediaQuery>
+
       {children}
     </AppShell>
   );
