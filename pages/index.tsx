@@ -8,7 +8,7 @@ import HomeStatsSection from "@/src/Page/Home/HomeStatsSection";
 
 import HomeCarousel from "@/src/Page/Home/HomeCarousel";
 import QuizCarousel from "@/components/Carousel/QuizCarousel";
-import { Box, Text } from "@mantine/core";
+import { Box, Container, Text } from "@mantine/core";
 import { useHomeTitleStyle } from "@/styles/styleJs/useTitleStyle";
 
 export default function Home() {
@@ -40,7 +40,9 @@ export default function Home() {
             fangs. This happens when hunger drives it to try biting a Steel-type
             Pokémon.
           </Text>
-          <HomeCarousel />
+          <Container size={"xl"} px={"0"}>
+            <HomeCarousel />
+          </Container>
         </Box>
         {/* Course Card Component end */}
         {/* Servis Card Component start */}
@@ -84,7 +86,9 @@ export default function Home() {
             fangs. This happens when hunger drives it to try biting a Steel-type
             Pokémon.
           </Text>
-          <QuizCarousel />
+          <Container size={"xl"} px={"0"}>
+            <QuizCarousel />
+          </Container>
         </Box>
         {/* Quiz Card Component end */}
 

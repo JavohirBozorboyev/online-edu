@@ -6,6 +6,7 @@ import {
   Container,
   rem,
 } from "@mantine/core";
+import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -123,17 +124,21 @@ export default function HeroHeader() {
           </Container>
 
           <div className={classes.controls}>
-            <Button
-              className={classes.control}
-              size="lg"
-              variant="default"
-              color="gray"
-            >
-              {"Ro'yhatdan O'tish"}
-            </Button>
-            <Button className={classes.control} size="lg">
-              {"Honaga Kirish"}
-            </Button>
+            <Link href="/login/signin">
+              <Button
+                className={classes.control}
+                size="lg"
+                variant="default"
+                color="gray"
+              >
+                {"Ro'yhatdan O'tish"}
+              </Button>
+            </Link>
+            <Link href={"/dashboard"}>
+              <Button className={classes.control} ml={"lg"} size="lg">
+                {"Honaga Kirish"}
+              </Button>
+            </Link>
           </div>
         </div>
       </Container>
