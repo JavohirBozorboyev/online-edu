@@ -10,7 +10,6 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import DashNavigation from "@/components/Navbar/Dashboard/DashNavigation";
-import DashCourseNavbar from "@/components/Navbar/Dashboard/DashCourseNavbar";
 import DashTabs from "@/src/Page/Dashboard/Other/DashTabs";
 import DashNavbar from "@/components/Navbar/Dashboard/DashNavbar";
 import DashCourseAside from "@/components/Navbar/Dashboard/DashCourseAside";

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, NavLink, createStyles } from "@mantine/core";
+import { Box, NavLink, ScrollArea, createStyles } from "@mantine/core";
 import { TbCheck, TbPlayerSkipForward } from "react-icons/tb";
 import Link from "next/link";
 
@@ -67,10 +67,16 @@ const data = [
 ];
 
 const DashCourseAside = ({ toggleAsideBar }: any) => {
-  const { classes } = useStyle();
+  const { classes, theme } = useStyle();
   return (
     <>
-      <Box>
+      <ScrollArea
+        h={"100%"}
+        mb={"md"}
+        sx={{
+          [theme.fn.smallerThan("sm")]: { paddingBottom: "100px" },
+        }}
+      >
         {data.map((item, i) => {
           return (
             <NavLink
@@ -103,7 +109,7 @@ const DashCourseAside = ({ toggleAsideBar }: any) => {
             </NavLink>
           );
         })}
-      </Box>
+      </ScrollArea>
     </>
   );
 };
