@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/jsx-no-undef */
-import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
+
+import LessonPassButton from "@/components/Tabs/LessonPassButton";
 
 import LessonVideo from "@/components/Video/LessonVideo";
 import CourseLayout from "@/layouts/CourseLayout";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { useCardBg } from "@/styles/styleJs/useCardBg";
-import { Container, Box, Tabs, Paper } from "@mantine/core";
+import { Box } from "@mantine/core";
 import { getServerSession } from "next-auth";
 
 import React, { ReactElement, useState } from "react";
-import { TbListDetails, TbMessageCircle } from "react-icons/tb";
 
 type Props = {};
 
@@ -21,6 +21,7 @@ const index = (props: Props) => {
     <>
       <Box m={"-md"} mb={"md"}></Box>
       <LessonVideo />
+      <LessonPassButton />
     </>
   );
 };
