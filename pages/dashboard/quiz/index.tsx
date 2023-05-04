@@ -6,11 +6,18 @@ import { useDashTitleStyle } from "@/styles/styleJs/useTitleStyle";
 import { Box, Text } from "@mantine/core";
 import { getServerSession } from "next-auth";
 import React from "react";
+import useSWR from "swr";
 
 type Props = {};
 
 const index = (props: Props) => {
   const { classes, theme } = useDashTitleStyle();
+  const {
+    data: quiz,
+    error: equiz,
+    isLoading: lquiz,
+  } = useSWR("https://backend.tibbiypsixologiya.uz/api/category/");
+
   return (
     <>
       <Box mb={"xl"}>
@@ -23,7 +30,7 @@ const index = (props: Props) => {
         <Text className={classes.title} mb={"sm"}>
           Ommabop Imtixonlar
         </Text>
-        <DashQuizCard />
+        <DashQuizCard data={quiz} error={equiz} loading={lquiz} />
       </Box>
     </>
   );

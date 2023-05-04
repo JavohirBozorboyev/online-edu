@@ -2,79 +2,68 @@ import { useCardBg } from "@/styles/styleJs/useCardBg";
 import { Badge, Button, Card, Grid, Group, Text } from "@mantine/core";
 import Link from "next/link";
 import React from "react";
+import DashQuizCardSkeleton from "./DashQuizCardSkeleton";
 
-type Props = {};
+type Props = {
+  data: {
+    body: string;
+    id: number;
+    parent: number | null;
+    slug: string;
+    name: string;
+  }[];
+  error: any;
+  loading: boolean;
+};
 
-const data = [
-  {
-    title: "Javascript",
-    text: " Boshlang'ich darslardan 30 ta savol. Harbir Savol uchun 2 daqiqa beriadi.",
-    type: "free",
-    time: " 12.02.2023",
-  },
-  {
-    title: "Python",
-    text: " Boshlang'ich darslardan 30 ta savol. Harbir Savol uchun 2 daqiqa beriadi.",
-    type: "free",
-    time: " 07.02.2023",
-  },
-  {
-    title: "Java",
-    text: " Boshlang'ich darslardan 30 ta savol. Harbir Savol uchun 2 daqiqa beriadi.",
-    type: "free",
-    time: " 14.02.2023",
-  },
-  {
-    title: "C++",
-    text: " Boshlang'ich darslardan 30 ta savol. Harbir Savol uchun 2 daqiqa beriadi.",
-    type: "free",
-    time: " 05.02.2023",
-  },
-];
-
-const DashQuizCard = (props: Props) => {
+const DashQuizCard = ({ data, error, loading }: Props) => {
   const { classes } = useCardBg();
+  if (loading) {
+    return <DashQuizCardSkeleton />;
+  }
   return (
     <>
       <Grid>
-        {data.map((item, i) => {
-          return (
-            <Grid.Col key={i} sm={6} lg={4}>
-              <Card
-                className={classes.cardBg}
-                shadow="sm"
-                padding="lg"
-                radius="sm"
-              >
-                <Group position="apart" mb="xs">
-                  <Text weight={500}>{item.title}</Text>
-                  <Badge variant="light" radius={"sm"}>
-                    {item.type}
-                  </Badge>
-                </Group>
+        {data
+          .filter((fil) => fil.parent === null)
+          .map((item, i) => {
+            return (
+              <Grid.Col key={i} sm={6} lg={4}>
+                <Card
+                  className={classes.cardBg}
+                  shadow="sm"
+                  padding="lg"
+                  radius="sm"
+                >
+                  <Group position="apart" mb="xs">
+                    <Text weight={500}>{item.name}</Text>
+                    <Badge variant="light" radius={"sm"}>
+                      {"free"}
+                    </Badge>
+                  </Group>
 
-                <Text size="sm" color="dimmed">
-                  {item.text.slice(0, 80)}...
-                </Text>
-                <Text size="sm" color="blue" mt={"sm"}>
-                  {item.time}
-                </Text>
+                  <Text size="sm" color="dimmed">
+                    {item.body.slice(0, 80)}...
+                  </Text>
+                  <Text size="sm" color="blue" mt={"sm"}>
+                    {item.slug}
+                  </Text>
 
-                <Link href={'quiz/javascript'}>
-                  <Button
-                    variant="light"
-                    color="blue"
-                    fullWidth
-                    mt="md"
-                    radius="sm"
-                  >
-                    Boshlash
-                  </Button>
-                </Link>
-              </Card>
-            </Grid.Col>
-          );
-        })}
+                  <Link href={`quiz/${item.slug}`}>
+                    <Button
+                      variant="light"
+                      color="blue"
+                      fullWidth
+                      mt="md"
+                      radius="sm"
+                    >
+                      Boshlash
+                    </Button>
+                  </Link>
+                </Card>
+              </Grid.Col>
+            );
+          })}
       </Grid>
     </>
   );

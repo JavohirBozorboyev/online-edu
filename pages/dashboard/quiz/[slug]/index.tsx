@@ -7,12 +7,21 @@ import { useDashTitleStyle } from "@/styles/styleJs/useTitleStyle";
 import DashQuizSlugCard from "@/src/Page/Dashboard/DashQuiz/DashQuizSlugCard";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
+import useSWR from "swr";
 
-type Props = {};
+type Props = {
+  data: any;
+};
 
-const index = (props: Props) => {
+const index = ({ data }: Props) => {
   const { classes } = useDashTitleStyle();
   const router = useRouter();
+  // const { data, error, isLoading } = useSWR(
+  //   `https://backend.tibbiypsixologiya.uz/api/category/${router.query.slug}/`
+  // );
+
+  console.log(data);
+
   const titleSlug = router.query.slug || "Loading...";
 
   return (
@@ -32,6 +41,12 @@ export default index;
 export async function getServerSideProps(context: any) {
   const session = await getServerSession(context.req, context.res, authOptions);
 
+  const quiz = await fetch(
+    `https://backend.tibbiypsixologiya.uz/api/category/${context.params}/`
+  );
+
+  const data = await quiz.json();
+
   if (!session) {
     return {
       redirect: {
@@ -42,6 +57,8 @@ export async function getServerSideProps(context: any) {
   }
 
   return {
-    props: {},
+    props: {
+      data,
+    },
   };
 }

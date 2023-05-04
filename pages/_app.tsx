@@ -14,6 +14,8 @@ import Layout from "@/layouts/Layout";
 import { useRouter } from "next/router";
 import RouterTransition from "@/components/Other/RouterTransition";
 import { Notifications } from "@mantine/notifications";
+import { SWRConfig } from "swr";
+import axios from "axios";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -23,6 +25,7 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
+const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 export default function App({
   Component,
   pageProps: { sesion, ...pageProps },
@@ -58,9 +61,16 @@ export default function App({
         >
           <RouterTransition />
           <Notifications />
-          <SessionProvider session={sesion}>
-            {getLayout(<Component {...pageProps} />)}
-          </SessionProvider>
+          <SWRConfig
+            value={{
+              refreshInterval: 1000,
+              fetcher,
+            }}
+          >
+            <SessionProvider session={sesion}>
+              {getLayout(<Component {...pageProps} />)}
+            </SessionProvider>
+          </SWRConfig>
         </MantineProvider>
       </ColorSchemeProvider>
     </>
