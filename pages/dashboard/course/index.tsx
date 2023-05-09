@@ -11,7 +11,7 @@ type Props = {};
 const index = (props: Props) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   // const { data, error, isLoading } = useSWR(
-  //   "https://jsonplaceholder.typicode.com/posts"
+  //   "https://splatform.pythonanywhere.com/platform/course/"
   // );
 
   // console.log(data);

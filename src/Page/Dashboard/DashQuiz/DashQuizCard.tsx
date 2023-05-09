@@ -12,14 +12,23 @@ type Props = {
     slug: string;
     name: string;
   }[];
-  error: any;
-  loading: boolean;
+  error?: any;
+  loading?: boolean;
 };
 
 const DashQuizCard = ({ data, error, loading }: Props) => {
   const { classes } = useCardBg();
   if (loading) {
     return <DashQuizCardSkeleton />;
+  }
+  if (error) {
+    return (
+      <>
+        <Text size="xl" ta="center" my="xl">
+          Server Bilan Xatolik Yuzaga Keldi{" "}
+        </Text>
+      </>
+    );
   }
   return (
     <>

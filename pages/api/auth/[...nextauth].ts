@@ -20,10 +20,10 @@ export const authOptions = {
         if (user) {
           return {
             id: "1",
-            name: credentials?.username,
-            email: credentials?.password,
-
-            image: "img url",
+            name: "",
+            email: "",
+            image: "",
+            token: "",
           };
         } else {
           return null;
@@ -41,11 +41,11 @@ export const authOptions = {
     },
 
     async signIn({ user, account, profile, email, credentials }: any) {
-      return true;
+      return { ...user, ...account };
     },
 
     async session({ session, user, token }: any) {
-      return session;
+      return { ...session, ...user, ...token };
     },
   },
 };
