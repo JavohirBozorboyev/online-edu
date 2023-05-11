@@ -1,42 +1,34 @@
-import { useLessonPassButtonStyle } from "@/styles/styleJs/useLessonPassButtonStyle";
-import { Box, Grid, Button, Paper, Text, createStyles } from "@mantine/core";
+import { Grid, Button, Text } from "@mantine/core";
 import React from "react";
 import { TbChevronLeft, TbChevronRight } from "react-icons/tb";
 
 const LessonPassButton = () => {
-  const { classes } = useLessonPassButtonStyle();
   return (
     <div>
       <Grid my="md">
         <Grid.Col md={6}>
-          <Paper
-            variant="default"
-            color="gray"
-            withBorder
-            py={"xl"}
-            px={"xl"}
-            className={`${classes.bg} ${classes.pos}`}
+          <Button
+            size="xl"
+            variant="light"
+            fullWidth
+            leftIcon={<TbChevronLeft size={"1.5rem"} />}
           >
-            <TbChevronLeft size={"1.5rem"} className={classes.icon} />
-            <Text fz="md" fw={"00"} tt={"capitalize"}>
+            <Text fw={"600"} fz="md" tt={"uppercase"}>
               Ortga qaytish
             </Text>
-          </Paper>
+          </Button>
         </Grid.Col>
         <Grid.Col md={6}>
-          <Paper
-            variant="default"
-            color="gray"
-            withBorder
-            py={"xl"}
-            px={"xl"}
-            className={`${classes.bg} ${classes.pos}`}
+          <Button
+            size="xl"
+            variant="light"
+            fullWidth
+            rightIcon={<TbChevronRight size={"1.2rem"} />}
           >
-            <Text fw={"00"} fz="md" tt={"capitalize"}>
+            <Text fw={"600"} fz="md" tt={"uppercase"}>
               Oldinga yurish
             </Text>
-            <TbChevronRight size={"1.5rem"} className={classes.icon} />
-          </Paper>
+          </Button>
         </Grid.Col>
       </Grid>
     </div>

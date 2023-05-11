@@ -75,20 +75,24 @@ const DashCourseCard = (props: Props) => {
                   onClick={open}
                   color="teal"
                   radius="sm"
+                  variant="light"
                   fullWidth
                 >
                   Kurs Statistikasi
                 </Button>
               </Grid.Col>
               <Grid.Col span={"auto"}>
-                <Button
-                  leftIcon={<TbPlayerPlayFilled size={"1.2rem"} />}
-                  fullWidth
-                  color="blue"
-                  radius="sm"
-                >
-                  Kursni Boshlash
-                </Button>
+                <Link href={"/dashboard/course/js"}>
+                  <Button
+                    leftIcon={<TbPlayerPlayFilled size={"1.2rem"} />}
+                    fullWidth
+                    color="blue"
+                    radius="sm"
+                    variant="light"
+                  >
+                    Kursni Boshlash
+                  </Button>
+                </Link>
               </Grid.Col>
             </Grid>
           </Card>
@@ -124,6 +128,7 @@ const DashCourseCard = (props: Props) => {
                   color="teal"
                   radius="sm"
                   fullWidth
+                  variant="light"
                 >
                   Kurs Statistikasi
                 </Button>
@@ -135,6 +140,7 @@ const DashCourseCard = (props: Props) => {
                     fullWidth
                     color="blue"
                     radius="sm"
+                    variant="light"
                   >
                     Kursni Boshlash
                   </Button>

@@ -66,7 +66,7 @@ const DashQuizCard = ({ data, error, loading }: Props) => {
                       mt="md"
                       radius="sm"
                     >
-                      Boshlash
+                      {"Barchasini Ko'rish"}
                     </Button>
                   </Link>
                 </Card>

@@ -66,7 +66,10 @@ const data = [
   },
 ];
 
-const DashCourseAside = ({ toggleAsideBar }: any) => {
+type Props = {
+  toggleAsideBar?: any;
+};
+const DashCourseAside = ({ toggleAsideBar }: Props) => {
   const { classes, theme } = useStyle();
   return (
     <>

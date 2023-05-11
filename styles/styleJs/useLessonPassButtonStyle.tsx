@@ -6,13 +6,17 @@ export const useLessonPassButtonStyle = createStyles((theme) => ({
       theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
     "&:hover": {
       backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : "",
-      boxShadow: theme.colorScheme === "dark" ? "" : `0px 0px 10px ${theme.colors.gray[5]}`,
+      transform: theme.colorScheme === "dark" ? "" : `scale(1.1)`,
     },
   },
   pos: {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
+    transition: "all 0.3s ease",
+    "&:hover": {
+      transform: theme.colorScheme === "dark" ? "" : `scale(0.99)`,
+    },
   },
   icon: {
     color:

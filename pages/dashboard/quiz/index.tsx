@@ -8,17 +8,15 @@ import { getServerSession } from "next-auth";
 import React from "react";
 import useSWR from "swr";
 
-type Props = {
-  quiz: any;
-};
+type Props = {};
 
-const index = ({ quiz }: Props) => {
+const index = ({}: Props) => {
   const { classes, theme } = useDashTitleStyle();
-  // const {
-  //   data: quiz,
-  //   error: equiz,
-  //   isLoading: lquiz,
-  // } = useSWR("https://backend.tibbiypsixologiya.uz/api/category/");
+  const {
+    data: quiz,
+    error: equiz,
+    isLoading: lquiz,
+  } = useSWR("https://backend.tibbiypsixologiya.uz/api/category/");
 
   return (
     <>
@@ -32,7 +30,7 @@ const index = ({ quiz }: Props) => {
         <Text className={classes.title} mb={"sm"}>
           Ommabop Imtixonlar
         </Text>
-        <DashQuizCard data={quiz}  />
+        <DashQuizCard data={quiz} error={equiz} loading={lquiz} />
       </Box>
     </>
   );
@@ -42,11 +40,6 @@ export default index;
 
 export async function getServerSideProps(context: any) {
   const session = await getServerSession(context.req, context.res, authOptions);
-
-  const quiz = await fetch(
-    "https://backend.tibbiypsixologiya.uz/api/category/"
-  );
-  const resQuiz = await quiz.json();
 
   if (!session) {
     return {
@@ -58,8 +51,6 @@ export async function getServerSideProps(context: any) {
   }
 
   return {
-    props: {
-      quiz: resQuiz,
-    },
+    props: {},
   };
 }
