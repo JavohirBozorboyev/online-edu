@@ -5,14 +5,14 @@ import {
   Box,
   Button,
   MediaQuery,
-  
   useMantineTheme,
 } from "@mantine/core";
 import DashNavigation from "@/components/Navbar/Dashboard/DashNavigation";
-import DashTabs from "@/src/Page/Dashboard/Other/DashTabs";
+
 import DashNavbar from "@/components/Navbar/Dashboard/DashNavbar";
 import DashCourseAside from "@/components/Navbar/Dashboard/DashCourseAside";
 import { TbList } from "react-icons/tb";
+import BottomNavigation from "@/components/Tabs/BottomNavigation";
 
 interface CourseLayoutType {
   children: React.ReactElement;
@@ -62,7 +62,7 @@ export default function CourseLayout({ children }: CourseLayoutType) {
           </Aside>
         </MediaQuery>
       }
-      footer={<DashTabs />}
+      footer={<BottomNavigation />}
       header={<DashNavigation opened={opened} setOpened={setOpened} />}
     >
       <MediaQuery largerThan="sm" styles={{ display: "none" }}>

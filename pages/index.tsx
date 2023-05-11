@@ -14,8 +14,8 @@ import { useSession } from "next-auth/react";
 
 export default function Home() {
   const { classes, theme } = useHomeTitleStyle();
-  const { data: session, status,  } = useSession();
-  console.log(status);
+  const { data: session, status } = useSession();
+
   return (
     <>
       <main>

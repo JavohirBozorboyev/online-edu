@@ -1,4 +1,3 @@
-import { Container } from "@mantine/core";
 import React, { useTransition } from "react";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { getServerSession } from "next-auth/next";
@@ -30,10 +29,8 @@ const Dashboard = () => {
 
   return (
     <>
-      <Container p={0} size={"xl"}>
-        <DashHomeInfoCard />
-        <Chart />
-      </Container>
+      <DashHomeInfoCard />
+      <Chart />
     </>
   );
 };

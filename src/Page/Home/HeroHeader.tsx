@@ -122,24 +122,6 @@ export default function HeroHeader() {
               Twitter.
             </Text>
           </Container>
-
-          <div className={classes.controls}>
-            <Link href="/login/signin">
-              <Button
-                className={classes.control}
-                size="lg"
-                variant="default"
-                color="gray"
-              >
-                {"Ro'yhatdan O'tish"}
-              </Button>
-            </Link>
-            <Link href={"/dashboard"}>
-              <Button className={classes.control} ml={"lg"} size="lg">
-                {"Honaga Kirish"}
-              </Button>
-            </Link>
-          </div>
         </div>
       </Container>
     </>

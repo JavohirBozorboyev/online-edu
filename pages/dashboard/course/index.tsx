@@ -22,9 +22,7 @@ const index = (props: Props) => {
         <Breadcrumb />
       </Box> */}
       <main>
-        <Container size={"xl"} p={0}>
-          <DashCourseCard />
-        </Container>
+        <DashCourseCard />
       </main>
     </>
   );

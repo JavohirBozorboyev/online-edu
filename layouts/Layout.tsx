@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import DashNavigation from "@/components/Navbar/Dashboard/DashNavigation";
 import DashNavbar from "@/components/Navbar/Dashboard/DashNavbar";
 import AppFooter from "@/components/Footer/AppFooter";
-import DashTabs from "@/src/Page/Dashboard/Other/DashTabs";
+import BottomNavigation from "@/components/Tabs/BottomNavigation";
 
 interface LayoutType {
   children: React.ReactElement;
@@ -41,7 +41,7 @@ export default function Layout({ children }: LayoutType) {
       }
       footer={
         <>
-          <DashTabs />
+          <BottomNavigation />
           {!act && <AppFooter />}
         </>
       }

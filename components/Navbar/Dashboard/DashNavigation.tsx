@@ -27,7 +27,7 @@ const DashNavigation = ({ opened, setOpened }: Props) => {
   return (
     <>
       <Header
-        height={{ base: 60, md: 60 }}
+        height={{ base: 50 }}
         p="md"
         sx={(theme) => ({
           backgroundColor:
@@ -45,17 +45,17 @@ const DashNavigation = ({ opened, setOpened }: Props) => {
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <MediaQuery largerThan="sm" styles={{ display: "none" }}>
-              <ActionIcon variant="light" mr={"xs"} size={"lg"} component="div">
+              <ActionIcon variant="light" mr={"xs"} size={"md"} component="div">
                 <Burger
                   opened={opened}
                   onClick={() => setOpened((o: boolean) => !o)}
-                  size="16px"
+                  size="xs"
                   color={theme.colors.gray[6]}
                 />
               </ActionIcon>
             </MediaQuery>
             <Link href={"/"} style={{ marginTop: "5px" }}>
-              <TbBrandMantine size={42} color={theme.fn.primaryColor()} />
+              <TbBrandMantine size={36} color={theme.fn.primaryColor()} />
             </Link>
           </Box>
 

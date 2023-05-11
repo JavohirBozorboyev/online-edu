@@ -3,11 +3,9 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import {
   TbHome,
-  TbHome2,
   TbLayoutDashboard,
   TbListDetails,
-  TbShoppingBag,
-  TbVideo,
+  TbPlayerPlayFilled,
 } from "react-icons/tb";
 
 const useStyles = createStyles((theme) => ({
@@ -34,7 +32,7 @@ const Links = [
   },
   {
     label: "My Course",
-    icon: TbVideo,
+    icon: TbPlayerPlayFilled,
     url: "/dashboard/course",
   },
   {
@@ -46,7 +44,7 @@ const Links = [
 
 type Props = {};
 
-const DashTabs = (props: Props) => {
+const BottomNavigation = (props: Props) => {
   const router = useRouter();
   const { classes, theme } = useStyles();
   return (
@@ -71,10 +69,10 @@ const DashTabs = (props: Props) => {
             return (
               <Tabs.Tab
                 key={i}
-                p={"md"}
+                p={"sm"}
                 icon={
                   <item.icon
-                    size="1.5rem"
+                    size="1.4rem"
                     color={`${
                       router.route === item.url
                         ? theme.colorScheme === "dark"
@@ -96,4 +94,4 @@ const DashTabs = (props: Props) => {
   );
 };
 
-export default DashTabs;
+export default BottomNavigation;

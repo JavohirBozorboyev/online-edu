@@ -11,21 +11,32 @@ import {
   rem,
   ActionIcon,
   Container,
-  Avatar,
+  Text,
   Menu,
+  NavLink,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { HiMenuAlt4 } from "react-icons/hi";
-import { TbBrandMantine, TbDashboard, TbLogout } from "react-icons/tb";
+import {
+  TbBrandMantine,
+  TbLayoutDashboard,
+  TbListDetails,
+  TbPlayerPlayFilled,
+  TbUser,
+  TbChevronDown,
+  TbCategory2,
+} from "react-icons/tb";
 
 import { TbHome } from "react-icons/tb";
 import NavbarLinksGroup from "./NavbarLinksGroup";
 
 import UserAvatarMenu from "../Other/UserAvatarMenu";
 import ColorSchemaButton from "../Other/ColorSchemaButton";
+import { useCardBg } from "@/styles/styleJs/useCardBg";
+import { DashLinkData, AppLinkData } from "@/data/NavLinkData";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -96,32 +107,27 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const Links = [
-  {
-    label: "Home",
-    icon: TbHome,
-    url: "/",
-  },
-  {
-    label: "Dashboard",
-    icon: TbDashboard,
-    url: "/dashboard",
-  },
-];
 export default function AppNavigation() {
   const router = useRouter();
+  const { classes: BgClass } = useCardBg();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
-
   const { classes, theme } = useStyles();
+  const DashLink: {
+    label: string;
+    url: string;
+    icon: any;
+  }[] = DashLinkData();
 
-  const LinksMemo = useMemo(() => {
-    return Links;
-  }, []);
+  const AppLink: {
+    label: string;
+    url: string;
+    icon: any;
+  }[] = AppLinkData();
 
   return (
     <Box>
-      <Header height={60} sx={{ position: "fixed" }}>
+      <Header height={50} sx={{ position: "fixed" }} className={BgClass.cardBg}>
         <Container size={"xl"} sx={{ height: "100%" }}>
           <Group position="apart" sx={{ height: "100%" }}>
             <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
@@ -129,9 +135,9 @@ export default function AppNavigation() {
                 onClick={toggleDrawer}
                 variant="light"
                 className={classes.hiddenDesktop}
-                size={"lg"}
+                size={"md"}
               >
-                <HiMenuAlt4 size="1.2rem" />
+                <HiMenuAlt4 size="1.1rem" />
               </ActionIcon>
               <Link
                 href={"/"}
@@ -141,7 +147,7 @@ export default function AppNavigation() {
                   gap: "10px",
                 }}
               >
-                <TbBrandMantine size={42} color={theme.fn.primaryColor()} />
+                <TbBrandMantine size={36} color={theme.fn.primaryColor()} />
               </Link>
             </Box>
             <Box
@@ -154,13 +160,35 @@ export default function AppNavigation() {
               }}
               className={classes.hiddenMobile}
             >
-              {LinksMemo.map((item, i) => {
+              {AppLink.map((item, i) => {
                 return (
                   <Link href={item.url} key={i} className={classes.link}>
                     {item.label}
                   </Link>
                 );
               })}
+              <Menu withArrow trigger="hover" shadow="md" width={200}>
+                <Menu.Target>
+                  <NavLink
+                    label="Menu"
+                    rightSection={<TbChevronDown size="1rem" />}
+                    className={classes.link}
+                  />
+                </Menu.Target>
+
+                <Menu.Dropdown>
+                  <Menu.Label>Foydalanuvchi sahifasi</Menu.Label>
+                  {DashLink.map((item, i) => {
+                    return (
+                      <Link href={item.url} key={i}>
+                        <Menu.Item icon={<item.icon size={14} />}>
+                          {item.label}
+                        </Menu.Item>
+                      </Link>
+                    );
+                  })}
+                </Menu.Dropdown>
+              </Menu>
             </Box>
 
             <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
@@ -185,13 +213,47 @@ export default function AppNavigation() {
       >
         <ScrollArea h={`calc(100vh - ${rem(70)})`} mx="-md">
           <Divider
-            mb={"xs"}
+            
             color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
           />
 
-          <Group position="center" grow pb="xl" px="md">
-            <NavbarLinksGroup links={LinksMemo} setOpened={toggleDrawer} />
-          </Group>
+          <Box>
+            {AppLink.map((item, i) => {
+              return (
+                <Link href={item.url} key={i}>
+                  <NavLink
+                    icon={<item.icon size="18" />}
+                    label={`${item.label}`}
+                    active={router.route === item.url}
+                    py={"md"}
+                  />
+                </Link>
+              );
+            })}
+            <Divider
+              color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
+            />
+            <NavLink
+              label="Menu"
+              childrenOffset={28}
+              defaultOpened
+              icon={<TbCategory2 />}
+              py={"md"}
+            >
+              {DashLink.map((item, i) => {
+                return (
+                  <Link href={item.url} key={i}>
+                    <NavLink
+                      icon={<item.icon size="18" />}
+                      label={`${item.label}`}
+                      active={router.route === item.url}
+                      py={"sm"}
+                    />
+                  </Link>
+                );
+              })}
+            </NavLink>
+          </Box>
         </ScrollArea>
       </Drawer>
     </Box>

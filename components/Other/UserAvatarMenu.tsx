@@ -20,7 +20,7 @@ const UserAvatarMenu = () => {
           withArrow
         >
           <Menu.Target>
-            <Avatar size={"md"} variant="light" color="blue" />
+            <Avatar size={"32px"} variant="light" color="blue" />
           </Menu.Target>
 
           <Menu.Dropdown>

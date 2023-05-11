@@ -75,9 +75,9 @@ export function LinksGroup({
                 component="div"
                 variant={"light"}
                 color={`${router.route === url ? "blue" : "gray"}`}
-                size={40}
+                size={"lg"}
               >
-                <Icon size="1.2rem" />
+                <Icon size="1rem" />
               </ActionIcon>
               <Text
                 ta={"center"}

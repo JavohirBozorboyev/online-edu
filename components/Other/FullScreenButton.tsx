@@ -16,12 +16,12 @@ const FullScreenButton = (props: Props) => {
         sx={(theme) => ({
           color: theme.colors.blue[6],
         })}
-        size={"lg"}
+        size={"md"}
       >
         {!fullscreen ? (
-          <BiFullscreen size="1.2rem" />
+          <BiFullscreen size="1.1rem" />
         ) : (
-          <BiExitFullscreen size="1.2rem" />
+          <BiExitFullscreen size="1.1rem" />
         )}
       </ActionIcon>
     </div>
