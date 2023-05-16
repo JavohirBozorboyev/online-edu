@@ -8,18 +8,23 @@ import HomeStatsSection from "@/src/Page/Home/HomeStatsSection";
 
 import HomeCarousel from "@/src/Page/Home/HomeCarousel";
 import QuizCarousel from "@/components/Carousel/QuizCarousel";
-import { Box, Container, Text } from "@mantine/core";
+import { Box, Button, Container, Text } from "@mantine/core";
 import { useHomeTitleStyle } from "@/styles/styleJs/useTitleStyle";
 import { useSession } from "next-auth/react";
+
+import React, { useCallback, useState } from "react";
 
 export default function Home() {
   const { classes, theme } = useHomeTitleStyle();
   const { data: session, status } = useSession();
 
+
   return (
     <>
       <main>
         <HeroHeader />
+        
+
         <HomeStatsSection />
 
         {/* Course Card Component start */}

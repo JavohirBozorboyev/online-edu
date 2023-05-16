@@ -2,11 +2,12 @@ import {
   createStyles,
   Title,
   Text,
-  Button,
   Container,
   rem,
 } from "@mantine/core";
-import Link from "next/link";
+
+
+import { memo } from "react";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -101,7 +102,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function HeroHeader() {
+const HeroHeader = () => {
   const { classes } = useStyles();
 
   return (
@@ -126,4 +127,7 @@ export default function HeroHeader() {
       </Container>
     </>
   );
-}
+};
+
+
+export default memo(HeroHeader)

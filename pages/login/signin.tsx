@@ -20,59 +20,60 @@ import {
 import { TbMail, TbPhone, TbUser } from "react-icons/tb";
 import Link from "next/link";
 import { notifications } from "@mantine/notifications";
+import { useForm } from "@mantine/form";
+import axios from "axios";
+import { useTransition } from "react";
 
 const signin = () => {
   const [segment, setSegment] = useState("pochta");
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
-  const email = useRef<any>("");
-  const password = useRef<any>("");
-  const tel = useRef<any>("");
-  const cmsKey = useRef<any>("");
+  const formPochta = useForm({
+    initialValues: {
+      email: "",
+      password: "",
+    },
 
-  const handleAuth = async () => {
-    signIn("credentials", {
-      email: email.current.value,
-      password: password.current.value,
-      redirect: false,
-    })
-      .then((res: any) => {
-        if (res.ok) {
-          router.push("/dashboard");
-          notifications.show({
-            title: "Assalomu Alaykom",
-            message: "Shaxsiy saxifangizga hush kelibsiz.",
-            icon: <TbUser />,
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Emailda hato bor!"),
+      password: (value) => (value.length > 2 ? null : "Parolda xoto bor!"),
+    },
+  });
+
+  const handleAuth = async (values: any) => {
+    startTransition(() => {
+      try {
+        axios
+          .post("https://onlineedu.pythonanywhere.com/student/login/", {
+            email: values.email,
+            password: values.password,
+          })
+          .then(function (response) {
+            if (response.status === 200) {
+              signIn("credentials", {
+                email: response?.data?.user_profile_data?.email,
+                name: response?.data?.user_profile_data?.first_name,
+                token: response?.data.token?.access,
+                redirect: false,
+              });
+              router.push("/dashboard");
+              notifications.show({
+                title: "Assalomu Alaykom",
+                message: "Shaxsiy saxifangizga hush kelibsiz.",
+                icon: <TbUser />,
+              });
+            }
           });
-        }
-      })
-      .catch((err) => {
-        null;
-      });
+      } catch (err) {
+        console.log(err);
+      }
+    });
   };
 
   return (
     <Container size={480} p={"0"}>
       <Paper withBorder shadow="md" p={30} radius="md">
-        {/* <Box mb={"md"}>
-          <Text size="xl" weight={700} tt={"uppercase"} ta={"center"}>
-            Tizimga Kirish
-          </Text>
-          <Group grow mb="md" mt="lg">
-            <Box>
-              <GoogleButton />
-            </Box>
-            <Box>
-              <AppleButton />
-            </Box>
-          </Group>
-
-          <Divider
-            label="Or continue with email and Phone Number"
-            labelPosition="center"
-            my="lg"
-          />
-        </Box> */}
         <SegmentedControl
           value={segment}
           onChange={setSegment}
@@ -95,52 +96,54 @@ const signin = () => {
                 </Center>
               ),
               value: "tel",
+              disabled: true,
             },
           ]}
         />
         <Box>
           {segment === "pochta" ? (
-            <>
-              <TextInput
-                ref={email}
-                label="Pochta"
-                placeholder="abs@gmail.com"
-                required
-                mt="md"
-                type="email"
-              />
-              <PasswordInput
-                label="Parol"
-                placeholder="Parol"
-                required
-                mt="md"
-                ref={password}
-              />
-            </>
+            <Box mt="lg">
+              <form
+                onSubmit={formPochta.onSubmit((values) => handleAuth(values))}
+              >
+                <TextInput
+                  withAsterisk
+                  label="Email"
+                  placeholder="Email"
+                  {...formPochta.getInputProps("email")}
+                />
+                <PasswordInput
+                  mt="md"
+                  label="Parol"
+                  placeholder="Prol"
+                  {...formPochta.getInputProps("password")}
+                />
+
+                <Group position="apart" mt="lg">
+                  <Checkbox
+                    label="Remember me"
+                    // {...formPochta.getInputProps("termsOfService", {
+                    //   type: "checkbox",
+                    // })}
+                  />
+                  <Link href={"/login/new-user"}>
+                    <Anchor component="button" size="sm">
+                      {" Ro'yhatdan O'tish"}
+                    </Anchor>
+                  </Link>
+                </Group>
+
+                <Group position="right" mt="md">
+                  <Button type="submit" fullWidth mt="xl" loading={isPending}>
+                    Tizimga Kirish
+                  </Button>
+                </Group>
+              </form>
+            </Box>
           ) : (
-            <>
-              <TextInput
-                ref={tel}
-                label="Mobil Raqam"
-                placeholder="+998 99 391 25 05"
-                required
-                mt="md"
-              />
-              <PinInput mt={"md"} ref={cmsKey} />
-            </>
+            <></>
           )}
         </Box>
-        <Group position="apart" mt="lg">
-          <Checkbox label="Remember me" />
-          <Link href={"/login/new-user"}>
-            <Anchor component="button" size="sm">
-              {" Ro'yhatdan O'tish"}
-            </Anchor>
-          </Link>
-        </Group>
-        <Button onClick={handleAuth} fullWidth mt="xl">
-          Tizimga Kirish
-        </Button>
       </Paper>
     </Container>
   );

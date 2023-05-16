@@ -9,25 +9,15 @@ export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
-      credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" },
-        tel: { label: "Password", type: "password" },
-      },
+      credentials: {},
       async authorize(credentials, req) {
-        const user = { id: "1", name: credentials?.username, email: "test" };
-
-        if (user) {
-          return {
-            id: "1",
-            name: "",
-            email: "",
-            image: "",
-            token: "",
-          };
-        } else {
-          return null;
-        }
+        const { token, email, password }: any = credentials;
+        return {
+          id: "123",
+          email,
+          password,
+          token,
+        };
       },
     }),
   ],
@@ -41,7 +31,7 @@ export const authOptions = {
     },
 
     async signIn({ user, account, profile, email, credentials }: any) {
-      return { ...user, ...account };
+      return { ...user, ...account, ...credentials };
     },
 
     async session({ session, user, token }: any) {

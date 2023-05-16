@@ -1,6 +1,7 @@
 import { Button, Navbar, Text } from "@mantine/core";
 import React, { useMemo } from "react";
 import NavbarLinksGroup from "../NavbarLinksGroup";
+import { DashLinkData } from "@/data/NavLinkData";
 import {
   TbLayoutDashboard,
   TbListDetails,
@@ -14,33 +15,8 @@ type Props = {
   setOpened: any;
 };
 
-const Links = [
-  {
-    label: "Asosiy",
-    icon: TbLayoutDashboard,
-    url: "/dashboard",
-  },
-  {
-    label: "Kurslar",
-    icon: TbPlayerPlayFilled,
-    url: "/dashboard/course",
-  },
-  {
-    label: "Imtxon",
-    icon: TbListDetails,
-    url: "/dashboard/quiz",
-  },
-  {
-    label: "Account",
-    icon: TbUser,
-    url: "/dashboard/account",
-  },
-];
-
 const DashNavbar = ({ opened, setOpened }: Props) => {
-  const LinksMemo = useMemo(() => {
-    return Links;
-  }, []);
+  const DashLink = DashLinkData();
   return (
     <div>
       <Navbar
@@ -54,7 +30,7 @@ const DashNavbar = ({ opened, setOpened }: Props) => {
             theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
         })}
       >
-        <NavbarLinksGroup links={LinksMemo} setOpened={setOpened} />
+        <NavbarLinksGroup links={DashLink} setOpened={setOpened} />
       </Navbar>
     </div>
   );

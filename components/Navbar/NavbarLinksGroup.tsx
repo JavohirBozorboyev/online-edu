@@ -7,6 +7,7 @@ import {
   createStyles,
   rem,
   ActionIcon,
+  MediaQuery,
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 
@@ -67,6 +68,7 @@ export function LinksGroup({
 
   return (
     <>
+      
       <UnstyledButton className={classes.control}>
         <Link href={`${url}`} onClick={() => setOpenedNav(false)}>
           <Group position="apart" spacing={0}>
@@ -81,9 +83,9 @@ export function LinksGroup({
               </ActionIcon>
               <Text
                 ta={"center"}
-                fz={"12px"}
+                fz={"10px"}
                 mt="xs"
-                lts={"0.8px"}
+                lts={"0.5px"}
                 color={`${
                   router.route === url
                     ? theme.colorScheme === "dark"
