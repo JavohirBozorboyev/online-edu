@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/router";
-import { signIn } from "next-auth/react";
 import {
   Paper,
   TextInput,
@@ -15,8 +14,8 @@ import {
   Center,
   SegmentedControl,
   Grid,
-  PinInput,
   Input,
+  LoadingOverlay,
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { TbMail, TbPhone, TbUser } from "react-icons/tb";
@@ -24,44 +23,91 @@ import Link from "next/link";
 import { useForm } from "@mantine/form";
 import { useId } from "@mantine/hooks";
 import { IMaskInput } from "react-imask";
+import axios from "axios";
+import { signIn } from "next-auth/react";
+import { useDisclosure } from "@mantine/hooks";
 
 const index = () => {
   const [segment, setSegment] = useState("pochta");
+  const [visible, { toggle }] = useDisclosure(false);
 
   const router = useRouter();
   const id = useId();
 
-  const form = useForm({
+  useEffect(() => {
+    router.prefetch("/dashboard");
+  }, [router]);
+
+  const formPochta = useForm({
     initialValues: {
-      name: "",
+      firstName: "",
       lastName: "",
-      username: "",
-      tel: "",
       email: "",
-      password: "secret",
-      confirmPassword: "sevret",
+      tel: "",
+      password: "",
+      confirmPassword: "",
     },
 
     validate: {
-      name: (value) => (value.length < 2 ? "Ismizni to'liq kiriting" : null),
+      firstName: (value) => (value.length < 2 ? "Ismingizda xato bor." : null),
       lastName: (value) =>
         value.length < 2 ? "Familiyangizni to'liq kiriting" : null,
-      username: (value) =>
-        value.length < 2 ? "Familiyangizni to'liq kiriting" : null,
+      tel: (value) => (value.length < 6 ? "Telefon raqamni kiriting." : null),
       email: (value) =>
         /^\S+@\S+$/.test(value) ? null : "Noto'gri pochta manzili",
+      password: (value) =>
+        value.length < 6 ? "Parol 6 ta belgidan kam." : null,
       confirmPassword: (value, values) =>
-        value !== values.password ? "Passwords did not match" : null,
+        value !== values.password ? "Parollar mos kelmadi." : null,
     },
   });
 
-  const handleAuth = async (value: any) => {
-    console.log(value);
-  };
+  const handleAuth = useCallback(async (value: any) => {
+    const PostData = {
+      first_name: value.firstName,
+      last_name: value.lastName,
+      email: value.email,
+      phone: 998993912505,
+      password: value.password,
+      password2: value.confirmPassword,
+    };
+    axios
+      .post(`${process.env.NEXT_PUBLIC_URL}/student/register/`, PostData)
+      .then(function (res) {
+        if (res.status === 201) {
+          toggle();
+          signIn("credentials", {
+            id: res?.data?.user_profile_data?.id,
+            email: PostData?.email,
+            name: PostData?.first_name,
+            token: res?.data.token?.access,
+            redirect: false,
+          }).then((res) => {
+            res?.status === 200 ? router.push("/dashboard") : null;
+          });
+
+          notifications.show({
+            title: "Assalomu Alaykom",
+            message: "Shaxsiy saxifangizga hush kelibsiz.",
+            icon: <TbUser />,
+          });
+        }
+      })
+      .catch(function (error) {
+        let errorValidate = error.response?.data?.errors;
+        if (error.response.status === 400) {
+          errorValidate?.email
+            ? formPochta.setFieldError("email", `Pochta manzili noto'g'ri`)
+            : null;
+        }
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <form onSubmit={form.onSubmit((values) => console.log(values))}>
+    <>
       <Container size={620} p={0}>
+        <LoadingOverlay visible={visible} overlayBlur={2} />
         <Paper withBorder shadow="md" p={30} radius="md">
           <SegmentedControl
             value={segment}
@@ -93,47 +139,76 @@ const index = () => {
           <Box mt={"md"}>
             <Box>
               {segment === "pochta" ? (
-                <>
+                <form
+                  onSubmit={formPochta.onSubmit((values) => handleAuth(values))}
+                >
                   <Grid>
                     <Grid.Col span={12} xs={6}>
-                      <TextInput label="Ism" placeholder="Ism" required />
+                      <TextInput
+                        label="Ism"
+                        placeholder="Ism"
+                        {...formPochta.getInputProps("firstName")}
+                      />
+                    </Grid.Col>
+                    <Grid.Col span={12} xs={6}>
+                      <TextInput
+                        label="Familiya"
+                        placeholder="Familiya"
+                        {...formPochta.getInputProps("lastName")}
+                      />
                     </Grid.Col>
                   </Grid>
-                  <TextInput
-                    label="Pochta"
-                    placeholder="abs@gmail.com"
-                    mt="md"
-                    required
-                    {...form.getInputProps("email")}
-                  />
-                  <Input.Wrapper id={id} label="Telefon raqam" required>
+                  <Input.Wrapper mt="md" id={id} label="Telefon raqam">
                     <Input<any>
                       component={IMaskInput}
                       mask="+998 (90) 000-00-00"
                       id={id}
-                      placeholder="Telefon raqam"
+                      placeholder="+998 (99) 391-25-05"
+                      {...formPochta.getInputProps("tel")}
                     />
                   </Input.Wrapper>
-                </>
+                  <TextInput
+                    label="Pochta"
+                    placeholder="abs@gmail.com"
+                    mt="md"
+                    {...formPochta.getInputProps("email")}
+                  />
+                  <Grid mt="xs">
+                    <Grid.Col span={12} xs={6}>
+                      <PasswordInput
+                        label="Parolmi kiriting."
+                        placeholder="Parol kiriting"
+                        {...formPochta.getInputProps("password")}
+                      />
+                    </Grid.Col>
+                    <Grid.Col span={12} xs={6}>
+                      <PasswordInput
+                        label="Parolni takrorlang."
+                        placeholder="Parolni takrorlang."
+                        {...formPochta.getInputProps("confirmPassword")}
+                      />
+                    </Grid.Col>
+                  </Grid>
+                  <Group position="apart" mt="lg">
+                    <Checkbox label="Remember me" />
+                    <Link href={"/login/signin"}>
+                      <Anchor component="button" size="sm">
+                        Tizimga Kirish
+                      </Anchor>
+                    </Link>
+                  </Group>
+                  <Button type="submit" fullWidth mt="xl">
+                    {"Ro'yhatdan O'tish"}
+                  </Button>
+                </form>
               ) : (
                 <></>
               )}
             </Box>
           </Box>
-          <Group position="apart" mt="lg">
-            <Checkbox label="Remember me" />
-            <Link href={"/login/signin"}>
-              <Anchor component="button" size="sm">
-                Tizimga Kirish
-              </Anchor>
-            </Link>
-          </Group>
-          <Button type="submit" fullWidth mt="xl">
-            {"Ro'yhatdan O'tish"}
-          </Button>
         </Paper>
       </Container>
-    </form>
+    </>
   );
 };
 

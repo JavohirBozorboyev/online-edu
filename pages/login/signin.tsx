@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 import {
@@ -13,8 +13,8 @@ import {
   Container,
   SegmentedControl,
   Box,
+  LoadingOverlay,
   Center,
-  PinInput,
 } from "@mantine/core";
 // import { notifications } from "@mantine/notifications";
 import { TbMail, TbPhone, TbUser } from "react-icons/tb";
@@ -22,12 +22,16 @@ import Link from "next/link";
 import { notifications } from "@mantine/notifications";
 import { useForm } from "@mantine/form";
 import axios from "axios";
-import { useTransition } from "react";
+import { useDisclosure } from '@mantine/hooks';
 
 const signin = () => {
   const [segment, setSegment] = useState("pochta");
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
+  const [visible, { toggle }] = useDisclosure(false);
+  
+  useEffect(() => {
+    router.prefetch("/dashboard");
+  }, [router]);
 
   const formPochta = useForm({
     initialValues: {
@@ -42,43 +46,44 @@ const signin = () => {
   });
 
   const handleAuth = async (values: any) => {
-    startTransition(() => {
-      try {
-        axios
-          .post("https://onlineedu.pythonanywhere.com/student/login/", {
-            email: values.email,
-            password: values.password,
-          })
-          .then(function (response) {
-            if (response.status === 200) {
-              signIn("credentials", {
-                email: response?.data?.user_profile_data?.email,
-                name: response?.data?.user_profile_data?.first_name,
-                token: response?.data.token?.access,
-                redirect: false,
-              }).then((res) => {
-                res?.status === 200 ? router.push("/dashboard") : null;
-              });
+      axios
+        .post("https://onlineedu.pythonanywhere.com/student/login/", {
+          email: values.email,
+          password: values.password,
+        })
+        .then(function (response) {
+          if (response.status === 200) {
+            toggle()
+            signIn("credentials", {
+              id: response?.data?.user_profile_data?.id,
+              email: response?.data?.user_profile_data?.email,
+              name: response?.data?.user_profile_data?.first_name,
+              token: response?.data.token?.access,
+              redirect: false,
+            }).then((res) => {
+              res?.status === 200 ? router.push("/dashboard") : null;
+            });
 
-              notifications.show({
-                title: "Assalomu Alaykom",
-                message: "Shaxsiy saxifangizga hush kelibsiz.",
-                icon: <TbUser />,
-              });
-            }
-          })
-          .catch(function (error) {
-            
-              formPochta.setFieldError("email", "Noto'gri Email");
-              formPochta.setFieldError("password", "Noto'gri password");
-            
-          });
-      } catch (err) {}
-    });
+            notifications.show({
+              title: "Assalomu Alaykom",
+              message: "Shaxsiy saxifangizga hush kelibsiz.",
+              icon: <TbUser />,
+            });
+          }
+        })
+        .catch(function (error) {
+          formPochta.setFieldError("email", "Noto'gri Email");
+          formPochta.setFieldError("password", "Noto'gri password");
+         
+        });
+   
   };
+
+  
 
   return (
     <Container size={480} p={"0"}>
+      <LoadingOverlay visible={visible} overlayBlur={2} />
       <Paper withBorder shadow="md" p={30} radius="md">
         <SegmentedControl
           value={segment}
@@ -116,12 +121,14 @@ const signin = () => {
                   label="Email"
                   placeholder="Email"
                   {...formPochta.getInputProps("email")}
+                  autoComplete="on"
                 />
                 <PasswordInput
                   mt="md"
                   label="Parol"
                   placeholder="Prol"
                   {...formPochta.getInputProps("password")}
+                  autoComplete="on"
                 />
 
                 <Group position="apart" mt="lg">
@@ -139,7 +146,7 @@ const signin = () => {
                 </Group>
 
                 <Group position="right" mt="md">
-                  <Button type="submit" fullWidth mt="xl" loading={isPending}>
+                  <Button type="submit" fullWidth mt="xl">
                     Tizimga Kirish
                   </Button>
                 </Group>
