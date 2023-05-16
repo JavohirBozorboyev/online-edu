@@ -56,18 +56,24 @@ const signin = () => {
                 name: response?.data?.user_profile_data?.first_name,
                 token: response?.data.token?.access,
                 redirect: false,
+              }).then((res) => {
+                res?.status === 200 ? router.push("/dashboard") : null;
               });
-              router.push("/dashboard");
+
               notifications.show({
                 title: "Assalomu Alaykom",
                 message: "Shaxsiy saxifangizga hush kelibsiz.",
                 icon: <TbUser />,
               });
             }
+          })
+          .catch(function (error) {
+            
+              formPochta.setFieldError("email", "Noto'gri Email");
+              formPochta.setFieldError("password", "Noto'gri password");
+            
           });
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     });
   };
 
@@ -107,7 +113,6 @@ const signin = () => {
                 onSubmit={formPochta.onSubmit((values) => handleAuth(values))}
               >
                 <TextInput
-                  withAsterisk
                   label="Email"
                   placeholder="Email"
                   {...formPochta.getInputProps("email")}
