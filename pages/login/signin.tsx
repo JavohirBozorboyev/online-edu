@@ -22,13 +22,13 @@ import Link from "next/link";
 import { notifications } from "@mantine/notifications";
 import { useForm } from "@mantine/form";
 import axios from "axios";
-import { useDisclosure } from '@mantine/hooks';
+import { useDisclosure } from "@mantine/hooks";
 
 const signin = () => {
   const [segment, setSegment] = useState("pochta");
   const router = useRouter();
   const [visible, { toggle }] = useDisclosure(false);
-  
+
   useEffect(() => {
     router.prefetch("/dashboard");
   }, [router]);
@@ -46,40 +46,36 @@ const signin = () => {
   });
 
   const handleAuth = async (values: any) => {
-      axios
-        .post("https://onlineedu.pythonanywhere.com/student/login/", {
-          email: values.email,
-          password: values.password,
-        })
-        .then(function (response) {
-          if (response.status === 200) {
-            toggle()
-            signIn("credentials", {
-              id: response?.data?.user_profile_data?.id,
-              email: response?.data?.user_profile_data?.email,
-              name: response?.data?.user_profile_data?.first_name,
-              token: response?.data.token?.access,
-              redirect: false,
-            }).then((res) => {
-              res?.status === 200 ? router.push("/dashboard") : null;
-            });
+    axios
+      .post(`${process.env.NEXT_PUBLIC_URL}/student/login/`, {
+        email: values.email,
+        password: values.password,
+      })
+      .then(function (response) {
+        if (response.status === 200) {
+          toggle();
+          signIn("credentials", {
+            id: response?.data?.user_profile_data?.id,
+            email: response?.data?.user_profile_data?.email,
+            name: response?.data?.user_profile_data?.first_name,
+            token: response?.data.token?.access,
+            redirect: false,
+          }).then((res) => {
+            res?.status === 200 ? router.push("/dashboard") : null;
+          });
 
-            notifications.show({
-              title: "Assalomu Alaykom",
-              message: "Shaxsiy saxifangizga hush kelibsiz.",
-              icon: <TbUser />,
-            });
-          }
-        })
-        .catch(function (error) {
-          formPochta.setFieldError("email", "Noto'gri Email");
-          formPochta.setFieldError("password", "Noto'gri password");
-         
-        });
-   
+          notifications.show({
+            title: "Assalomu Alaykom",
+            message: "Shaxsiy saxifangizga hush kelibsiz.",
+            icon: <TbUser />,
+          });
+        }
+      })
+      .catch(function (error) {
+        formPochta.setFieldError("email", "Noto'gri Email");
+        formPochta.setFieldError("password", "Noto'gri password");
+      });
   };
-
-  
 
   return (
     <Container size={480} p={"0"}>

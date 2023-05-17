@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AppShell, useMantineTheme } from "@mantine/core";
 import AppNavigation from "@/components/Navbar/AppNavigation";
 import { useRouter } from "next/router";

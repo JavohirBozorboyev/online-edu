@@ -5,9 +5,9 @@ import {
   ColorScheme,
 } from "@mantine/core";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
-import type { ReactElement, ReactNode } from "react";
-import type { NextPage, NextPageContext } from "next";
-import type { AppContext, AppProps } from "next/app";
+import { ReactElement, type ReactNode } from "react";
+import type { NextPage } from "next";
+import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 
 import Layout from "@/layouts/Layout";
