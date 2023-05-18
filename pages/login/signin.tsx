@@ -66,13 +66,12 @@ const signin = () => {
           }).then((res) => {
             if (res?.status === 200) {
               router.push("/dashboard");
+              notifications.show({
+                title: "Assalomu Alaykom",
+                message: "Shaxsiy saxifangizga hush kelibsiz.",
+                icon: <TbUser />,
+              });
             }
-          });
-
-          notifications.show({
-            title: "Assalomu Alaykom",
-            message: "Shaxsiy saxifangizga hush kelibsiz.",
-            icon: <TbUser />,
           });
         }
       })
