@@ -12,5 +12,12 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  if (request.nextUrl.pathname.startsWith("/login")) {
+    if (token && refresh_token) {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
+    return NextResponse.next();
+  }
+
   return NextResponse.next();
 }
