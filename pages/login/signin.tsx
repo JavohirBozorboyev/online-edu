@@ -55,6 +55,8 @@ const signin = () => {
       .then(function (response) {
         if (response.status === 200) {
           // toggle();
+          setCookie("_token", `${response.data.token.access}`);
+          setCookie("_refresh_token", `${response.data.token.refresh}`);
           signIn("credentials", {
             id: response?.data?.user_profile_data?.id,
             email: response?.data?.user_profile_data?.email,
@@ -63,8 +65,6 @@ const signin = () => {
             redirect: false,
           }).then((res) => {
             if (res?.status === 200) {
-              setCookie("_token", `${response.data.token.access}`);
-              setCookie("_refresh_token", `${response.data.token.refresh}`);
               router.push("/dashboard");
             }
           });
