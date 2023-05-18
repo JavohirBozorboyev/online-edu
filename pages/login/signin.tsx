@@ -54,7 +54,7 @@ const signin = () => {
       })
       .then(function (response) {
         if (response.status === 200) {
-          toggle();
+          // toggle();
           signIn("credentials", {
             id: response?.data?.user_profile_data?.id,
             email: response?.data?.user_profile_data?.email,
