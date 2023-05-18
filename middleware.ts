@@ -7,11 +7,13 @@ export function middleware(request: NextRequest) {
 
   if (request.nextUrl.pathname.startsWith("/dashboard")) {
     if (!token || !refresh_token) {
-      return NextResponse.rewrite(new URL("/login/signin", request.url));
+      return NextResponse.redirect(new URL("/login/signin", request.url));
     }
   }
+
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: [ "/dashboard/:path*"],
+  matcher: ["/dashboard/:path*"],
 };
