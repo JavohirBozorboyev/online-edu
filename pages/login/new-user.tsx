@@ -26,6 +26,7 @@ import { IMaskInput } from "react-imask";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useDisclosure } from "@mantine/hooks";
+import { setCookie } from "cookies-next";
 
 const index = () => {
   const [segment, setSegment] = useState("pochta");
@@ -82,8 +83,12 @@ const index = () => {
             name: PostData?.first_name,
             token: res?.data.token?.access,
             redirect: false,
-          }).then((res) => {
-            res?.status === 200 ? router.push("/dashboard") : null;
+          }).then((sign) => {
+            if (sign?.status === 200) {
+              router.push("/dashboard");
+              setCookie("_token", `${res?.data.token?.access}`);
+              setCookie("_refresh_token", `${res?.data.token?.refresh}`);
+            }
           });
 
           notifications.show({

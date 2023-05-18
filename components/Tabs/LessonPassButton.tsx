@@ -8,7 +8,7 @@ const LessonPassButton = () => {
       <Grid my="md">
         <Grid.Col md={6}>
           <Button
-            size="xl"
+            size="lg"
             variant="light"
             fullWidth
             leftIcon={<TbChevronLeft size={"1.5rem"} />}
@@ -20,7 +20,7 @@ const LessonPassButton = () => {
         </Grid.Col>
         <Grid.Col md={6}>
           <Button
-            size="xl"
+            size="lg"
             variant="light"
             fullWidth
             rightIcon={<TbChevronRight size={"1.2rem"} />}

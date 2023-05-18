@@ -62,10 +62,13 @@ const signin = () => {
             token: response?.data.token?.access,
             redirect: false,
           }).then((res) => {
-            res?.status === 200 ? router.push("/dashboard") : null;
+            if (res?.status === 200) {
+              router.push("/dashboard");
+              setCookie("_token", `${response.data.token.access}`);
+              setCookie("_refresh_token", `${response.data.token.refresh}`);
+            }
           });
-          setCookie("_token", `${response.data.token.access}`);
-          setCookie("_refresh_token", `${response.data.token.refresh}`);
+
           notifications.show({
             title: "Assalomu Alaykom",
             message: "Shaxsiy saxifangizga hush kelibsiz.",
