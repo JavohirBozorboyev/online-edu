@@ -24,6 +24,7 @@ import { useForm } from "@mantine/form";
 import axios from "axios";
 import { useDisclosure } from "@mantine/hooks";
 import { setCookie } from "cookies-next";
+import { redirect } from "next/dist/server/api-utils";
 
 const signin = () => {
   const [segment, setSegment] = useState("pochta");
@@ -65,7 +66,7 @@ const signin = () => {
             redirect: false,
           }).then((res) => {
             if (res?.status === 200) {
-              router.push("/dashboard");
+              router.push("/dashboard/course");
               notifications.show({
                 title: "Assalomu Alaykom",
                 message: "Shaxsiy saxifangizga hush kelibsiz.",
