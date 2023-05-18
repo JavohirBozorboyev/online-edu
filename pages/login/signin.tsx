@@ -63,9 +63,9 @@ const signin = () => {
             redirect: false,
           }).then((res) => {
             if (res?.status === 200) {
-              router.push("/dashboard");
               setCookie("_token", `${response.data.token.access}`);
               setCookie("_refresh_token", `${response.data.token.refresh}`);
+              router.push("/dashboard");
             }
           });
 
