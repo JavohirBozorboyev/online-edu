@@ -1,13 +1,20 @@
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 
 import { Menu, Avatar, Button } from "@mantine/core";
 import { signOut, useSession } from "next-auth/react";
 import router from "next/router";
 import { MdLogin } from "react-icons/md";
 import { TbLayoutDashboard, TbLogout } from "react-icons/tb";
+import { deleteCookie } from "cookies-next";
 
 const UserAvatarMenu = () => {
   const { data: session } = useSession();
+
+  const SignOut = useCallback(() => {
+    deleteCookie("_token");
+    deleteCookie("_refresh_token");
+    signOut();
+  }, []);
   return (
     <div>
       {session ? (
@@ -34,9 +41,7 @@ const UserAvatarMenu = () => {
               Dashbaord
             </Menu.Item>
             <Menu.Item
-              onClick={() => {
-                signOut();
-              }}
+              onClick={SignOut}
               color="blue"
               icon={<TbLogout size={"1rem"} />}
             >

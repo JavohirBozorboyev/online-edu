@@ -1,10 +1,6 @@
-import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import DashCourseCard from "@/src/Page/Dashboard/DashCourse/DashCourseCard";
-import { Box, Container } from "@mantine/core";
-import { getServerSession } from "next-auth";
+
 import React from "react";
-import useSWR from "swr";
 
 type Props = {};
 
@@ -29,20 +25,3 @@ const index = (props: Props) => {
 };
 
 export default index;
-
-export async function getServerSideProps(context: any) {
-  const session = await getServerSession(context.req, context.res, authOptions);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/login/signin",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
-}

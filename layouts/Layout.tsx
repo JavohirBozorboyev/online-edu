@@ -7,6 +7,7 @@ import DashNavbar from "@/components/Navbar/Dashboard/DashNavbar";
 import AppFooter from "@/components/Footer/AppFooter";
 import BottomNavigation from "@/components/Tabs/BottomNavigation";
 
+
 interface LayoutType {
   children: React.ReactElement;
 }
@@ -16,6 +17,8 @@ export default function Layout({ children }: LayoutType) {
   const [opened, setOpened] = useState(false);
   const router = useRouter();
   const act = router.route.startsWith("/dashboard");
+
+  
 
   return (
     <AppShell

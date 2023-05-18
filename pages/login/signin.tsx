@@ -23,6 +23,7 @@ import { notifications } from "@mantine/notifications";
 import { useForm } from "@mantine/form";
 import axios from "axios";
 import { useDisclosure } from "@mantine/hooks";
+import { setCookie } from "cookies-next";
 
 const signin = () => {
   const [segment, setSegment] = useState("pochta");
@@ -63,7 +64,8 @@ const signin = () => {
           }).then((res) => {
             res?.status === 200 ? router.push("/dashboard") : null;
           });
-
+          setCookie("_token", `${response.data.token.access}`);
+          setCookie("_refresh_token", `${response.data.token.refresh}`);
           notifications.show({
             title: "Assalomu Alaykom",
             message: "Shaxsiy saxifangizga hush kelibsiz.",

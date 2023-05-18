@@ -5,10 +5,8 @@ import LessonPassButton from "@/components/Tabs/LessonPassButton";
 
 import LessonVideo from "@/components/Video/LessonVideo";
 import CourseLayout from "@/layouts/CourseLayout";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { useCardBg } from "@/styles/styleJs/useCardBg";
 import { Box } from "@mantine/core";
-import { getServerSession } from "next-auth";
 
 import React, { ReactElement, useState } from "react";
 
@@ -36,19 +34,4 @@ index.getLayout = function PageLayout(page: ReactElement) {
   );
 };
 
-export async function getServerSideProps(context: any) {
-  const session = await getServerSession(context.req, context.res, authOptions);
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/login/signin",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
-}
