@@ -67,7 +67,7 @@ export default function NotFoundTitle() {
       </Text>
       <Group position="center">
         <Button variant="subtle" size="md">
-         Asosiy sahifaga qaytish
+          Asosiy sahifaga qaytish.
         </Button>
       </Group>
     </Container>

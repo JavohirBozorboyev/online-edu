@@ -23,8 +23,7 @@ import { notifications } from "@mantine/notifications";
 import { useForm } from "@mantine/form";
 import axios from "axios";
 import { useDisclosure } from "@mantine/hooks";
-import { setCookie } from "cookies-next";
-import { redirect } from "next/dist/server/api-utils";
+import { getCookie, setCookie } from "cookies-next";
 
 const signin = () => {
   const [segment, setSegment] = useState("pochta");
@@ -66,7 +65,7 @@ const signin = () => {
             redirect: false,
           }).then((res) => {
             if (res?.status === 200) {
-              router.push("/dashboard/course");
+              router.reload();
               notifications.show({
                 title: "Assalomu Alaykom",
                 message: "Shaxsiy saxifangizga hush kelibsiz.",
@@ -81,6 +80,10 @@ const signin = () => {
         formPochta.setFieldError("password", "Noto'gri password");
       });
   };
+
+  if (getCookie("_token")) {
+    router.push("/dashbaord/course");
+  }
 
   return (
     <Container size={480} p={"0"}>

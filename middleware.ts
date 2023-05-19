@@ -7,7 +7,7 @@ export function middleware(request: NextRequest) {
 
   if (request.nextUrl.pathname.startsWith("/dashboard")) {
     if (!token || !refresh_token) {
-      return NextResponse.redirect(new URL("/login/signin", request.url));
+      return NextResponse.rewrite(new URL("/login/signin", request.url));
     }
     return NextResponse.next();
   }

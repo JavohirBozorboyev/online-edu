@@ -52,7 +52,7 @@ const UserAvatarMenu = () => {
       ) : (
         <Button
           onClick={() => {
-            router.push("/login/signin");
+            router.push("/dashboard");
           }}
           leftIcon={<MdLogin size="1rem" />}
         >
