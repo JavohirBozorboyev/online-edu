@@ -82,10 +82,6 @@ const signin = () => {
       });
   };
 
-  if (getCookie("_token")) {
-    router.push("/dashbaord/course");
-  }
-
   return (
     <Container size={480} p={"0"}>
       <LoadingOverlay visible={visible} overlayBlur={2} />

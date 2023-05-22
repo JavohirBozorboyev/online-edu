@@ -1,28 +1,29 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
 import { useRouter } from "next/router";
-import DashQuizCard from "@/src/Page/Dashboard/DashQuiz/DashQuizCard";
 import { Box, Text } from "@mantine/core";
 import { useDashTitleStyle } from "@/styles/styleJs/useTitleStyle";
 import DashQuizSlugCard from "@/src/Page/Dashboard/DashQuiz/DashQuizSlugCard";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { getServerSession } from "next-auth";
+
 import useSWR from "swr";
 
-type Props = {
-  data: any;
-};
+type Props = {};
 
-const index = ({ data }: Props) => {
+const index = () => {
   const { classes } = useDashTitleStyle();
   const router = useRouter();
-  // const { data, error, isLoading } = useSWR(
-  //   `https://backend.tibbiypsixologiya.uz/api/category/${router.query.slug}/`
-  // );
 
-  console.log(data);
+  const { slug } = router?.query;
+  const {
+    data: quizSlug,
+    error: errSlug,
+    isLoading: loadSlug,
+  } = useSWR(
+    `https://onlineedu.pythonanywhere.com/api/examp/category/${slug}/`,
+    { refreshInterval: 1000 * 60 * 60 }
+  );
 
-  const titleSlug = router.query.slug || "Loading...";
+  const titleSlug = quizSlug?.name || "Loading...";
 
   return (
     <div>
@@ -30,35 +31,10 @@ const index = ({ data }: Props) => {
         <Text className={classes.title} mb={"sm"}>
           {titleSlug}
         </Text>
-        <DashQuizSlugCard />
+        <DashQuizSlugCard quiz={quizSlug} error={errSlug} loading={loadSlug} />
       </Box>
     </div>
   );
 };
 
 export default index;
-
-export async function getServerSideProps(context: any) {
-  const session = await getServerSession(context.req, context.res, authOptions);
-
-  const quiz = await fetch(
-    `https://backend.tibbiypsixologiya.uz/api/category/${context.params}/`
-  );
-
-  const data = await quiz.json();
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/login/signin",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {
-      data,
-    },
-  };
-}

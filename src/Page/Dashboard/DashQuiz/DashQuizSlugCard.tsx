@@ -2,48 +2,41 @@ import { useCardBg } from "@/styles/styleJs/useCardBg";
 import { Badge, Button, Card, Grid, Group, Text } from "@mantine/core";
 import Link from "next/link";
 import React from "react";
+import DashQuizCardSkeleton from "./DashQuizCardSkeleton";
 
-type Props = {};
+type Props = {
+  quiz: {
+    subcategories: any;
+    name: string;
+    id: number;
+  };
+  error: any;
+  loading: any;
+};
 
-const data = [
-  {
-    title: "Unit-1",
-    text: " Boshlang'ich darslardan 30 ta savol. Harbir Savol uchun 2 daqiqa beriadi.",
-    type: "free",
-    time: " 12.02.2023",
-    len: 30,
-  },
-  {
-    title: "Unit-2",
-    text: " Boshlang'ich darslardan 30 ta savol. Harbir Savol uchun 2 daqiqa beriadi.",
-    type: "free",
-    time: " 07.02.2023",
-    len: 10,
-  },
-  {
-    title: "Unit-3",
-    text: " Boshlang'ich darslardan 30 ta savol. Harbir Savol uchun 2 daqiqa beriadi.",
-    type: "free",
-    time: " 14.02.2023",
-    len: 20,
-  },
-  {
-    title: "Unit-4",
-    text: " Boshlang'ich darslardan 30 ta savol. Harbir Savol uchun 2 daqiqa beriadi.",
-    type: "free",
-    time: " 05.02.2023",
-    len: 25,
-  },
-];
-
-const DashQuizSlugCard = (props: Props) => {
+const DashQuizSlugCard = ({ quiz, loading, error }: Props) => {
   const { classes } = useCardBg();
+
+  if (loading) {
+    return <DashQuizCardSkeleton />;
+  }
+  if (error) {
+    return (
+      <>
+        <Text size="xl" ta="center" my="xl">
+          Server Bilan Xatolik Yuzaga Keldi{" "}
+        </Text>
+      </>
+    );
+  }
+  console.log(quiz);
+
   return (
     <>
       <Grid>
-        {data.map((item, i) => {
+        {quiz?.subcategories?.map((item: Props["quiz"]) => {
           return (
-            <Grid.Col key={i} sm={6} lg={4} xl={3}>
+            <Grid.Col key={item.id} sm={6} lg={4} xl={3}>
               <Card
                 className={classes.cardBg}
                 shadow="sm"
@@ -51,17 +44,15 @@ const DashQuizSlugCard = (props: Props) => {
                 radius="sm"
               >
                 <Group position="apart" mb="xs">
-                  <Text weight={500}>{item.title}</Text>
+                  <Text weight={500}>{item.name}</Text>
                   <Badge variant="light" radius={"sm"}>
-                    {item.len} - ta savol
+                    {"2"} - ta savol
                   </Badge>
                 </Group>
 
                 <Text size="sm" color="dimmed">
-                  {item.text.slice(0, 80)}...
-                </Text>
-                <Text size="sm" color="blue" mt={"sm"}>
-                  {item.time}
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Quisquam, vero. ...
                 </Text>
 
                 <Button

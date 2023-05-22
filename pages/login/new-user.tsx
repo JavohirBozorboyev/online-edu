@@ -75,8 +75,6 @@ const index = () => {
     axios
       .post(`${process.env.NEXT_PUBLIC_URL}/api/student/register/`, PostData)
       .then(function (res) {
-        console.log(res);
-
         if (res.status === 201) {
           toggle();
           signIn("credentials", {

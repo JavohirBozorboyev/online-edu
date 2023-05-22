@@ -33,46 +33,43 @@ const DashQuizCard = ({ data, error, loading }: Props) => {
   return (
     <>
       <Grid>
-        {data
-          .filter((fil) => fil.parent === null)
-          .map((item, i) => {
-            return (
-              <Grid.Col key={i} sm={6} lg={4}>
-                <Card
-                  className={classes.cardBg}
-                  shadow="sm"
-                  padding="lg"
-                  radius="sm"
-                >
-                  <Group position="apart" mb="xs">
-                    <Text weight={500}>{item.name}</Text>
-                    <Badge variant="light" radius={"sm"}>
-                      {"free"}
-                    </Badge>
-                  </Group>
+        {data.map((item, i) => {
+          return (
+            <Grid.Col key={i} sm={6} lg={4}>
+              <Card
+                className={classes.cardBg}
+                shadow="sm"
+                padding="lg"
+                radius="sm"
+              >
+                <Group position="apart" mb="xs">
+                  <Text weight={500}>{item.name}</Text>
+                  <Badge variant="light" radius={"sm"}>
+                    {"free"}
+                  </Badge>
+                </Group>
 
-                  <Text size="sm" color="dimmed">
-                    {item.body.slice(0, 80)}...
-                  </Text>
-                  <Text size="sm" color="blue" mt={"sm"}>
-                    {item.slug}
-                  </Text>
+                <Text size="sm" color="dimmed">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Doloribus ducimus accusamus dolore sint perferendis
+                  praesentium optio quasi labore esse eius!
+                </Text>
 
-                  <Link href={`quiz/${item.slug}`}>
-                    <Button
-                      variant="light"
-                      color="blue"
-                      fullWidth
-                      mt="md"
-                      radius="sm"
-                    >
-                      {"Barchasini Ko'rish"}
-                    </Button>
-                  </Link>
-                </Card>
-              </Grid.Col>
-            );
-          })}
+                <Link href={`quiz/${item.id}`} >
+                  <Button
+                    variant="light"
+                    color="blue"
+                    fullWidth
+                    mt="md"
+                    radius="sm"
+                  >
+                    {"Barchasini Ko'rish"}
+                  </Button>
+                </Link>
+              </Card>
+            </Grid.Col>
+          );
+        })}
       </Grid>
     </>
   );

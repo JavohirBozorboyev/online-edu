@@ -12,6 +12,7 @@ import {
   Badge,
   Group,
 } from "@mantine/core";
+import useSWR from "swr";
 
 const useStyles = createStyles((theme) => ({
   bg: {
@@ -66,6 +67,7 @@ const data = [
 function QuizCarousel() {
   const { classes, theme } = useStyles();
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
+
   const slides = data.map((item) => (
     <Carousel.Slide key={item.title}>
       <Card className={classes.bg} shadow="sm" padding="lg" radius="sm">

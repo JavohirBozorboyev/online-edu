@@ -7,6 +7,7 @@ import {
   Group,
   rem,
 } from "@mantine/core";
+import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -66,9 +67,11 @@ export default function NotFoundTitle() {
         address, or the page has been moved to another URL.
       </Text>
       <Group position="center">
-        <Button variant="subtle" size="md">
-          Asosiy sahifaga qaytish.
-        </Button>
+        <Link href={"/"}>
+          <Button variant="subtle" size="md">
+            Asosiy sahifaga qaytish.
+          </Button>
+        </Link>
       </Group>
     </Container>
   );
