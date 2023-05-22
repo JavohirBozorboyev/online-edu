@@ -68,13 +68,15 @@ const index = () => {
       first_name: value.firstName,
       last_name: value.lastName,
       email: value.email,
-      phone: 998993912505,
+      phone: value.tel,
       password: value.password,
       password2: value.confirmPassword,
     };
     axios
-      .post(`${process.env.NEXT_PUBLIC_URL}/student/register/`, PostData)
+      .post(`${process.env.NEXT_PUBLIC_URL}/api/student/register/`, PostData)
       .then(function (res) {
+        console.log(res);
+
         if (res.status === 201) {
           toggle();
           signIn("credentials", {

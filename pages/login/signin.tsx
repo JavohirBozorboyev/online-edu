@@ -48,7 +48,7 @@ const signin = () => {
 
   const handleAuth = async (values: any) => {
     axios
-      .post(`${process.env.NEXT_PUBLIC_URL}/student/login/`, {
+      .post(`${process.env.NEXT_PUBLIC_URL}/api/student/login/`, {
         email: values.email,
         password: values.password,
       })
@@ -62,6 +62,7 @@ const signin = () => {
             email: response?.data?.user_profile_data?.email,
             name: response?.data?.user_profile_data?.first_name,
             token: response?.data.token?.access,
+
             redirect: false,
           }).then((res) => {
             if (res?.status === 200) {
@@ -88,7 +89,7 @@ const signin = () => {
   return (
     <Container size={480} p={"0"}>
       <LoadingOverlay visible={visible} overlayBlur={2} />
-      <Paper withBorder shadow="md" p={30} radius="md">
+      <Paper withBorder shadow="sm" p={30} radius="md">
         <SegmentedControl
           value={segment}
           onChange={setSegment}
