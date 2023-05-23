@@ -26,7 +26,8 @@ import { IMaskInput } from "react-imask";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useDisclosure } from "@mantine/hooks";
-import { setCookie } from "cookies-next";
+import { setCookie, getCookie } from "cookies-next";
+
 
 const index = () => {
   const [segment, setSegment] = useState("pochta");
@@ -108,6 +109,12 @@ const index = () => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(()=>{
+    if(getCookie('_token') && getCookie('_refresh_token')){
+      router.push("/dashboard")
+    }
+  }, [])
 
   return (
     <>

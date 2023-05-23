@@ -29,7 +29,7 @@ const DashQuizSlugCard = ({ quiz, loading, error }: Props) => {
       </>
     );
   }
-  console.log(quiz);
+  
 
   return (
     <>

@@ -55,7 +55,7 @@ const DashQuizCard = ({ data, error, loading }: Props) => {
                   praesentium optio quasi labore esse eius!
                 </Text>
 
-                <Link href={`quiz/${item.id}`} >
+                <Link href={`quiz/${item.slug}`} >
                   <Button
                     variant="light"
                     color="blue"

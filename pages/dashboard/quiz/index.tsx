@@ -17,7 +17,7 @@ const index = ({}: Props) => {
     isLoading: lquiz,
   } = useSWR("https://onlineedu.pythonanywhere.com/api/examp/category/");
 
-  // console.log(quiz);
+ 
 
   return (
     <>
