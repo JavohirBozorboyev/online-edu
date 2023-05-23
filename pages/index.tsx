@@ -5,25 +5,22 @@ import HomeFaq from "@/src/Page/Home/HomeFaq";
 import HomeContactSection from "@/src/Page/Home/HomeContactSection";
 import HomeServiceSection from "@/src/Page/Home/HomeServiceSection";
 import HomeStatsSection from "@/src/Page/Home/HomeStatsSection";
-
-import HomeCarousel from "@/src/Page/Home/HomeCarousel";
 import QuizCarousel from "@/components/Carousel/QuizCarousel";
 import { Box, Button, Container, Text } from "@mantine/core";
 import { useHomeTitleStyle } from "@/styles/styleJs/useTitleStyle";
 import { useSession } from "next-auth/react";
 
 import React, { useCallback, useState } from "react";
+import HomeCourse from "@/src/Page/Home/HomeCourse";
 
 export default function Home() {
   const { classes, theme } = useHomeTitleStyle();
   const { data: session, status } = useSession();
 
-
   return (
     <>
       <main>
         <HeroHeader />
-        
 
         <HomeStatsSection />
 
@@ -49,7 +46,7 @@ export default function Home() {
             Pokémon.
           </Text>
           <Container size={"xl"} px={"0"}>
-            <HomeCarousel />
+            <HomeCourse />
           </Container>
         </Box>
         {/* Course Card Component end */}
