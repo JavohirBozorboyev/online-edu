@@ -24,11 +24,18 @@ import { useForm } from "@mantine/form";
 import axios from "axios";
 import { useDisclosure } from "@mantine/hooks";
 import { getCookie, setCookie } from "cookies-next";
+import { useSession } from "next-auth/react";
+
+
+
 
 const signin = () => {
   const [segment, setSegment] = useState("pochta");
   const router = useRouter();
   const [visible, { toggle }] = useDisclosure(false);
+  const { data: session, status } = useSession();
+
+  console.log(session)
 
   useEffect(() => {
     router.prefetch("/dashboard");
@@ -47,26 +54,16 @@ const signin = () => {
   });
 
   const handleAuth = async (values: any) => {
-    axios
-      .post(`${process.env.NEXT_PUBLIC_URL}/api/student/login/`, {
-        email: values.email,
-        password: values.password,
-      })
-      .then(function (response) {
-        if (response.status === 200) {
-          // toggle();
-          setCookie("_token", `${response.data.token.access}`);
-          setCookie("_refresh_token", `${response.data.token.refresh}`);
-          signIn("credentials", {
-            id: response?.data?.user_profile_data?.id,
-            email: response?.data?.user_profile_data?.email,
-            name: response?.data?.user_profile_data?.first_name,
-            token: response?.data.token?.access,
+
+    signIn("credentials", {
+            email: values.email,
+            password: values.password,
 
             redirect: false,
           }).then((res) => {
             if (res?.status === 200) {
-              router.reload();
+              router.push("/dashboard");
+              console.log(res)
               notifications.show({
                 title: "Assalomu Alaykom",
                 message: "Shaxsiy saxifangizga hush kelibsiz.",
@@ -74,12 +71,40 @@ const signin = () => {
               });
             }
           });
-        }
-      })
-      .catch(function (error) {
-        formPochta.setFieldError("email", "Noto'gri Email");
-        formPochta.setFieldError("password", "Noto'gri password");
-      });
+    // axios
+    //   .post(`${process.env.NEXT_PUBLIC_URL}/api/student/login/`, {
+    //     email: values.email,
+    //     password: values.password,
+    //   })
+    //   .then(function (response) {
+    //     if (response.status === 200) {
+    //       // toggle();
+    //       setCookie("_token", `${response.data.token.access}`);
+    //       setCookie("_refresh_token", `${response.data.token.refresh}`);
+    //       signIn("credentials", {
+    //         id: response?.data?.user_profile_data?.id,
+    //         email: response?.data?.user_profile_data?.email,
+    //         name: response?.data?.user_profile_data?.first_name,
+    //         token: response?.data.token?.access,
+    //         password: value.password,
+
+    //         redirect: false,
+    //       }).then((res) => {
+    //         if (res?.status === 200) {
+    //           router.reload();
+    //           notifications.show({
+    //             title: "Assalomu Alaykom",
+    //             message: "Shaxsiy saxifangizga hush kelibsiz.",
+    //             icon: <TbUser />,
+    //           });
+    //         }
+    //       });
+    //     }
+    //   })
+    //   .catch(function (error) {
+    //     formPochta.setFieldError("email", "Noto'gri Email");
+    //     formPochta.setFieldError("password", "Noto'gri password");
+    //   });
   };
 
   return (

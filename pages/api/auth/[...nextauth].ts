@@ -1,6 +1,7 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+
 export const authOptions = {
   pages: {
     signIn: "/login/signin",
@@ -11,20 +12,44 @@ export const authOptions = {
       name: "Credentials",
       credentials: {},
       async authorize(credentials, req) {
-        const { id, token, email, password }: any = credentials;
-        return {
-          id,
-          email,
-          password,
-          token,
-        };
+        const { email , password }: any = credentials;
+
+         try {
+            const response = await fetch("https://onlineedu.pythonanywhere.com/api/student/login/", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: email,
+                password: password
+              }),
+            });
+
+            const result = await response.json();
+            // console.log("Success:", result);
+             
+
+             return {
+              name: {...result},
+              token: result.token.access,
+              email: result.user_profile_data.email,
+              id: result.user_profile_data.id,
+
+              
+             }
+          } catch (error) {
+          
+          }
+
+        return null
       },
     }),
   ],
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser }: any) {
       if (user) {
-        token.id = user.id;
+        token.role = user.role;
       }
 
       return token;
@@ -35,7 +60,7 @@ export const authOptions = {
     },
 
     async session({ session, user, token }: any) {
-      return { ...session, ...user, ...token };
+      return { ...session };
     },
   },
 };

@@ -114,7 +114,7 @@ const index = () => {
     if(getCookie('_token') && getCookie('_refresh_token')){
       router.push("/dashboard")
     }
-  }, [])
+  }, [router])
 
   return (
     <>

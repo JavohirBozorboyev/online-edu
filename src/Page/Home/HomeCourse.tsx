@@ -90,8 +90,6 @@ function HomeCourse() {
       </>
     );
 
-  console.log(data);
-
   return (
     <>
       <Grid>
