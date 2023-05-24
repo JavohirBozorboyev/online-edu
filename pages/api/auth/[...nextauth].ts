@@ -1,7 +1,6 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-
 export const authOptions = {
   pages: {
     signIn: "/login/signin",
@@ -12,16 +11,14 @@ export const authOptions = {
       name: "Credentials",
       credentials: {},
       async authorize(credentials, req) {
-        const { email , password }: any = credentials;
+        const { id, token, email, password }: any = credentials;
 
-        
-
+        console.log(email, password)
         return {
-        
+          id,
           email,
           password,
-         
-         
+          token,
         };
       },
     }),
@@ -29,7 +26,7 @@ export const authOptions = {
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser }: any) {
       if (user) {
-        token.role = user.role;
+        token.id = user.id;
       }
 
       return token;
@@ -40,7 +37,7 @@ export const authOptions = {
     },
 
     async session({ session, user, token }: any) {
-      return { ...session };
+      return { ...session, ...user, ...token };
     },
   },
 };

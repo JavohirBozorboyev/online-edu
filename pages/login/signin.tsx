@@ -71,7 +71,7 @@ const signin = () => {
             email: response?.data?.user_profile_data?.email,
             name: response?.data?.user_profile_data?.first_name,
             token: response?.data.token?.access,
-            password: value.password,
+            password: values.password,
 
             redirect: false,
           }).then((res) => {
