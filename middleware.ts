@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { getCookie, setCookie } from "cookies-next";
 
 export function middleware(request: NextRequest) {
-  let token = request.cookies.get("next-auth.session-token")?.value;
- 
+  let token = request.cookies.get("_token")?.value;
 
   if (request.nextUrl.pathname.startsWith("/dashboard")) {
     if (!token) {

@@ -55,15 +55,28 @@ const signin = () => {
 
   const handleAuth = async (values: any) => {
 
-    signIn("credentials", {
-            email: values.email,
-            password: values.password,
+   
+    axios
+      .post(`${process.env.NEXT_PUBLIC_URL}/api/student/login/`, {
+        email: values.email,
+        password: values.password,
+      })
+      .then(function (response) {
+        if (response.status === 200) {
+          // toggle();
+          setCookie("_token", `${response.data.token.access}`);
+          setCookie("_refresh_token", `${response.data.token.refresh}`);
+          signIn("credentials", {
+            id: response?.data?.user_profile_data?.id,
+            email: response?.data?.user_profile_data?.email,
+            name: response?.data?.user_profile_data?.first_name,
+            token: response?.data.token?.access,
+            password: value.password,
 
             redirect: false,
           }).then((res) => {
             if (res?.status === 200) {
-              router.push("/dashboard");
-              console.log(res)
+              router.reload();
               notifications.show({
                 title: "Assalomu Alaykom",
                 message: "Shaxsiy saxifangizga hush kelibsiz.",
@@ -71,40 +84,12 @@ const signin = () => {
               });
             }
           });
-    // axios
-    //   .post(`${process.env.NEXT_PUBLIC_URL}/api/student/login/`, {
-    //     email: values.email,
-    //     password: values.password,
-    //   })
-    //   .then(function (response) {
-    //     if (response.status === 200) {
-    //       // toggle();
-    //       setCookie("_token", `${response.data.token.access}`);
-    //       setCookie("_refresh_token", `${response.data.token.refresh}`);
-    //       signIn("credentials", {
-    //         id: response?.data?.user_profile_data?.id,
-    //         email: response?.data?.user_profile_data?.email,
-    //         name: response?.data?.user_profile_data?.first_name,
-    //         token: response?.data.token?.access,
-    //         password: value.password,
-
-    //         redirect: false,
-    //       }).then((res) => {
-    //         if (res?.status === 200) {
-    //           router.reload();
-    //           notifications.show({
-    //             title: "Assalomu Alaykom",
-    //             message: "Shaxsiy saxifangizga hush kelibsiz.",
-    //             icon: <TbUser />,
-    //           });
-    //         }
-    //       });
-    //     }
-    //   })
-    //   .catch(function (error) {
-    //     formPochta.setFieldError("email", "Noto'gri Email");
-    //     formPochta.setFieldError("password", "Noto'gri password");
-    //   });
+        }
+      })
+      .catch(function (error) {
+        formPochta.setFieldError("email", "Noto'gri Email");
+        formPochta.setFieldError("password", "Noto'gri password");
+      });
   };
 
   return (
