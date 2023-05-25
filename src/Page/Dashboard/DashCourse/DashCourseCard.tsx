@@ -85,47 +85,7 @@ const DashCourseCard = (props: Props) => {
     <>
       <Grid>
         {data.map(
-          (item: {
-            id: React.Key | null | undefined;
-            photo: string | null | undefined;
-            name:
-              | string
-              | number
-              | boolean
-              | React.ReactElement<
-                  any,
-                  string | React.JSXElementConstructor<any>
-                >
-              | React.ReactFragment
-              | React.ReactPortal
-              | null
-              | undefined;
-            cost:
-              | string
-              | number
-              | boolean
-              | React.ReactElement<
-                  any,
-                  string | React.JSXElementConstructor<any>
-                >
-              | React.ReactFragment
-              | React.ReactPortal
-              | null
-              | undefined;
-            teacher_name:
-              | string
-              | number
-              | boolean
-              | React.ReactElement<
-                  any,
-                  string | React.JSXElementConstructor<any>
-                >
-              | React.ReactFragment
-              | React.ReactPortal
-              | null
-              | undefined;
-            slug: any;
-          }) => {
+          (item: any) => {
             return (
               <Grid.Col md={6} key={item.id}>
                 <Card

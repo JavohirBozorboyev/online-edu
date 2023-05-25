@@ -36,8 +36,6 @@ const signin = () => {
   const [visible, { toggle }] = useDisclosure(false);
   const { data: session, status } = useSession();
 
-  console.log(session)
-
   useEffect(() => {
     router.prefetch("/dashboard");
   }, [router]);

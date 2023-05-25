@@ -86,7 +86,7 @@ const index = () => {
             redirect: false,
           }).then((sign) => {
             if (sign?.status === 200) {
-              router.push("/dashboard");
+              router.reload();
               setCookie("_token", `${res?.data.token?.access}`);
               setCookie("_refresh_token", `${res?.data.token?.refresh}`);
             }
