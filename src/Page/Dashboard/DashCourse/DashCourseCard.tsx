@@ -84,68 +84,66 @@ const DashCourseCard = (props: Props) => {
   return (
     <>
       <Grid>
-        {data.map(
-          (item: any) => {
-            return (
-              <Grid.Col md={6} key={item.id}>
-                <Card
-                  shadow="sm"
-                  padding="lg"
-                  radius="sm"
-                  className={classes.cardBg}
-                >
-                  <Card.Section>
-                    <Image src={item.photo} height={200} alt="Norway" />
-                  </Card.Section>
+        {data.map((item: any) => {
+          return (
+            <Grid.Col md={6} key={item.id}>
+              <Card
+                shadow="sm"
+                padding="lg"
+                radius="sm"
+                className={classes.cardBg}
+              >
+                <Card.Section>
+                  <Image src={item.photo} height={200} alt="Norway" />
+                </Card.Section>
 
-                  <Group position="apart" mt="md" mb="xs">
-                    <Text weight={500}>{item.name}</Text>
-                    <Badge variant="light">
-                      {item.cost} {"so'm"}
-                    </Badge>
-                  </Group>
+                <Group position="apart" mt="md" mb="xs">
+                  <Text weight={500}>{item.name}</Text>
+                  <Badge variant="light">
+                    {item.cost} {"so'm"}
+                  </Badge>
+                </Group>
 
-                  <Text size="sm" color="dimmed">
-                    With Fjord Tours you can explore more of the magical fjord
-                    landscapes with tours and activities on and around the
-                    fjords of Norway
-                  </Text>
-                  <Text size={"sm"} c="blue.3" mt={"md"}>
-                    {item.teacher_name}
-                  </Text>
+                <Text size="sm" color="dimmed">
+                  With Fjord Tours you can explore more of the magical fjord
+                  landscapes with tours and activities on and around the fjords
+                  of Norway
+                </Text>
+                <Text size={"sm"} c="blue.3" mt={"md"}>
+                  {item.teacher_name}
+                </Text>
 
-                  <Grid mt={"md"}>
-                    <Grid.Col span={"auto"}>
+                <Grid mt={"md"}>
+                  <Grid.Col span={"auto"}>
+                    <Button
+                      leftIcon={<TbChartBar size={"1.2rem"} />}
+                      onClick={open}
+                      color="teal"
+                      radius="sm"
+                      variant="light"
+                      fullWidth
+                    >
+                      Kurs Statistikasi
+                    </Button>
+                  </Grid.Col>
+                  <Grid.Col span={"auto"}>
+                    <Link href={`/dashboard/course/${item.slug}`}>
                       <Button
-                        leftIcon={<TbChartBar size={"1.2rem"} />}
-                        onClick={open}
-                        color="teal"
+                        leftIcon={<TbPlayerPlayFilled size={"1.2rem"} />}
+                        fullWidth
+                        color="blue"
                         radius="sm"
                         variant="light"
-                        fullWidth
                       >
-                        Kurs Statistikasi
+                        Kursni Boshlash
                       </Button>
-                    </Grid.Col>
-                    <Grid.Col span={"auto"}>
-                      <Link href={`/dashboard/course/${item.slug}`}>
-                        <Button
-                          leftIcon={<TbPlayerPlayFilled size={"1.2rem"} />}
-                          fullWidth
-                          color="blue"
-                          radius="sm"
-                          variant="light"
-                        >
-                          Kursni Boshlash
-                        </Button>
-                      </Link>
-                    </Grid.Col>
-                  </Grid>
-                </Card>
-              </Grid.Col>
-            );
-          }
-        )}
+                    </Link>
+                  </Grid.Col>
+                </Grid>
+              </Card>
+            </Grid.Col>
+          );
+        })}
       </Grid>
 
       <Modal size={"lg"} opened={opened} onClose={close} title="Statistika">

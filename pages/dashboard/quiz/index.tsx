@@ -16,9 +16,6 @@ const index = ({}: Props) => {
     error: equiz,
     isLoading: lquiz,
   } = useSWR("https://onlineedu.pythonanywhere.com/api/examp/category/");
-
- 
-
   return (
     <>
       <Box mb={"xl"}>

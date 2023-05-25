@@ -11,6 +11,8 @@ import {
   Card,
   Badge,
   Group,
+  Grid,
+  Skeleton
 } from "@mantine/core";
 import useSWR from "swr";
 
@@ -67,6 +69,47 @@ const data = [
 function QuizCarousel() {
   const { classes, theme } = useStyles();
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
+
+  const {
+    data: quiz,
+    error,
+    isLoading
+  } = useSWR("https://onlineedu.pythonanywhere.com/api/examp/free-category/");
+
+  console.log(quiz)
+
+  if(error){
+    return(
+      <>
+        <Text size="xl" ta="center">Server Error</Text>
+      </>
+    )
+  }
+
+  
+  const sk = ()=>{
+    return (
+      <Grid>
+        <Grid.Col md={6} lg={3}>
+          <Skeleton height={200} radius="sm" />
+        </Grid.Col>
+        <Grid.Col md={6} lg={3}>
+          <Skeleton height={200} radius="sm" />
+        </Grid.Col>
+        <Grid.Col md={6} lg={3}>
+          <Skeleton height={200} radius="sm" />
+        </Grid.Col>
+        <Grid.Col md={6} lg={3}>
+          <Skeleton height={200} radius="sm" />
+        </Grid.Col>
+        <Grid.Col md={6} lg={3}>
+          <Skeleton height={200} radius="sm" />
+        </Grid.Col>
+      
+      </Grid>
+    )
+  }
+
 
   const slides = data.map((item) => (
     <Carousel.Slide key={item.title}>

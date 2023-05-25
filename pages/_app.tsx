@@ -63,7 +63,7 @@ export default function App({
           <Notifications />
           <SWRConfig
             value={{
-              refreshInterval: 1000,
+              refreshInterval: 1000*60*60,
               fetcher,
             }}
           >

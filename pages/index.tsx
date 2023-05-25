@@ -5,7 +5,7 @@ import HomeFaq from "@/src/Page/Home/HomeFaq";
 import HomeContactSection from "@/src/Page/Home/HomeContactSection";
 import HomeServiceSection from "@/src/Page/Home/HomeServiceSection";
 import HomeStatsSection from "@/src/Page/Home/HomeStatsSection";
-import QuizCarousel from "@/components/Carousel/QuizCarousel";
+import HomeQuizCard from "@/src/Page/Home/HomeQuizCard"
 import { Box, Button, Container, Text } from "@mantine/core";
 import { useHomeTitleStyle } from "@/styles/styleJs/useTitleStyle";
 import { useSession } from "next-auth/react";
@@ -92,7 +92,7 @@ export default function Home() {
             Pokémon.
           </Text>
           <Container size={"xl"} px={"0"}>
-            <QuizCarousel />
+            <HomeQuizCard />
           </Container>
         </Box>
         {/* Quiz Card Component end */}
