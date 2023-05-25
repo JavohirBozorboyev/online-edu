@@ -8,12 +8,16 @@ import {
   Grid,
   Modal,
   createStyles,
+  Skeleton,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
 import { TbChartBar, TbPlayerPlayFilled } from "react-icons/tb";
 import DashCourseCardStats from "./DashCourseCardStats";
 import Link from "next/link";
+import useSWR from "swr";
+import { getCookie } from "cookies-next";
+import axios from "axios";
 
 type Props = {};
 
@@ -42,113 +46,146 @@ const Data = [
 const DashCourseCard = (props: Props) => {
   const [opened, { open, close }] = useDisclosure(false);
   const { classes, theme } = useStyles();
+
+  let token = getCookie("_token");
+
+  const fetcher = (url: string) =>
+    axios
+      .get(url, { headers: { Authorization: `Bearer ${token}` } })
+      .then((res) => res.data);
+
+  const { data, error, isLoading } = useSWR(
+    [`https://onlineedu.pythonanywhere.com/api/course/course/`],
+    fetcher,
+    { refreshInterval: 1000 * 60 * 60 }
+  );
+
+  if (error) return <div>failed to load</div>;
+  if (isLoading)
+    return (
+      <>
+        <Grid>
+          <Grid.Col md={6}>
+            <Skeleton height={300} />
+          </Grid.Col>
+          <Grid.Col md={6}>
+            <Skeleton height={300} />
+          </Grid.Col>
+          <Grid.Col md={6}>
+            <Skeleton height={300} />
+          </Grid.Col>
+          <Grid.Col md={6}>
+            <Skeleton height={300} />
+          </Grid.Col>
+        </Grid>
+      </>
+    );
+
   return (
     <>
       <Grid>
-        <Grid.Col md={6}>
-          <Card shadow="sm" padding="lg" radius="sm" className={classes.cardBg}>
-            <Card.Section>
-              <Image
-                src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
-                height={200}
-                alt="Norway"
-              />
-            </Card.Section>
-
-            <Group position="apart" mt="md" mb="xs">
-              <Text weight={500}>Javascript</Text>
-              <Badge color="blue" variant="light">
-                Free
-              </Badge>
-            </Group>
-
-            <Text size="sm" color="dimmed">
-              With Fjord Tours you can explore more of the magical fjord
-              landscapes with tours and activities on and around the fjords of
-              Norway
-            </Text>
-
-            <Grid mt={"md"}>
-              <Grid.Col span={"auto"}>
-                <Button
-                  leftIcon={<TbChartBar size={"1.2rem"} />}
-                  onClick={open}
-                  color="teal"
-                  radius="sm"
-                  variant="light"
-                  fullWidth
+        {data.map(
+          (item: {
+            id: React.Key | null | undefined;
+            photo: string | null | undefined;
+            name:
+              | string
+              | number
+              | boolean
+              | React.ReactElement<
+                  any,
+                  string | React.JSXElementConstructor<any>
                 >
-                  Kurs Statistikasi
-                </Button>
-              </Grid.Col>
-              <Grid.Col span={"auto"}>
-                <Link href={"/dashboard/course/js"}>
-                  <Button
-                    leftIcon={<TbPlayerPlayFilled size={"1.2rem"} />}
-                    fullWidth
-                    color="blue"
-                    radius="sm"
-                    variant="light"
-                  >
-                    Kursni Boshlash
-                  </Button>
-                </Link>
-              </Grid.Col>
-            </Grid>
-          </Card>
-        </Grid.Col>
-        <Grid.Col md={6}>
-          <Card shadow="sm" padding="lg" radius="sm" className={classes.cardBg}>
-            <Card.Section>
-              <Image
-                src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
-                height={200}
-                alt="Norway"
-              />
-            </Card.Section>
-
-            <Group position="apart" mt="md" mb="xs">
-              <Text weight={500}>Javascript</Text>
-              <Badge color="blue" variant="light">
-                Free
-              </Badge>
-            </Group>
-
-            <Text size="sm" color="dimmed">
-              With Fjord Tours you can explore more of the magical fjord
-              landscapes with tours and activities on and around the fjords of
-              Norway
-            </Text>
-
-            <Grid mt={"md"}>
-              <Grid.Col span={"auto"}>
-                <Button
-                  leftIcon={<TbChartBar size={"1.2rem"} />}
-                  onClick={open}
-                  color="teal"
-                  radius="sm"
-                  fullWidth
-                  variant="light"
+              | React.ReactFragment
+              | React.ReactPortal
+              | null
+              | undefined;
+            cost:
+              | string
+              | number
+              | boolean
+              | React.ReactElement<
+                  any,
+                  string | React.JSXElementConstructor<any>
                 >
-                  Kurs Statistikasi
-                </Button>
+              | React.ReactFragment
+              | React.ReactPortal
+              | null
+              | undefined;
+            teacher_name:
+              | string
+              | number
+              | boolean
+              | React.ReactElement<
+                  any,
+                  string | React.JSXElementConstructor<any>
+                >
+              | React.ReactFragment
+              | React.ReactPortal
+              | null
+              | undefined;
+            slug: any;
+          }) => {
+            return (
+              <Grid.Col md={6} key={item.id}>
+                <Card
+                  shadow="sm"
+                  padding="lg"
+                  radius="sm"
+                  className={classes.cardBg}
+                >
+                  <Card.Section>
+                    <Image src={item.photo} height={200} alt="Norway" />
+                  </Card.Section>
+
+                  <Group position="apart" mt="md" mb="xs">
+                    <Text weight={500}>{item.name}</Text>
+                    <Badge variant="light">
+                      {item.cost} {"so'm"}
+                    </Badge>
+                  </Group>
+
+                  <Text size="sm" color="dimmed">
+                    With Fjord Tours you can explore more of the magical fjord
+                    landscapes with tours and activities on and around the
+                    fjords of Norway
+                  </Text>
+                  <Text size={"sm"} c="blue.3" mt={"md"}>
+                    {item.teacher_name}
+                  </Text>
+
+                  <Grid mt={"md"}>
+                    <Grid.Col span={"auto"}>
+                      <Button
+                        leftIcon={<TbChartBar size={"1.2rem"} />}
+                        onClick={open}
+                        color="teal"
+                        radius="sm"
+                        variant="light"
+                        fullWidth
+                      >
+                        Kurs Statistikasi
+                      </Button>
+                    </Grid.Col>
+                    <Grid.Col span={"auto"}>
+                      <Link href={`/dashboard/course/${item.slug}`}>
+                        <Button
+                          leftIcon={<TbPlayerPlayFilled size={"1.2rem"} />}
+                          fullWidth
+                          color="blue"
+                          radius="sm"
+                          variant="light"
+                        >
+                          Kursni Boshlash
+                        </Button>
+                      </Link>
+                    </Grid.Col>
+                  </Grid>
+                </Card>
               </Grid.Col>
-              <Grid.Col span={"auto"}>
-                <Link href={"/dashboard/course/js"}>
-                  <Button
-                    leftIcon={<TbPlayerPlayFilled size={"1.2rem"} />}
-                    fullWidth
-                    color="blue"
-                    radius="sm"
-                    variant="light"
-                  >
-                    Kursni Boshlash
-                  </Button>
-                </Link>
-              </Grid.Col>
-            </Grid>
-          </Card>
-        </Grid.Col>
+            );
+          }
+        )}
       </Grid>
 
       <Modal size={"lg"} opened={opened} onClose={close} title="Statistika">

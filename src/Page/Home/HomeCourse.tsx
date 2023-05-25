@@ -33,10 +33,10 @@ const useStyles = createStyles((theme) => ({
   },
 
   category: {
-    color: theme.white,
+    
     opacity: 0.7,
     fontWeight: 700,
-    textTransform: "uppercase",
+    textTransform: "capitalize",
   },
 }));
 
@@ -61,8 +61,8 @@ function Card({ image, teacher, name }: CardProps) {
       className={classes.card}
     >
       <div>
-        <Text className={classes.category} size="xs">
-          {teacher} Teacher Ism Familiyasi
+        <Text className={classes.category} c="blue.2" size="xs">
+          {teacher}
         </Text>
         <Title order={3} className={classes.title}>
           {name}
@@ -86,7 +86,14 @@ function HomeCourse() {
   if (isLoading)
     return (
       <>
-        <Skeleton height={200} />
+        <Grid>          
+            <Grid.Col md={6} >
+             <Skeleton height={300} />
+            </Grid.Col>
+            <Grid.Col md={6} >
+             <Skeleton height={300} />
+            </Grid.Col>
+      </Grid>
       </>
     );
 
@@ -97,8 +104,8 @@ function HomeCourse() {
           return (
             <Grid.Col md={6} key={item.id}>
               <Card
-                image={"http://kurs-sp.ru/assets/images/news/1662129323.jpg"}
-                teacher={item.teacher}
+                image={item.photo}
+                teacher={item.teacher_name}
                 name={item.name}
               />
             </Grid.Col>

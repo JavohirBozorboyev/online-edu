@@ -10,7 +10,7 @@ const index = (props: Props) => {
   //   "https://splatform.pythonanywhere.com/platform/course/"
   // );
 
-  // console.log(data);
+  
 
   return (
     <>

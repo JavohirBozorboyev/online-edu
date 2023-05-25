@@ -12,8 +12,6 @@ export const authOptions = {
       credentials: {},
       async authorize(credentials, req) {
         const { id, token, email, password }: any = credentials;
-
-        console.log(email, password)
         return {
           id,
           email,
