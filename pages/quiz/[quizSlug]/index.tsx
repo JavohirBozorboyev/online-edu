@@ -1,30 +1,34 @@
+import useSWR from "swr";
+import { useRouter } from "next/router";
+import { Text } from "@mantine/core";
+import HomeQuizSlugCard from "@/src/Page/Quiz/HomeQuizSlugCard";
 
-import useSWR from 'swr'
-import {useRouter} from "next/router"
-import {Text} from "@mantine/core"
-
-const QuizSlugPage = ()=>{
-	const router = useRouter()
-	const { quizSlug} = router.query
-	const {
+const QuizSlugPage = () => {
+  const router = useRouter();
+  const { quizSlug } = router.query;
+  const {
     data: quiz,
     error,
-    isLoading
-  } = useSWR(`https://onlineedu.pythonanywhere.com/api/examp/free-category/${quizSlug}/`);
+    isLoading,
+  } = useSWR(
+    `https://onlineedu.pythonanywhere.com/api/examp/free-category/${quizSlug}/`
+  );
 
-  
-
-  if(error){
-    return(
+  if (error) {
+    return (
       <>
-        <Text size="xl" ta="center">Server Error</Text>
+        <Text size="xl" ta="center">
+          Server Error
+        </Text>
       </>
-    )
+    );
   }
 
-	return (
-		<></>
-	)
-}
+  return (
+    <>
+      <HomeQuizSlugCard />
+    </>
+  );
+};
 
-export default QuizSlugPage
+export default QuizSlugPage;

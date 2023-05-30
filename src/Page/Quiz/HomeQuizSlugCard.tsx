@@ -1,31 +1,33 @@
-import { Carousel } from "@mantine/carousel";
-import { useMediaQuery } from "@mantine/hooks";
 import { useCardBg } from "@/styles/styleJs/useCardBg";
 import {
-  createStyles,
-  Paper,
-  Text,
-  Title,
-  Button,
-  useMantineTheme,
-  rem,
-  Card,
   Badge,
-  Group,
+  Button,
+  Card,
   Grid,
+  Group,
   Skeleton,
+  Text,
 } from "@mantine/core";
-import useSWR from "swr";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import React from "react";
+import useSWR from "swr";
 
-function HomeQuizCard() {
+type Props = {};
+
+const HomeQuizSlugCard = (props: Props) => {
   const { classes } = useCardBg();
+  const router = useRouter();
+
+  const { quizSlug } = router.query;
 
   const {
     data: quiz,
     error,
     isLoading,
-  } = useSWR("https://onlineedu.pythonanywhere.com/api/examp/free-category/");
+  } = useSWR(
+    `https://onlineedu.pythonanywhere.com/api/examp/free-category/${quizSlug}/`
+  );
 
   if (error) {
     return (
@@ -36,6 +38,7 @@ function HomeQuizCard() {
       </>
     );
   }
+  console.log(quiz);
 
   if (isLoading) {
     return (
@@ -61,11 +64,10 @@ function HomeQuizCard() {
       </Grid>
     );
   }
-
   return (
-    <>
+    <div>
       <Grid>
-        {quiz.map((item: any) => {
+        {quiz.free_subcategories.map((item: any) => {
           return (
             <Grid.Col sm={6} lg={4} key={item.id}>
               <Card
@@ -87,7 +89,7 @@ function HomeQuizCard() {
                   praesentium optio quasi labore esse eius!
                 </Text>
 
-                <Link href={`/quiz/${item.slug}`}>
+                <Link href={`/quiz/${quizSlug}/${item.slug}`}>
                   <Button
                     variant="light"
                     color="blue"
@@ -103,8 +105,8 @@ function HomeQuizCard() {
           );
         })}
       </Grid>
-    </>
+    </div>
   );
-}
+};
 
-export default HomeQuizCard;
+export default HomeQuizSlugCard;
