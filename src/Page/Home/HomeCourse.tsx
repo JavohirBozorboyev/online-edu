@@ -33,7 +33,6 @@ const useStyles = createStyles((theme) => ({
   },
 
   category: {
-    
     opacity: 0.7,
     fontWeight: 700,
     textTransform: "capitalize",
@@ -76,7 +75,6 @@ function Card({ image, teacher, name }: CardProps) {
 }
 
 function HomeCourse() {
-  const theme = useMantineTheme();
   const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_URL}/api/course/course/`,
     { refreshInterval: 1000 * 60 * 60 }
@@ -86,14 +84,14 @@ function HomeCourse() {
   if (isLoading)
     return (
       <>
-        <Grid>          
-            <Grid.Col md={6} >
-             <Skeleton height={300} />
-            </Grid.Col>
-            <Grid.Col md={6} >
-             <Skeleton height={300} />
-            </Grid.Col>
-      </Grid>
+        <Grid>
+          <Grid.Col md={6}>
+            <Skeleton height={300} />
+          </Grid.Col>
+          <Grid.Col md={6}>
+            <Skeleton height={300} />
+          </Grid.Col>
+        </Grid>
       </>
     );
 
