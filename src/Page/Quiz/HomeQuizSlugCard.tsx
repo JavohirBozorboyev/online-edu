@@ -8,62 +8,26 @@ import {
   Skeleton,
   Text,
 } from "@mantine/core";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React from "react";
-import useSWR from "swr";
+import React, { useCallback } from "react";
 
-type Props = {};
+type Props = {
+  quiz: any;
+  openModal: any;
+  setQuziId: any;
+};
 
-const HomeQuizSlugCard = (props: Props) => {
+const HomeQuizSlugCard = ({
+  quiz,
+
+  openModal,
+  setQuziId,
+}: Props) => {
   const { classes } = useCardBg();
-  const router = useRouter();
 
-  const { quizSlug } = router.query;
-
-  const {
-    data: quiz,
-    error,
-    isLoading,
-  } = useSWR(
-    `https://onlineedu.pythonanywhere.com/api/examp/free-category/${quizSlug}/`
-  );
-
-  if (error) {
-    return (
-      <>
-        <Text size="xl" ta="center">
-          Server Error
-        </Text>
-      </>
-    );
-  }
-  console.log(quiz);
-
-  if (isLoading) {
-    return (
-      <Grid>
-        <Grid.Col md={6} lg={4}>
-          <Skeleton height={200} radius="sm" />
-        </Grid.Col>
-        <Grid.Col md={6} lg={4}>
-          <Skeleton height={200} radius="sm" />
-        </Grid.Col>
-        <Grid.Col md={6} lg={4}>
-          <Skeleton height={200} radius="sm" />
-        </Grid.Col>
-        <Grid.Col md={6} lg={4}>
-          <Skeleton height={200} radius="sm" />
-        </Grid.Col>
-        <Grid.Col md={6} lg={4}>
-          <Skeleton height={200} radius="sm" />
-        </Grid.Col>
-        <Grid.Col md={6} lg={4}>
-          <Skeleton height={200} radius="sm" />
-        </Grid.Col>
-      </Grid>
-    );
-  }
+  const Startquiz = (e: number) => {
+    setQuziId(e);
+    openModal();
+  };
   return (
     <div>
       <Grid>
@@ -89,17 +53,16 @@ const HomeQuizSlugCard = (props: Props) => {
                   praesentium optio quasi labore esse eius!
                 </Text>
 
-                <Link href={`/quiz/${quizSlug}/${item.slug}`}>
-                  <Button
-                    variant="light"
-                    color="blue"
-                    fullWidth
-                    mt="md"
-                    radius="sm"
-                  >
-                    {"Barchasini Ko'rish"}
-                  </Button>
-                </Link>
+                <Button
+                  variant="light"
+                  color="blue"
+                  fullWidth
+                  mt="md"
+                  radius="sm"
+                  onClick={() => Startquiz(item.id)}
+                >
+                  {"Barchasini Ko'rish"}
+                </Button>
               </Card>
             </Grid.Col>
           );

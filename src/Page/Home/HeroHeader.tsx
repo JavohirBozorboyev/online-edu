@@ -1,11 +1,4 @@
-import {
-  createStyles,
-  Title,
-  Text,
-  Container,
-  rem,
-} from "@mantine/core";
-
+import { createStyles, Title, Text, Container, rem } from "@mantine/core";
 
 import { memo } from "react";
 
@@ -118,9 +111,8 @@ const HeroHeader = () => {
 
           <Container p={0} size={600}>
             <Text size="lg" color="dimmed" className={classes.description}>
-              Build more reliable software with AI companion. AI is also trained
-              to detect lazy developers who do nothing and just complain on
-              Twitter.
+              {` Sifatli ta'lim, natijaviylik, mas'uliyatlilik. Avval tarbiya,
+              keyin ta'lim!`}
             </Text>
           </Container>
         </div>
@@ -129,5 +121,4 @@ const HeroHeader = () => {
   );
 };
 
-
-export default memo(HeroHeader)
+export default memo(HeroHeader);
