@@ -12,7 +12,7 @@ import {
   Badge,
   Group,
   Grid,
-  Skeleton
+  Skeleton,
 } from "@mantine/core";
 import useSWR from "swr";
 
@@ -73,21 +73,20 @@ function QuizCarousel() {
   const {
     data: quiz,
     error,
-    isLoading
+    isLoading,
   } = useSWR("https://onlineedu.pythonanywhere.com/api/examp/free-category/");
 
-  console.log(quiz)
-
-  if(error){
-    return(
+  if (error) {
+    return (
       <>
-        <Text size="xl" ta="center">Server Error</Text>
+        <Text size="xl" ta="center">
+          Server Error
+        </Text>
       </>
-    )
+    );
   }
 
-  
-  const sk = ()=>{
+  const sk = () => {
     return (
       <Grid>
         <Grid.Col md={6} lg={3}>
@@ -105,11 +104,9 @@ function QuizCarousel() {
         <Grid.Col md={6} lg={3}>
           <Skeleton height={200} radius="sm" />
         </Grid.Col>
-      
       </Grid>
-    )
-  }
-
+    );
+  };
 
   const slides = data.map((item) => (
     <Carousel.Slide key={item.title}>

@@ -8,10 +8,7 @@ import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 import { ReactElement, type ReactNode } from "react";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
-import { SessionProvider } from "next-auth/react";
-
 import Layout from "@/layouts/Layout";
-import { useRouter } from "next/router";
 import RouterTransition from "@/components/Other/RouterTransition";
 import { Notifications } from "@mantine/notifications";
 import { SWRConfig } from "swr";
@@ -35,8 +32,6 @@ export default function App({
     defaultValue: "light",
     getInitialValueInEffect: true,
   });
-
-  const router = useRouter();
 
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
@@ -63,13 +58,11 @@ export default function App({
           <Notifications />
           <SWRConfig
             value={{
-              refreshInterval: 1000*60*60,
+              refreshInterval: 1000 * 60 * 60,
               fetcher,
             }}
           >
-            <SessionProvider session={sesion}>
-              {getLayout(<Component {...pageProps} />)}
-            </SessionProvider>
+            {getLayout(<Component {...pageProps} />)}
           </SWRConfig>
         </MantineProvider>
       </ColorSchemeProvider>

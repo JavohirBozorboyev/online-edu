@@ -28,8 +28,6 @@ export default function QuestionLayout({ children, list }: Props) {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
 
-  console.log(list);
-
   return (
     <AppShell
       styles={{

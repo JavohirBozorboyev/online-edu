@@ -24,17 +24,11 @@ import { useForm } from "@mantine/form";
 import axios from "axios";
 import { useDisclosure } from "@mantine/hooks";
 import { getCookie, setCookie } from "cookies-next";
-import { useSession } from "next-auth/react";
-
-
-
-
 
 const signin = () => {
   const [segment, setSegment] = useState("pochta");
   const router = useRouter();
   const [visible, { toggle }] = useDisclosure(false);
-  const { data: session, status } = useSession();
 
   useEffect(() => {
     router.prefetch("/dashboard");
@@ -53,8 +47,6 @@ const signin = () => {
   });
 
   const handleAuth = async (values: any) => {
-
-   
     axios
       .post(`${process.env.NEXT_PUBLIC_URL}/api/student/login/`, {
         email: values.email,

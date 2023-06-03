@@ -8,8 +8,6 @@ import { TbLayoutDashboard, TbLogout } from "react-icons/tb";
 import { deleteCookie } from "cookies-next";
 
 const UserAvatarMenu = () => {
-  const { data: session } = useSession();
-
   const SignOut = useCallback(() => {
     deleteCookie("_token");
     deleteCookie("_refresh_token");
@@ -17,7 +15,7 @@ const UserAvatarMenu = () => {
   }, []);
   return (
     <div>
-      {session ? (
+      {true ? (
         <Menu
           shadow="md"
           width={200}
