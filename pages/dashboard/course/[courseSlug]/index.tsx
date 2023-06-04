@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react-hooks/rules-of-hooks */
 
 import CourseLayout from "@/layouts/CourseLayout";
@@ -58,7 +59,7 @@ const index = (props: Props) => {
         <Grid gutter="xs">
           <Grid.Col md={6}>
             <Paper p={'xs'}>
-               <Image   radius="sm" src={data.photo}  />
+               <Image radius="sm" src={data.photo}  />
             </Paper>
           </Grid.Col>
           <Grid.Col md={6}>

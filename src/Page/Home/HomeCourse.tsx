@@ -10,6 +10,7 @@ import {
   Grid,
 } from "@mantine/core";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
+import Link from "next/link";
 import useSWR from "swr";
 
 const useStyles = createStyles((theme) => ({
@@ -43,9 +44,10 @@ interface CardProps {
   image: string;
   teacher: string;
   name: string;
+  url: string;
 }
 
-function Card({ image, teacher, name }: CardProps) {
+function Card({ image, teacher, name, url }: CardProps) {
   const { classes } = useStyles();
 
   return (
@@ -67,9 +69,15 @@ function Card({ image, teacher, name }: CardProps) {
           {name}
         </Title>
       </div>
-      <Button rightIcon={<IconArrowNarrowRight />}>
-        Kurs haqida malumotlar
-      </Button>
+      <Link href={`/course/${url}`}>
+        <Button
+          rightIcon={<IconArrowNarrowRight />}
+          variant="outline"
+          color="gray.0"
+        >
+          Kurs haqida malumotlar
+        </Button>
+      </Link>
     </Paper>
   );
 }
@@ -105,6 +113,7 @@ function HomeCourse() {
                 image={item.photo}
                 teacher={item.teacher_name}
                 name={item.name}
+                url={item.slug}
               />
             </Grid.Col>
           );
