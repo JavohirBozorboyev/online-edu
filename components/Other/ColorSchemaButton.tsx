@@ -1,6 +1,6 @@
 import { ActionIcon, useMantineColorScheme } from "@mantine/core";
+import { IconBrightnessDown, IconMoon } from "@tabler/icons-react";
 import React, { memo } from "react";
-import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 
 type Props = {};
 
@@ -25,9 +25,9 @@ const ColorSchemaButton = (props: Props) => {
         size={"md"}
       >
         {colorScheme !== "dark" ? (
-          <MdOutlineDarkMode size="1.1rem" />
+          <IconMoon size="1.1rem" />
         ) : (
-          <MdOutlineLightMode size="1.1rem" />
+          <IconBrightnessDown size="1.1rem" />
         )}
       </ActionIcon>
     </div>

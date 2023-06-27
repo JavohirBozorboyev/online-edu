@@ -1,7 +1,7 @@
 import { ActionIcon } from "@mantine/core";
 import { useFullscreen } from "@mantine/hooks";
+import { IconArrowsMaximize, IconArrowsMinimize } from "@tabler/icons-react";
 import React, { memo } from "react";
-import { BiFullscreen, BiExitFullscreen } from "react-icons/bi";
 
 type Props = {};
 
@@ -19,9 +19,9 @@ const FullScreenButton = (props: Props) => {
         size={"md"}
       >
         {!fullscreen ? (
-          <BiFullscreen size="1.1rem" />
+          <IconArrowsMaximize size="1.1rem" />
         ) : (
-          <BiExitFullscreen size="1.1rem" />
+          <IconArrowsMinimize size="1.1rem" />
         )}
       </ActionIcon>
     </div>

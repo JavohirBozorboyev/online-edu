@@ -1,30 +1,25 @@
-import {
-  TbLayoutDashboard,
-  TbPlayerPlayFilled,
-  TbListDetails,
-  TbUser,
-  TbHome,
-} from "react-icons/tb";
+import { IconHome, IconLayoutDashboard, IconListDetails, IconPlayerPlayFilled, IconUser } from "@tabler/icons-react";
+
 
 const DashLink = [
   {
     label: "Dashboard",
-    icon: TbLayoutDashboard,
+    icon: IconLayoutDashboard,
     url: "/dashboard",
   },
   {
     label: "Kurslar",
-    icon: TbPlayerPlayFilled,
+    icon: IconPlayerPlayFilled,
     url: "/dashboard/course",
   },
   {
     label: "Imtxon",
-    icon: TbListDetails,
+    icon: IconListDetails,
     url: "/dashboard/quiz",
   },
   {
     label: "Account",
-    icon: TbUser,
+    icon: IconUser,
     url: "/dashboard/account",
   },
 ];
@@ -32,7 +27,7 @@ const DashLink = [
 const AppLink = [
   {
     label: "Asosiy",
-    icon: TbHome,
+    icon: IconHome,
     url: "/",
   },
 ];

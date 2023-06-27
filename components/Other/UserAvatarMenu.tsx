@@ -1,20 +1,20 @@
-import React, { memo, useCallback } from "react";
-
+import React, { useState, memo, useCallback } from "react";
 import { Menu, Avatar, Button } from "@mantine/core";
-import { signOut, useSession } from "next-auth/react";
-import router from "next/router";
-import { MdLogin } from "react-icons/md";
-import { TbLayoutDashboard, TbLogout } from "react-icons/tb";
-import { deleteCookie } from "cookies-next";
+import { useRouter } from "next/router";
+import { deleteCookie, hasCookie } from "cookies-next";
+import { IconLayoutDashboard, IconLogout, IconLogin } from "@tabler/icons-react";
 
 const UserAvatarMenu = () => {
+  const router = useRouter();
+  const cook = hasCookie("_token");
+
   const SignOut = useCallback(() => {
     deleteCookie("_token");
     deleteCookie("_refresh_token");
-    signOut();
-  }, []);
+    router.reload();
+  }, [router]);
   return (
-    <div>
+    <>
       {true ? (
         <Menu
           shadow="md"
@@ -34,14 +34,14 @@ const UserAvatarMenu = () => {
               onClick={() => {
                 router.push("/dashboard");
               }}
-              icon={<TbLayoutDashboard size={"1rem"} />}
+              icon={<IconLayoutDashboard size={"1rem"} />}
             >
               Dashbaord
             </Menu.Item>
             <Menu.Item
               onClick={SignOut}
               color="blue"
-              icon={<TbLogout size={"1rem"} />}
+              icon={<IconLogout size={"1rem"} />}
             >
               Chiqish
             </Menu.Item>
@@ -52,12 +52,12 @@ const UserAvatarMenu = () => {
           onClick={() => {
             router.push("/dashboard");
           }}
-          leftIcon={<MdLogin size="1rem" />}
+          leftIcon={<IconLogin size="1rem" />}
         >
           Kirish
         </Button>
       )}
-    </div>
+    </>
   );
 };
 

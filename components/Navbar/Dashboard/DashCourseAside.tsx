@@ -1,7 +1,8 @@
 import React from "react";
 import { Box, NavLink, ScrollArea, createStyles } from "@mantine/core";
-import { TbCheck, TbPlayerSkipForward } from "react-icons/tb";
+
 import Link from "next/link";
+import { IconCheck, IconPlayerSkipForward } from "@tabler/icons-react";
 
 const useStyle = createStyles((theme) => ({
   link: {
@@ -97,9 +98,9 @@ const DashCourseAside = ({ toggleAsideBar }: Props) => {
                       className={classes.secondLink}
                       icon={
                         list.lessonActive ? (
-                          <TbCheck />
+                          <IconCheck />
                         ) : (
-                          <TbPlayerSkipForward />
+                          <IconPlayerSkipForward />
                         )
                       }
                       label={`${list.name}`}

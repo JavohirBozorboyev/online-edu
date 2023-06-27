@@ -1,9 +1,9 @@
 import { createStyles, Container, Group, ActionIcon, rem } from "@mantine/core";
 import {
-  TbBrandTwitter,
-  TbBrandYoutube,
-  TbBrandInstagram,
-} from "react-icons/tb";
+  IconBrandTwitter,
+  IconBrandYoutube,
+  IconBrandInstagram,
+} from "@tabler/icons-react";
 
 const useStyles = createStyles((theme) => ({
   footer: {
@@ -36,17 +36,17 @@ export default function AppFooter() {
 
   return (
     <div className={classes.footer}>
-      <Container className={classes.inner} size={'xl'}>
+      <Container className={classes.inner} size={"xl"}>
         {/* <MantineLogo size={28} /> */}
         <Group spacing={0} className={classes.links} position="right" noWrap>
           <ActionIcon size="lg">
-            <TbBrandTwitter size="1.05rem" />
+            <IconBrandTwitter size="1.05rem" />
           </ActionIcon>
           <ActionIcon size="lg">
-            <TbBrandYoutube size="1.05rem" />
+            <IconBrandYoutube size="1.05rem" />
           </ActionIcon>
           <ActionIcon size="lg">
-            <TbBrandInstagram size="1.05rem" />
+            <IconBrandInstagram size="1.05rem" />
           </ActionIcon>
         </Group>
       </Container>

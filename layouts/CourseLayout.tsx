@@ -11,8 +11,8 @@ import DashNavigation from "@/components/Navbar/Dashboard/DashNavigation";
 
 import DashNavbar from "@/components/Navbar/Dashboard/DashNavbar";
 import DashCourseAside from "@/components/Navbar/Dashboard/DashCourseAside";
-import { TbList } from "react-icons/tb";
 import BottomNavigation from "@/components/Tabs/BottomNavigation";
+import { IconList } from "@tabler/icons-react";
 
 interface CourseLayoutType {
   children: React.ReactElement;
@@ -79,7 +79,7 @@ export default function CourseLayout({ children }: CourseLayoutType) {
         >
           <Button
             variant="light"
-            leftIcon={<TbList size={"1.2rem"} />}
+            leftIcon={<IconList size={"1.2rem"} />}
             radius={"0"}
             color="gray"
             onClick={toggleAsideBar}

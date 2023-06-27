@@ -7,13 +7,13 @@ import {
   rem,
 } from "@mantine/core";
 import {
-  TbUserPlus,
-  TbDiscount2,
-  TbReceipt2,
-  TbCoin,
-  TbArrowUpRight,
-  TbArrowDownRight,
-} from "react-icons/tb";
+  IconUserPlus,
+  IconDiscount2,
+  IconReceipt2,
+  IconCoin,
+  IconArrowDownRight,
+  IconArrowUpRight,
+} from "@tabler/icons-react";
 
 const useStyles = createStyles((theme) => ({
   value: {
@@ -42,10 +42,10 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const icons = {
-  user: TbUserPlus,
-  discount: TbDiscount2,
-  receipt: TbReceipt2,
-  coin: TbCoin,
+  user: IconUserPlus,
+  discount: IconDiscount2,
+  receipt: IconReceipt2,
+  coin: IconCoin,
 };
 
 interface StatsGridProps {
@@ -60,38 +60,37 @@ interface StatsGridProps {
 const data = [
   {
     title: "Revenue",
-    icon: TbCoin,
+    icon: IconCoin,
     value: "13,456",
     diff: 34,
   },
   {
     title: "Revenue",
-    icon: TbCoin,
+    icon: IconCoin,
     value: "13,456",
     diff: 34,
   },
   {
     title: "Revenue",
-    icon: TbCoin,
+    icon: IconCoin,
     value: "13,456",
     diff: 44,
   },
   {
     title: "Revenue",
-    icon: TbCoin,
+    icon: IconCoin,
     value: "13,456",
     diff: 4,
   },
-  
 ];
 
 export default function DashHomeStatsCard() {
   const { classes } = useStyles();
   const stats = data.map((stat, i) => {
-    const DiffIcon = stat.diff > 0 ? TbArrowUpRight : TbArrowDownRight;
+    const DiffIcon = stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
 
     return (
-      <Paper  p="md" key={i}>
+      <Paper p="md" key={i}>
         <Group position="apart">
           <Text size="xs" color="dimmed" className={classes.title}>
             {stat.title}

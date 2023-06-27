@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useTransition } from "react";
 import { useRouter } from "next/router";
-import { signIn } from "next-auth/react";
 import {
   Paper,
   TextInput,
@@ -13,22 +12,19 @@ import {
   Container,
   SegmentedControl,
   Box,
-  LoadingOverlay,
   Center,
 } from "@mantine/core";
 // import { notifications } from "@mantine/notifications";
-import { TbMail, TbPhone, TbUser } from "react-icons/tb";
 import Link from "next/link";
 import { notifications } from "@mantine/notifications";
 import { useForm } from "@mantine/form";
 import axios from "axios";
-import { useDisclosure } from "@mantine/hooks";
-import { getCookie, setCookie } from "cookies-next";
+import { setCookie } from "cookies-next";
+import { IconMail, IconPhone, IconUser } from "@tabler/icons-react";
 
 const signin = () => {
   const [segment, setSegment] = useState("pochta");
   const router = useRouter();
-  const [visible, { toggle }] = useDisclosure(false);
 
   useEffect(() => {
     router.prefetch("/dashboard");
@@ -54,26 +50,13 @@ const signin = () => {
       })
       .then(function (response) {
         if (response.status === 200) {
-          // toggle();
+          router.reload();
           setCookie("_token", `${response.data.token.access}`);
           setCookie("_refresh_token", `${response.data.token.refresh}`);
-          signIn("credentials", {
-            id: response?.data?.user_profile_data?.id,
-            email: response?.data?.user_profile_data?.email,
-            name: response?.data?.user_profile_data?.first_name,
-            token: response?.data.token?.access,
-            password: values.password,
-
-            redirect: false,
-          }).then((res) => {
-            if (res?.status === 200) {
-              router.reload();
-              notifications.show({
-                title: "Assalomu Alaykom",
-                message: "Shaxsiy saxifangizga hush kelibsiz.",
-                icon: <TbUser />,
-              });
-            }
+          notifications.show({
+            title: "Assalomu Alaykom",
+            message: "Shaxsiy saxifangizga hush kelibsiz.",
+            icon: <IconUser />,
           });
         }
       })
@@ -85,7 +68,6 @@ const signin = () => {
 
   return (
     <Container size={480} p={"0"}>
-      <LoadingOverlay visible={visible} overlayBlur={2} />
       <Paper withBorder shadow="sm" p={30} radius="md">
         <SegmentedControl
           value={segment}
@@ -95,7 +77,7 @@ const signin = () => {
             {
               label: (
                 <Center>
-                  <TbMail size="1rem" />
+                  <IconMail size="1rem" />
                   <Box ml={10}>Pochta</Box>
                 </Center>
               ),
@@ -104,7 +86,7 @@ const signin = () => {
             {
               label: (
                 <Center>
-                  <TbPhone size="1rem" />
+                  <IconPhone size="1rem" />
                   <Box ml={10}>Mobil Raqam</Box>
                 </Center>
               ),
@@ -149,7 +131,7 @@ const signin = () => {
 
                 <Group position="right" mt="md">
                   <Button type="submit" fullWidth mt="xl">
-                    Tizimga Kirish
+                    {" Tizimga Kirish"}
                   </Button>
                 </Group>
               </form>

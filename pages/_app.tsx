@@ -56,6 +56,7 @@ export default function App({
         >
           <RouterTransition />
           <Notifications />
+
           <SWRConfig
             value={{
               refreshInterval: 1000 * 60 * 60,

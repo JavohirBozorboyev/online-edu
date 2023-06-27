@@ -12,12 +12,12 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
-import { TbChartBar, TbPlayerPlayFilled } from "react-icons/tb";
 import DashCourseCardStats from "./DashCourseCardStats";
 import Link from "next/link";
 import useSWR from "swr";
 import { getCookie } from "cookies-next";
 import axios from "axios";
+import { IconChartBar, IconPlayerPlayFilled } from "@tabler/icons-react";
 
 type Props = {};
 
@@ -116,7 +116,7 @@ const DashCourseCard = (props: Props) => {
                 <Grid mt={"md"}>
                   <Grid.Col span={"auto"}>
                     <Button
-                      leftIcon={<TbChartBar size={"1.2rem"} />}
+                      leftIcon={<IconChartBar size={"1.2rem"} />}
                       onClick={open}
                       color="teal"
                       radius="sm"
@@ -129,7 +129,7 @@ const DashCourseCard = (props: Props) => {
                   <Grid.Col span={"auto"}>
                     <Link href={`/dashboard/course/${item.slug}`}>
                       <Button
-                        leftIcon={<TbPlayerPlayFilled size={"1.2rem"} />}
+                        leftIcon={<IconPlayerPlayFilled size={"1.2rem"} />}
                         fullWidth
                         color="blue"
                         radius="sm"

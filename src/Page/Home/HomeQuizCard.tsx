@@ -21,11 +21,7 @@ import Link from "next/link";
 function HomeQuizCard() {
   const { classes } = useCardBg();
 
-  const {
-    data: quiz,
-    error,
-    isLoading,
-  } = useSWR("https://onlineedu.pythonanywhere.com/api/examp/free-category/");
+  const { data: quiz, error, isLoading } = useSWR("/api/dashboard/quiz");
 
   if (error) {
     return (

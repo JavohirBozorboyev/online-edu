@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useTransition } from "react";
 import { useRouter } from "next/router";
 import {
   Paper,
@@ -18,20 +18,18 @@ import {
   LoadingOverlay,
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-import { TbMail, TbPhone, TbUser } from "react-icons/tb";
+
 import Link from "next/link";
 import { useForm } from "@mantine/form";
 import { useId } from "@mantine/hooks";
 import { IMaskInput } from "react-imask";
 import axios from "axios";
-import { signIn } from "next-auth/react";
-import { useDisclosure } from "@mantine/hooks";
 import { setCookie, getCookie } from "cookies-next";
-
+import { IconUser, IconMail, IconPhone } from "@tabler/icons-react";
 
 const index = () => {
   const [segment, setSegment] = useState("pochta");
-  const [visible, { toggle }] = useDisclosure(false);
+  const [isPending, startTransition] = useTransition();
 
   const router = useRouter();
   const id = useId();
@@ -73,53 +71,44 @@ const index = () => {
       password: value.password,
       password2: value.confirmPassword,
     };
-    axios
-      .post(`${process.env.NEXT_PUBLIC_URL}/api/student/register/`, PostData)
-      .then(function (res) {
-        if (res.status === 201) {
-          toggle();
-          signIn("credentials", {
-            id: res?.data?.user_profile_data?.id,
-            email: PostData?.email,
-            name: PostData?.first_name,
-            token: res?.data.token?.access,
-            redirect: false,
-          }).then((sign) => {
-            if (sign?.status === 200) {
-              router.reload();
-              setCookie("_token", `${res?.data.token?.access}`);
-              setCookie("_refresh_token", `${res?.data.token?.refresh}`);
-            }
-          });
+    startTransition(() => {
+      axios
+        .post(`${process.env.NEXT_PUBLIC_URL}/api/student/register/`, PostData)
+        .then(function (res) {
+          if (res.status === 201) {
+            setCookie("_token", `${res?.data.token?.access}`);
+            setCookie("_refresh_token", `${res?.data.token?.refresh}`);
 
-          notifications.show({
-            title: "Assalomu Alaykom",
-            message: "Shaxsiy saxifangizga hush kelibsiz.",
-            icon: <TbUser />,
-          });
-        }
-      })
-      .catch(function (error) {
-        let errorValidate = error.response?.data?.errors;
-        if (error.response.status === 400) {
-          errorValidate?.email
-            ? formPochta.setFieldError("email", `Pochta manzili noto'g'ri`)
-            : null;
-        }
-      });
+            notifications.show({
+              title: "Assalomu Alaykom",
+              message: "Shaxsiy saxifangizga hush kelibsiz.",
+              icon: <IconUser />,
+            });
+            router.reload();
+          }
+        })
+        .catch(function (error) {
+          let errorValidate = error.response?.data?.errors;
+          if (error.response.status === 400) {
+            errorValidate?.email
+              ? formPochta.setFieldError("email", `Pochta manzili noto'g'ri`)
+              : null;
+          }
+        });
+    });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(()=>{
-    if(getCookie('_token') && getCookie('_refresh_token')){
-      router.push("/dashboard")
+  useEffect(() => {
+    if (getCookie("_token") && getCookie("_refresh_token")) {
+      router.push("/dashboard");
     }
-  }, [router])
+  }, [router]);
 
   return (
     <>
       <Container size={620} p={0}>
-        <LoadingOverlay visible={visible} overlayBlur={2} />
         <Paper withBorder shadow="md" p={30} radius="md">
           <SegmentedControl
             value={segment}
@@ -129,7 +118,7 @@ const index = () => {
               {
                 label: (
                   <Center>
-                    <TbMail size="1rem" />
+                    <IconMail size="1rem" />
                     <Box ml={10}>Pochta</Box>
                   </Center>
                 ),
@@ -138,7 +127,7 @@ const index = () => {
               {
                 label: (
                   <Center>
-                    <TbPhone size="1rem" />
+                    <IconPhone size="1rem" />
                     <Box ml={10}>Mobil Raqam</Box>
                   </Center>
                 ),
@@ -210,7 +199,7 @@ const index = () => {
                     </Link>
                   </Group>
                   <Button type="submit" fullWidth mt="xl">
-                    {"Ro'yhatdan O'tish"}
+                    {isPending ? "Loading..." : "Ro'yhatdan O'tish"}
                   </Button>
                 </form>
               ) : (

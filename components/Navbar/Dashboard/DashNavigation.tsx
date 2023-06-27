@@ -10,11 +10,10 @@ import {
 import Link from "next/link";
 import React from "react";
 
-import { TbBrandMantine, TbLogout } from "react-icons/tb";
-
 import UserAvatarMenu from "@/components/Other/UserAvatarMenu";
 import ColorSchemaButton from "@/components/Other/ColorSchemaButton";
 import FullScreenButton from "@/components/Other/FullScreenButton";
+import { IconBrandMantine } from "@tabler/icons-react";
 
 type Props = {
   opened: boolean;
@@ -55,7 +54,7 @@ const DashNavigation = ({ opened, setOpened }: Props) => {
               </ActionIcon>
             </MediaQuery>
             <Link href={"/"} style={{ marginTop: "5px" }}>
-              <TbBrandMantine size={36} color={theme.fn.primaryColor()} />
+              <IconBrandMantine size={36} color={theme.fn.primaryColor()} />
             </Link>
           </Box>
 

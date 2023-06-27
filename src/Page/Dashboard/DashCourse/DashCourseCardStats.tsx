@@ -8,7 +8,7 @@ import {
   SimpleGrid,
   rem,
 } from "@mantine/core";
-import { TbArrowUpRight, TbDeviceAnalytics } from "react-icons/tb";
+import { IconArrowUpRight, IconDeviceAnalytics } from "@tabler/icons-react";
 
 const useStyles = createStyles((theme) => ({
   progressLabel: {
@@ -52,7 +52,11 @@ interface StatsSegmentsProps {
   }[];
 }
 
-export default function DashCourseCardStats({ total, diff, data }: StatsSegmentsProps) {
+export default function DashCourseCardStats({
+  total,
+  diff,
+  data,
+}: StatsSegmentsProps) {
   const { classes } = useStyles();
 
   const segments = data.map((segment) => ({
@@ -89,10 +93,10 @@ export default function DashCourseCardStats({ total, diff, data }: StatsSegments
           </Text>
           <Text c="teal" className={classes.diff} fz="sm" fw={700}>
             <span>{diff}%</span>
-            <TbArrowUpRight size="1rem" style={{ marginBottom: rem(4) }} />
+            <IconArrowUpRight size="1rem" style={{ marginBottom: rem(4) }} />
           </Text>
         </Group>
-        <TbDeviceAnalytics size="1.4rem" className={classes.icon} />
+        <IconDeviceAnalytics size="1.4rem" className={classes.icon} />
       </Group>
 
       <Text c="dimmed" fz="sm">

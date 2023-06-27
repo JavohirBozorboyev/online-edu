@@ -7,7 +7,6 @@ import DashNavbar from "@/components/Navbar/Dashboard/DashNavbar";
 import AppFooter from "@/components/Footer/AppFooter";
 import BottomNavigation from "@/components/Tabs/BottomNavigation";
 
-
 interface LayoutType {
   children: React.ReactElement;
 }
@@ -17,8 +16,6 @@ export default function Layout({ children }: LayoutType) {
   const [opened, setOpened] = useState(false);
   const router = useRouter();
   const act = router.route.startsWith("/dashboard");
-
-  
 
   return (
     <AppShell
@@ -39,22 +36,15 @@ export default function Layout({ children }: LayoutType) {
       }}
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
-      navbar={
-        act ? <DashNavbar opened={opened} setOpened={setOpened} /> : undefined
-      }
+      navbar={<DashNavbar opened={opened} setOpened={setOpened} />}
+      // navbar={<AppSideBar />}
       footer={
         <>
           <BottomNavigation />
-          {!act && <AppFooter />}
+          {/* {!act && <AppFooter />} */}
         </>
       }
-      header={
-        act ? (
-          <DashNavigation opened={opened} setOpened={setOpened} />
-        ) : (
-          <AppNavigation />
-        )
-      }
+      header={<AppNavigation opened={opened} setOpened={setOpened} />}
     >
       {children}
     </AppShell>

@@ -1,12 +1,7 @@
 import { Box, Tabs, createStyles } from "@mantine/core";
+import { IconHome, IconLayoutDashboard, IconPlayerPlayFilled, IconListDetails } from "@tabler/icons-react";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import {
-  TbHome,
-  TbLayoutDashboard,
-  TbListDetails,
-  TbPlayerPlayFilled,
-} from "react-icons/tb";
 
 const useStyles = createStyles((theme) => ({
   hiddenDesktop: {
@@ -22,22 +17,22 @@ const useStyles = createStyles((theme) => ({
 const Links = [
   {
     label: "Home",
-    icon: TbHome,
+    icon: IconHome,
     url: "/",
   },
   {
     label: "Dashboard",
-    icon: TbLayoutDashboard,
+    icon: IconLayoutDashboard,
     url: "/dashboard",
   },
   {
     label: "My Course",
-    icon: TbPlayerPlayFilled,
+    icon: IconPlayerPlayFilled,
     url: "/dashboard/course",
   },
   {
     label: "My Course",
-    icon: TbListDetails,
+    icon: IconListDetails,
     url: "/dashboard/quiz",
   },
 ];
