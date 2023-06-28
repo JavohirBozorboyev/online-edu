@@ -34,7 +34,7 @@ const DashNavbar = ({ opened, setOpened }: Props) => {
         hiddenBreakpoint="sm"
         hidden={!opened}
         withBorder={true}
-        width={{ sm: 220 }}
+        width={{ sm: 250 }}
         height={"100%"}
         sx={(theme) => ({
           backgroundColor:

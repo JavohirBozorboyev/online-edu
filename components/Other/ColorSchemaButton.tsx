@@ -22,12 +22,12 @@ const ColorSchemaButton = (props: Props) => {
               ? theme.colors.yellow[4]
               : theme.colors.blue[6],
         })}
-        size={"md"}
+        size={"lg"}
       >
         {colorScheme !== "dark" ? (
           <IconMoon size="1.1rem" />
         ) : (
-          <IconBrightnessDown size="1.1rem" />
+          <IconBrightnessDown size="1.2rem" />
         )}
       </ActionIcon>
     </div>

@@ -25,7 +25,7 @@ const AppNavigation = ({ opened, setOpened }: Props) => {
   return (
     <>
       <Header
-        height={{ base: 50 }}
+        height={{ base: 60 }}
         p="md"
         sx={(theme) => ({
           backgroundColor:
@@ -43,11 +43,11 @@ const AppNavigation = ({ opened, setOpened }: Props) => {
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <MediaQuery largerThan="sm" styles={{ display: "none" }}>
-              <ActionIcon variant="light" mr={"xs"} size={"md"} component="div">
+              <ActionIcon variant="light" mr={"xs"} size={"lg"} component="div">
                 <Burger
                   opened={opened}
                   onClick={() => setOpened((o: boolean) => !o)}
-                  size="xs"
+                  size="sm"
                   color={theme.colors.gray[6]}
                 />
               </ActionIcon>

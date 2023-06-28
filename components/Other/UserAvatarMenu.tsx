@@ -2,7 +2,11 @@ import React, { useState, memo, useCallback } from "react";
 import { Menu, Avatar, Button } from "@mantine/core";
 import { useRouter } from "next/router";
 import { deleteCookie, hasCookie } from "cookies-next";
-import { IconLayoutDashboard, IconLogout, IconLogin } from "@tabler/icons-react";
+import {
+  IconLayoutDashboard,
+  IconLogout,
+  IconLogin,
+} from "@tabler/icons-react";
 
 const UserAvatarMenu = () => {
   const router = useRouter();
@@ -25,7 +29,7 @@ const UserAvatarMenu = () => {
           withArrow
         >
           <Menu.Target>
-            <Avatar size={"32px"} variant="light" color="blue" />
+            <Avatar size={"md"} variant="light" color="blue" />
           </Menu.Target>
 
           <Menu.Dropdown>

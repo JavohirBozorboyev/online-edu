@@ -1,4 +1,8 @@
-import { IconLayoutGrid, IconPlayerPlay } from "@tabler/icons-react";
+import {
+  IconLayoutGrid,
+  IconListDetails,
+  IconPlayerPlay,
+} from "@tabler/icons-react";
 import { IconHome } from "@tabler/icons-react";
 
 export const SideBarData = [
@@ -10,7 +14,12 @@ export const SideBarData = [
   {
     label: "Kurslar",
     icon: IconPlayerPlay,
-    url: "/",
+    url: "/course",
+  },
+  {
+    label: "Imtixonlar",
+    icon: IconListDetails,
+    url: "/quiz",
   },
 ];
 

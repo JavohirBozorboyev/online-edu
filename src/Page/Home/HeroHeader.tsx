@@ -1,37 +1,34 @@
-import { createStyles, Title, Text, Container, rem } from "@mantine/core";
+import {
+  createStyles,
+  Title,
+  Text,
+  Container,
+  rem,
+  Box,
+  Paper,
+} from "@mantine/core";
 
 import { memo } from "react";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
     position: "relative",
-
-    minHeight: "65vh",
+    background:
+      theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
+    minHeight: "400px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
 
     [theme.fn.smallerThan("sm")]: {
-      paddingTop: rem(80),
-      paddingBottom: rem(60),
+      paddingTop: rem(40),
+      paddingBottom: rem(40),
     },
   },
 
   inner: {
     position: "relative",
     zIndex: 1,
-  },
-
-  dots: {
-    position: "absolute",
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[5]
-        : theme.colors.gray[1],
-
-    [theme.fn.smallerThan("sm")]: {
-      display: "none",
-    },
   },
 
   dotsLeft: {
@@ -50,7 +47,6 @@ const useStyles = createStyles((theme) => ({
 
     [theme.fn.smallerThan("xs")]: {
       fontSize: rem(40),
-      textAlign: "left",
     },
   },
 
@@ -63,34 +59,7 @@ const useStyles = createStyles((theme) => ({
     textAlign: "center",
 
     [theme.fn.smallerThan("xs")]: {
-      textAlign: "left",
       fontSize: theme.fontSizes.md,
-    },
-  },
-
-  controls: {
-    marginTop: theme.spacing.lg,
-    display: "flex",
-    justifyContent: "center",
-
-    [theme.fn.smallerThan("xs")]: {
-      flexDirection: "column",
-    },
-  },
-
-  control: {
-    "&:not(:first-of-type)": {
-      marginLeft: theme.spacing.md,
-    },
-
-    [theme.fn.smallerThan("xs")]: {
-      height: rem(42),
-      fontSize: theme.fontSizes.md,
-
-      "&:not(:first-of-type)": {
-        marginTop: theme.spacing.md,
-        marginLeft: 0,
-      },
     },
   },
 }));
@@ -100,7 +69,7 @@ const HeroHeader = () => {
 
   return (
     <>
-      <Container className={classes.wrapper} size={"xl"} p={0}>
+      <Paper className={classes.wrapper} withBorder radius={"0"}>
         <div className={classes.inner}>
           <Title className={classes.title}>
             <Text component="span" className={classes.highlight} inherit>
@@ -116,7 +85,7 @@ const HeroHeader = () => {
             </Text>
           </Container>
         </div>
-      </Container>
+      </Paper>
     </>
   );
 };

@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AppShell, useMantineTheme } from "@mantine/core";
 import AppNavigation from "@/components/Navbar/AppNavigation";
 import { useRouter } from "next/router";
-import DashNavigation from "@/components/Navbar/Dashboard/DashNavigation";
 import DashNavbar from "@/components/Navbar/Dashboard/DashNavbar";
-import AppFooter from "@/components/Footer/AppFooter";
 import BottomNavigation from "@/components/Tabs/BottomNavigation";
 
 interface LayoutType {
@@ -36,15 +34,14 @@ export default function Layout({ children }: LayoutType) {
       }}
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
+      header={<AppNavigation opened={opened} setOpened={setOpened} />}
       navbar={<DashNavbar opened={opened} setOpened={setOpened} />}
-      // navbar={<AppSideBar />}
       footer={
         <>
           <BottomNavigation />
           {/* {!act && <AppFooter />} */}
         </>
       }
-      header={<AppNavigation opened={opened} setOpened={setOpened} />}
     >
       {children}
     </AppShell>

@@ -20,10 +20,8 @@ export default function Home() {
       <main>
         <HeroHeader />
 
-        <HomeStatsSection />
-
         {/* Course Card Component start */}
-        <Box my={"5rem"}>
+        {/* <Box my={"5rem"}>
           <Text
             className={classes.title}
             tt={"capitalize"}
@@ -46,10 +44,10 @@ export default function Home() {
           <Container size={"xl"} px={"0"}>
             <HomeCourse />
           </Container>
-        </Box>
+        </Box> */}
         {/* Course Card Component end */}
         {/* Servis Card Component start */}
-        <Box my={"5rem"}>
+        {/* <Box my={"5rem"}>
           <Text
             className={classes.title}
             tt={"capitalize"}
@@ -70,11 +68,11 @@ export default function Home() {
             Pokémon.
           </Text>
           <HomeServiceSection />
-        </Box>
+        </Box> */}
         {/* Course Card Component end */}
 
         {/* Quiz Card Component start */}
-        <Box my={"5rem"}>
+        {/* <Box my={"5rem"}>
           <Text className={classes.title} ta="center" mb={"md"}>
             Online Imtxonlar
           </Text>
@@ -92,11 +90,11 @@ export default function Home() {
           <Container size={"xl"} px={"0"}>
             <HomeQuizCard />
           </Container>
-        </Box>
+        </Box> */}
         {/* Quiz Card Component end */}
 
-        <HomeFaq />
-        <HomeContactSection />
+        {/* <HomeFaq />
+        <HomeContactSection /> */}
       </main>
     </>
   );

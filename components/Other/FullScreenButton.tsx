@@ -16,7 +16,7 @@ const FullScreenButton = (props: Props) => {
         sx={(theme) => ({
           color: theme.colors.blue[6],
         })}
-        size={"md"}
+        size={"lg"}
       >
         {!fullscreen ? (
           <IconArrowsMaximize size="1.1rem" />

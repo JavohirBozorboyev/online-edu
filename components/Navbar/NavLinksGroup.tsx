@@ -16,7 +16,7 @@ const useStyles = createStyles((theme) => ({
   control: {
     fontWeight: 500,
     display: "block",
-    color: theme.colorScheme === "dark" ? theme.colors.dark[0] : theme.black,
+    color: theme.colorScheme === "dark" ? theme.white : theme.colors.dark[9],
     fontSize: theme.fontSizes.sm,
     width: "100%",
     "&:hover": {
@@ -93,7 +93,7 @@ export default function NavLinksGroup({
           <Link href={url}>
             <Group position="apart" spacing={0} p={"xs"} px={"md"}>
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <ThemeIcon variant="light" size={30}>
+                <ThemeIcon variant="light" size={"lg"}>
                   <Icon size="1.1rem" />
                 </ThemeIcon>
                 <Box ml="md">{label}</Box>
@@ -114,7 +114,7 @@ export default function NavLinksGroup({
               }}
             >
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <ThemeIcon variant="light" size={30}>
+                <ThemeIcon variant="light" size={"lg"}>
                   <Icon size="1.1rem" />
                 </ThemeIcon>
                 <Box ml="md">{label}</Box>
