@@ -1,5 +1,21 @@
 import { useCardBg } from "@/styles/styleJs/useCardBg";
-import { Badge, Button, Card, Grid, Group, Image, Text } from "@mantine/core";
+import {
+  Badge,
+  Box,
+  Button,
+  Card,
+  Grid,
+  Group,
+  Image,
+  Paper,
+  Text,
+} from "@mantine/core";
+import {
+  IconAlertSquare,
+  IconAlertSquareRounded,
+  IconAlertSquareRoundedFilled,
+} from "@tabler/icons-react";
+import Link from "next/link";
 import React from "react";
 
 type Props = {
@@ -7,50 +23,99 @@ type Props = {
 };
 
 const CourseCard = ({ Course }: Props) => {
-  const { classes } = useCardBg();
+  const { classes, theme } = useCardBg();
+
   return (
     <>
-      <Grid>
+      <Grid gutter="xs">
+        {Course.length == 0 && (
+          <Grid.Col>
+            <Paper
+              className={classes.cardBg}
+              radius={"sm"}
+              p={"md"}
+              sx={{
+                minHeight: "300px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+              }}
+            >
+              <IconAlertSquareRoundedFilled
+                style={{
+                  color:
+                    theme.colorScheme === "dark"
+                      ? theme.colors.dark[3]
+                      : theme.colors.gray[6],
+                }}
+                size={"6rem"}
+              />
+              <Text
+                sx={{
+                  color:
+                    theme.colorScheme === "dark"
+                      ? theme.colors.dark[3]
+                      : theme.colors.gray[6],
+                }}
+                tt={"uppercase"}
+                fz={"xl"}
+                fw={"bolder"}
+                mt={"sm"}
+              >
+                Kurslar Topilmadi
+              </Text>
+            </Paper>
+          </Grid.Col>
+        )}
         {Course.map((item: any) => {
           return (
             <Grid.Col md={6} key={item.id}>
               <Card
                 shadow="sm"
-                padding="lg"
+                padding="xs"
                 radius="sm"
-                withBorder
+                // withBorder
                 className={classes.cardBg}
               >
-                <Card.Section>
+                <Card.Section p={"xs"}>
                   <Image
-                    src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
+                    src={item.photo}
                     height={260}
                     alt="Norway"
+                    radius={"xs"}
                   />
                 </Card.Section>
 
-                <Group position="apart" mt="md" mb="xs">
-                  <Text weight={500}>Norway Fjord Adventures</Text>
-                  <Badge color="pink" variant="light">
-                    On Sale
+                <Group position="apart" mt="xs" mb="xs">
+                  <Text weight={500}>{item.name}</Text>
+                  <Badge variant="light">
+                    {item.cost} {"So'm"}
                   </Badge>
                 </Group>
 
-                <Text size="sm" color="dimmed">
-                  With Fjord Tours you can explore more of the magical fjord
-                  landscapes with tours and activities on and around the fjords
-                  of Norway
-                </Text>
-
-                <Button
-                  variant="light"
-                  color="blue"
-                  fullWidth
-                  mt="md"
-                  radius="sm"
+                <Box
+                  sx={{ display: "flex", alignItems: "center", gap: "10px" }}
                 >
-                  Book classic tour now
-                </Button>
+                  <Text size="sm" color="dimmed">
+                    {"O'qtuvchi:"}
+                  </Text>
+                  <Text size="sm" color="blue">
+                    {item.teacher_name}
+                  </Text>
+                </Box>
+
+                <Link href={`/course/${item.slug}`}>
+                  <Button
+                    variant="light"
+                    color="blue"
+                    fullWidth
+                    mt="md"
+                    radius="sm"
+                  >
+                    Sotib Olish
+                  </Button>
+                </Link>
               </Card>
             </Grid.Col>
           );

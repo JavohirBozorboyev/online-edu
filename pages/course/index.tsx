@@ -1,4 +1,12 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import CourseCard from "@/src/Page/course/CourseCard";
+import { useCardBg } from "@/styles/styleJs/useCardBg";
+import { Paper, ScrollArea, Tabs } from "@mantine/core";
+import {
+  IconPhoto,
+  IconMessageCircle,
+  IconSettings,
+} from "@tabler/icons-react";
 import React from "react";
 
 type Props = {
@@ -6,12 +14,45 @@ type Props = {
 };
 
 const index = ({ course }: Props) => {
-  console.log(course);
+  const { classes } = useCardBg();
 
   return (
-    <div>
+    <main>
+      <Paper
+        className={classes.cardBg}
+        radius={"xs"}
+        p={"xs"}
+        mb={"xs"}
+        // withBorder
+      >
+        <Tabs variant="pills" radius={"xs"} defaultValue="0">
+          <ScrollArea
+            type="never"
+            sx={{ display: "flex", flexDirection: "row" }}
+            w={"100%"}
+          >
+            <Tabs.List sx={{ display: "flex", flexWrap: "nowrap" }}>
+              <Tabs.Tab py={"xs"} fw={"bold"} value="0">
+                Barcha Kurslar
+              </Tabs.Tab>
+              <Tabs.Tab py={"xs"} fw={"bold"} value="1">
+                Chet Tillari
+              </Tabs.Tab>
+              <Tabs.Tab py={"xs"} fw={"bold"} value="2">
+                IT
+              </Tabs.Tab>
+              <Tabs.Tab py={"xs"} fw={"bold"} value="3">
+                Biznes
+              </Tabs.Tab>
+              <Tabs.Tab py={"xs"} fw={"bold"} color="dimmed" value="4">
+                Fanlar
+              </Tabs.Tab>
+            </Tabs.List>{" "}
+          </ScrollArea>
+        </Tabs>
+      </Paper>
       <CourseCard Course={course} />
-    </div>
+    </main>
   );
 };
 
