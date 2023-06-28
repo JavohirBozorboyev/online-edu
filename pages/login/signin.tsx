@@ -21,6 +21,7 @@ import { useForm } from "@mantine/form";
 import axios from "axios";
 import { setCookie } from "cookies-next";
 import { IconMail, IconPhone, IconUser } from "@tabler/icons-react";
+import { signIn } from "next-auth/react";
 
 const signin = () => {
   const [segment, setSegment] = useState("pochta");
@@ -66,6 +67,22 @@ const signin = () => {
       });
   };
 
+  const ClickAuth = async (values: any) => {
+    signIn("credentials", {
+      email: values.email,
+      password: values.password,
+      redirect: false,
+    }).then((res) => {
+      console.log(res);
+
+      if (res?.status === 200) {
+        // router.reload();
+        setCookie("auth", `true`);
+        router.push("/dashboard");
+      }
+    });
+  };
+
   return (
     <Container size={480} p={"0"}>
       <Paper withBorder shadow="sm" p={30} radius="md">
@@ -99,7 +116,7 @@ const signin = () => {
           {segment === "pochta" ? (
             <Box mt="lg">
               <form
-                onSubmit={formPochta.onSubmit((values) => handleAuth(values))}
+                onSubmit={formPochta.onSubmit((values) => ClickAuth(values))}
               >
                 <TextInput
                   label="Email"

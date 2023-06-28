@@ -47,16 +47,9 @@ const DashCourseCard = (props: Props) => {
   const [opened, { open, close }] = useDisclosure(false);
   const { classes, theme } = useStyles();
 
-  let token = getCookie("_token");
-
-  const fetcher = (url: string) =>
-    axios
-      .get(url, { headers: { Authorization: `Bearer ${token}` } })
-      .then((res) => res.data);
-
   const { data, error, isLoading } = useSWR(
     [`https://onlineedu.pythonanywhere.com/api/course/course/`],
-    fetcher,
+
     { refreshInterval: 1000 * 60 * 60 }
   );
 

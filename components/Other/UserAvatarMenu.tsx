@@ -1,4 +1,5 @@
-import React, { useState, memo, useCallback } from "react";
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useState, memo, useCallback, useEffect } from "react";
 import { Menu, Avatar, Button } from "@mantine/core";
 import { useRouter } from "next/router";
 import { deleteCookie, hasCookie } from "cookies-next";
@@ -10,15 +11,16 @@ import {
 
 const UserAvatarMenu = () => {
   const router = useRouter();
-  const cook = hasCookie("_token");
+  const cook = hasCookie("_token") || "Loading";
 
   const SignOut = useCallback(() => {
-    deleteCookie("_token");
+    deleteCookie("auth");
     deleteCookie("_refresh_token");
     router.reload();
   }, [router]);
+
   return (
-    <>
+    <div>
       {true ? (
         <Menu
           shadow="md"
@@ -61,7 +63,7 @@ const UserAvatarMenu = () => {
           Kirish
         </Button>
       )}
-    </>
+    </div>
   );
 };
 

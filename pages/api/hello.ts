@@ -3,11 +3,13 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 
 
-export default async function handler(
+export default async function Hello(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const fe = await fetch("https://jsonplaceholder.typicode.com/todos/5")
-  const data = await fe.json()
-  res.status(200).json(data)
+ const token = req.cookies._token
+ 
+  res.status(200).json({
+    token,
+  })
 }

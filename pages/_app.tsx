@@ -13,6 +13,7 @@ import RouterTransition from "@/components/Other/RouterTransition";
 import { Notifications } from "@mantine/notifications";
 import { SWRConfig } from "swr";
 import axios from "axios";
+import { SessionProvider } from "next-auth/react";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -63,7 +64,10 @@ export default function App({
               fetcher,
             }}
           >
-            {getLayout(<Component {...pageProps} />)}
+            <SessionProvider session={sesion}>
+               {getLayout(<Component {...pageProps} />)}
+             </SessionProvider>
+           
           </SWRConfig>
         </MantineProvider>
       </ColorSchemeProvider>
