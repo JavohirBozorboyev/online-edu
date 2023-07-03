@@ -17,10 +17,8 @@ const UserAvatarMenu = () => {
   const { data: session } = useSession();
 
   const SignOut = useCallback(() => {
-    deleteCookie("auth");
     signOut();
-    router.reload();
-  }, [router]);
+  }, []);
 
   return (
     <div>
