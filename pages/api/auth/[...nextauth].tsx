@@ -6,6 +6,7 @@ export const authOptions = {
   pages: {
     signIn: "/login/signin",
     newUser: "/auth/new-user",
+    error: "/api/auth/error",
   },
   providers: [
     CredentialsProvider({
@@ -36,7 +37,6 @@ export const authOptions = {
       },
     }),
   ],
-  secret: "Javokhir_Bozorboyev",
 
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser }: any) {
