@@ -9,10 +9,10 @@ import {
 } from "@mantine/core";
 import DashNavigation from "@/components/Navbar/Dashboard/DashNavigation";
 
-import DashNavbar from "@/components/Navbar/Dashboard/DashNavbar";
 import DashCourseAside from "@/components/Navbar/Dashboard/DashCourseAside";
 import BottomNavigation from "@/components/Tabs/BottomNavigation";
 import { IconList } from "@tabler/icons-react";
+import AppNavbar from "@/components/Navbar/AppNavbar";
 
 interface CourseLayoutType {
   children: React.ReactElement;
@@ -38,7 +38,7 @@ export default function CourseLayout({ children }: CourseLayoutType) {
       }}
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
-      navbar={<DashNavbar opened={opened} setOpened={setOpened} />}
+      navbar={<AppNavbar opened={opened} setOpened={setOpened} />}
       aside={
         <MediaQuery
           smallerThan="sm"

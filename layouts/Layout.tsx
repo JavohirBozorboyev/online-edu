@@ -2,8 +2,8 @@ import { useState } from "react";
 import { AppShell, useMantineTheme } from "@mantine/core";
 import AppNavigation from "@/components/Navbar/AppNavigation";
 import { useRouter } from "next/router";
-import DashNavbar from "@/components/Navbar/Dashboard/DashNavbar";
 import BottomNavigation from "@/components/Tabs/BottomNavigation";
+import AppNavbar from "@/components/Navbar/AppNavbar";
 
 interface LayoutType {
   children: React.ReactElement;
@@ -35,7 +35,7 @@ export default function Layout({ children }: LayoutType) {
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
       header={<AppNavigation opened={opened} setOpened={setOpened} />}
-      navbar={<DashNavbar opened={opened} setOpened={setOpened} />}
+      navbar={<AppNavbar opened={opened} setOpened={setOpened} />}
       footer={
         <>
           <BottomNavigation />

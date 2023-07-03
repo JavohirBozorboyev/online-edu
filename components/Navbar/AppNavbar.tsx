@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-key */
 import { Button, Divider, Navbar, ScrollArea, Text } from "@mantine/core";
 import React, { useMemo } from "react";
-import NavbarLinksGroup from "../NavbarLinksGroup";
+import NavbarLinksGroup from "./NavbarLinksGroup";
 import { DashLinkData } from "@/data/NavLinkData";
 
 import { IconCalendarStats } from "@tabler/icons-react";
-import NavLinksGroup from "../NavLinksGroup";
+import NavLinksGroup from "./NavLinksGroup";
 import { SideBarData, UserData } from "@/data/SideBarData";
 
 const mockdata = {
@@ -25,7 +25,7 @@ type Props = {
   setOpened: any;
 };
 
-const DashNavbar = ({ opened, setOpened }: Props) => {
+const AppNavbar = ({ opened, setOpened }: Props) => {
   const DashLink = DashLinkData();
   return (
     <div>
@@ -65,4 +65,4 @@ const DashNavbar = ({ opened, setOpened }: Props) => {
   );
 };
 
-export default DashNavbar;
+export default AppNavbar;

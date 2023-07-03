@@ -8,20 +8,23 @@ import {
   IconLogout,
   IconLogin,
 } from "@tabler/icons-react";
+import { signOut, useSession } from "next-auth/react";
 
 const UserAvatarMenu = () => {
   const router = useRouter();
   const cook = hasCookie("_token") || "Loading";
 
+  const { data: session } = useSession();
+
   const SignOut = useCallback(() => {
     deleteCookie("auth");
-    deleteCookie("_refresh_token");
+    signOut();
     router.reload();
   }, [router]);
 
   return (
     <div>
-      {true ? (
+      {session ? (
         <Menu
           shadow="md"
           width={200}
@@ -58,7 +61,6 @@ const UserAvatarMenu = () => {
           onClick={() => {
             router.push("/dashboard");
           }}
-          leftIcon={<IconLogin size="1rem" />}
         >
           Kirish
         </Button>

@@ -72,15 +72,16 @@ const signin = () => {
       email: values.email,
       password: values.password,
       redirect: false,
-    }).then((res) => {
-      console.log(res);
-
-      if (res?.status === 200) {
-        // router.reload();
-        setCookie("auth", `true`);
-        router.push("/dashboard");
-      }
-    });
+    })
+      .then((res) => {
+        if (res?.status === 200) {
+          router.push("/dashboard");
+        }
+      })
+      .catch(function (error) {
+        formPochta.setFieldError("email", "Noto'gri Email");
+        formPochta.setFieldError("password", "Noto'gri password");
+      });
   };
 
   return (

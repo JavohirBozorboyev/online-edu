@@ -1,3 +1,4 @@
+import { setCookie } from "cookies-next";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -35,6 +36,7 @@ export const authOptions = {
       },
     }),
   ],
+
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser }: any) {
       if (user) {

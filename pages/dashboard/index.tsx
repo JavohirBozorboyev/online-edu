@@ -9,8 +9,6 @@ const Dashboard = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
 
-  console.log(session);
-
   return (
     <>
       <DashHomeInfoCard />

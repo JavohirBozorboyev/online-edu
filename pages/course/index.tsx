@@ -21,30 +21,29 @@ const index = ({ course }: Props) => {
       <Paper
         className={classes.cardBg}
         radius={"xs"}
-        p={"xs"}
-        mb={"xs"}
+        mb={"sm"}
         // withBorder
       >
-        <Tabs variant="pills" radius={"xs"} defaultValue="0">
+        <Tabs defaultValue="0">
           <ScrollArea
             type="never"
             sx={{ display: "flex", flexDirection: "row" }}
             w={"100%"}
           >
             <Tabs.List sx={{ display: "flex", flexWrap: "nowrap" }}>
-              <Tabs.Tab py={"xs"} fw={"bold"} value="0">
+              <Tabs.Tab py={"md"} fw={"bold"} value="0">
                 Barcha Kurslar
               </Tabs.Tab>
-              <Tabs.Tab py={"xs"} fw={"bold"} value="1">
+              <Tabs.Tab py={"md"} fw={"bold"} value="1">
                 Chet Tillari
               </Tabs.Tab>
-              <Tabs.Tab py={"xs"} fw={"bold"} value="2">
+              <Tabs.Tab py={"md"} fw={"bold"} value="2">
                 IT
               </Tabs.Tab>
-              <Tabs.Tab py={"xs"} fw={"bold"} value="3">
+              <Tabs.Tab py={"md"} fw={"bold"} value="3">
                 Biznes
               </Tabs.Tab>
-              <Tabs.Tab py={"xs"} fw={"bold"} color="dimmed" value="4">
+              <Tabs.Tab py={"md"} fw={"bold"} value="4">
                 Fanlar
               </Tabs.Tab>
             </Tabs.List>{" "}

@@ -1,67 +1,30 @@
-import { Carousel } from "@mantine/carousel";
-import { useMediaQuery } from "@mantine/hooks";
 import { useCardBg } from "@/styles/styleJs/useCardBg";
 import {
-  createStyles,
-  Paper,
-  Text,
-  Title,
-  Button,
-  useMantineTheme,
-  rem,
-  Card,
   Badge,
-  Group,
+  Button,
+  Card,
   Grid,
+  Group,
   Skeleton,
+  Text,
 } from "@mantine/core";
-import useSWR from "swr";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import React from "react";
+import useSWR from "swr";
 
-function HomeQuizCard() {
+type Props = {
+  data: any;
+};
+
+const QuizCard = ({ data }: Props) => {
   const { classes } = useCardBg();
-
-  const { data: quiz, error, isLoading } = useSWR("/api/dashboard/quiz");
-
-  if (error) {
-    return (
-      <>
-        <Text size="xl" ta="center">
-          Server Error
-        </Text>
-      </>
-    );
-  }
-
-  if (isLoading) {
-    return (
-      <Grid>
-        <Grid.Col md={6} lg={4}>
-          <Skeleton height={200} radius="sm" />
-        </Grid.Col>
-        <Grid.Col md={6} lg={4}>
-          <Skeleton height={200} radius="sm" />
-        </Grid.Col>
-        <Grid.Col md={6} lg={4}>
-          <Skeleton height={200} radius="sm" />
-        </Grid.Col>
-        <Grid.Col md={6} lg={4}>
-          <Skeleton height={200} radius="sm" />
-        </Grid.Col>
-        <Grid.Col md={6} lg={4}>
-          <Skeleton height={200} radius="sm" />
-        </Grid.Col>
-        <Grid.Col md={6} lg={4}>
-          <Skeleton height={200} radius="sm" />
-        </Grid.Col>
-      </Grid>
-    );
-  }
+  const router = useRouter();
 
   return (
-    <>
+    <div>
       <Grid>
-        {quiz.map((item: any) => {
+        {data.map((item: any) => {
           return (
             <Grid.Col sm={6} lg={4} key={item.id}>
               <Card
@@ -99,8 +62,8 @@ function HomeQuizCard() {
           );
         })}
       </Grid>
-    </>
+    </div>
   );
-}
+};
 
-export default HomeQuizCard;
+export default QuizCard;

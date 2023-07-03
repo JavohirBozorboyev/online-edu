@@ -19,9 +19,9 @@ const FullScreenButton = (props: Props) => {
         size={"lg"}
       >
         {!fullscreen ? (
-          <IconArrowsMaximize size="1.1rem" />
+          <IconArrowsMaximize size="1.2rem" />
         ) : (
-          <IconArrowsMinimize size="1.1rem" />
+          <IconArrowsMinimize size="1.2rem" />
         )}
       </ActionIcon>
     </div>
