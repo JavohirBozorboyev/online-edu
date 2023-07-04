@@ -54,6 +54,8 @@ export const authOptions = {
     async session({ session, user, token }: any) {
       return { ...session };
     },
+    
   },
+  
 };
 export default NextAuth(authOptions);
