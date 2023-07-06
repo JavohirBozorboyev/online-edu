@@ -12,13 +12,9 @@ export default function Home() {
   const { classes } = useHomeTitleStyle();
   const { data: session, status } = useSession();
 
-  console.log(session);
-
   return (
     <>
-      <main>
-        <HeroHeader />
-      </main>
+      <main>{/* <HeroHeader /> */}</main>
     </>
   );
 }

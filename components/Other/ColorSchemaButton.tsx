@@ -16,7 +16,7 @@ const ColorSchemaButton = (props: Props) => {
           sx={(theme) => ({
             backgroundColor:
               theme.colorScheme === "dark"
-                ? theme.colors.dark[6]
+                ? theme.colors.dark[7]
                 : theme.colors.gray[0],
             color:
               theme.colorScheme === "dark"
