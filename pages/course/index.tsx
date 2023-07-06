@@ -31,19 +31,19 @@ const index = ({ course }: Props) => {
             w={"100%"}
           >
             <Tabs.List sx={{ display: "flex", flexWrap: "nowrap" }}>
-              <Tabs.Tab py={"md"} fw={"bold"} value="0">
+              <Tabs.Tab py={"md"} value="0">
                 Barcha Kurslar
               </Tabs.Tab>
-              <Tabs.Tab py={"md"} fw={"bold"} value="1">
+              <Tabs.Tab py={"md"} value="1">
                 Chet Tillari
               </Tabs.Tab>
-              <Tabs.Tab py={"md"} fw={"bold"} value="2">
+              <Tabs.Tab py={"md"} value="2">
                 IT
               </Tabs.Tab>
-              <Tabs.Tab py={"md"} fw={"bold"} value="3">
+              <Tabs.Tab py={"md"} value="3">
                 Biznes
               </Tabs.Tab>
-              <Tabs.Tab py={"md"} fw={"bold"} value="4">
+              <Tabs.Tab py={"md"} value="4">
                 Fanlar
               </Tabs.Tab>
             </Tabs.List>{" "}

@@ -14,6 +14,9 @@ import {
   IconAlertSquare,
   IconAlertSquareRounded,
   IconAlertSquareRoundedFilled,
+  IconArrowNarrowRight,
+  IconBasket,
+  IconShoppingBag,
 } from "@tabler/icons-react";
 import Link from "next/link";
 import React from "react";
@@ -105,17 +108,34 @@ const CourseCard = ({ Course }: Props) => {
                   </Text>
                 </Box>
 
-                <Link href={`/course/${item.slug}`}>
-                  <Button
-                    variant="light"
-                    color="blue"
-                    fullWidth
-                    mt="md"
-                    radius="sm"
-                  >
-                    Sotib Olish
-                  </Button>
-                </Link>
+                <Grid>
+                  <Grid.Col span={"auto"}>
+                    <Button
+                      leftIcon={<IconBasket  />}
+                      // variant="light"
+                      color="blue"
+                      fullWidth
+                      mt="md"
+                      radius="sm"
+                    >
+                      Sotib Olish
+                    </Button>
+                  </Grid.Col>
+                  <Grid.Col span={"auto"}>
+                    <Link href={`/course/${item.slug}`}>
+                      <Button
+                        variant="light"
+                        color="blue"
+                        fullWidth
+                        mt="md"
+                        radius="sm"
+                        rightIcon={<IconArrowNarrowRight />}
+                      >
+                        Malumotlar
+                      </Button>
+                    </Link>
+                  </Grid.Col>
+                </Grid>
               </Card>
             </Grid.Col>
           );

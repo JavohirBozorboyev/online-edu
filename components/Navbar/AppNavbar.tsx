@@ -1,12 +1,20 @@
 /* eslint-disable react/jsx-key */
-import { Button, Divider, Navbar, ScrollArea, Text } from "@mantine/core";
+import {
+  Button,
+  Divider,
+  Navbar,
+  ScrollArea,
+  Skeleton,
+  Text,
+} from "@mantine/core";
 import React, { useMemo } from "react";
-import NavbarLinksGroup from "./NavbarLinksGroup";
+
 import { DashLinkData } from "@/data/NavLinkData";
 
 import { IconCalendarStats } from "@tabler/icons-react";
 import NavLinksGroup from "./NavLinksGroup";
 import { SideBarData, UserData } from "@/data/SideBarData";
+import { useSession } from "next-auth/react";
 
 const mockdata = {
   label: "Releases",
@@ -27,6 +35,8 @@ type Props = {
 
 const AppNavbar = ({ opened, setOpened }: Props) => {
   const DashLink = DashLinkData();
+  const { status } = useSession();
+
   return (
     <div>
       <Navbar
@@ -47,18 +57,29 @@ const AppNavbar = ({ opened, setOpened }: Props) => {
           {SideBarData.map((item) => {
             return <NavLinksGroup {...item} key={item.label} />;
           })}
-          <Divider
-            label="User"
-            sx={(theme) => ({
-              marginLeft: theme.spacing.md,
-              fontWeight: 700,
-              color: theme.colors.gray[6],
-            })}
-            labelPosition="left"
-          />
-          {UserData.map((item) => {
-            return <NavLinksGroup {...item} key={item.label} />;
-          })}
+
+          {status == "loading" ? (
+            <>
+              {" "}
+              <Skeleton height={200} radius="xs" mx={"md"} my={"sm"} />
+            </>
+          ) : null}
+          {status == "authenticated" ? (
+            <>
+              <Divider
+                label="User"
+                sx={(theme) => ({
+                  marginLeft: theme.spacing.md,
+                  fontWeight: 700,
+                  color: theme.colors.gray[6],
+                })}
+                labelPosition="left"
+              />
+              {UserData.map((item) => {
+                return <NavLinksGroup {...item} key={item.label} />;
+              })}
+            </>
+          ) : null}
         </ScrollArea>
       </Navbar>
     </div>

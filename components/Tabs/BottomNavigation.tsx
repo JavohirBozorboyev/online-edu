@@ -1,5 +1,10 @@
 import { Box, Tabs, createStyles } from "@mantine/core";
-import { IconHome, IconLayoutDashboard, IconPlayerPlayFilled, IconListDetails } from "@tabler/icons-react";
+import {
+  IconHome,
+  IconLayoutDashboard,
+  IconPlayerPlayFilled,
+  IconListDetails,
+} from "@tabler/icons-react";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
@@ -21,19 +26,20 @@ const Links = [
     url: "/",
   },
   {
+    label: "Kurslar",
+    icon: IconPlayerPlayFilled,
+    url: "/course",
+  },
+
+  {
+    label: "Imtixon",
+    icon: IconListDetails,
+    url: "/quiz",
+  },
+  {
     label: "Dashboard",
     icon: IconLayoutDashboard,
     url: "/dashboard",
-  },
-  {
-    label: "My Course",
-    icon: IconPlayerPlayFilled,
-    url: "/dashboard/course",
-  },
-  {
-    label: "My Course",
-    icon: IconListDetails,
-    url: "/dashboard/quiz",
   },
 ];
 
