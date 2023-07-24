@@ -16,7 +16,7 @@ type Props = {
   setQuziId: any;
 };
 
-const HomeQuizSlugCard = ({
+const QuizSlugCard = ({
   quiz,
 
   openModal,
@@ -72,4 +72,4 @@ const HomeQuizSlugCard = ({
   );
 };
 
-export default HomeQuizSlugCard;
+export default QuizSlugCard;

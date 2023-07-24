@@ -14,7 +14,7 @@ export const authOptions = {
       credentials: {},
       async authorize(credentials, req) {
         const authResponse = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/student/login/`,
+          `${process.env.NEXT_PUBLIC_URL_BACE}/student/login/`,
           {
             method: "POST",
             headers: {
@@ -24,6 +24,7 @@ export const authOptions = {
           }
         );
 
+        setCookie("te", "sasas");
         if (!authResponse.ok) {
           return null;
         }
@@ -32,7 +33,10 @@ export const authOptions = {
 
         return {
           id: user.user_profile_data.id,
-          email: { ...user },
+          image: { ...user },
+          name: user.user_profile_data.slug,
+          email: user.user_profile_data.email,
+          
         };
       },
     }),
@@ -54,8 +58,6 @@ export const authOptions = {
     async session({ session, user, token }: any) {
       return { ...session };
     },
-    
   },
-  
 };
 export default NextAuth(authOptions);

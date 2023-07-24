@@ -88,7 +88,7 @@ const index = () => {
   const { classes, theme } = useStyles();
   const { courseSlug } = router.query;
   const { data, error, isLoading } = useSWR(
-    `${process.env.NEXT_PUBLIC_URL}/api/course/course/${courseSlug}/`,
+    `${process.env.NEXT_PUBLIC_URL_BACE}/course/course/${courseSlug}/`,
     { refreshInterval: 1000 * 60 * 60 }
   );
 
@@ -100,6 +100,8 @@ const index = () => {
       </>
     );
   }
+
+  console.log(data);
 
   return (
     <>
@@ -125,7 +127,7 @@ const index = () => {
                     variant="gradient"
                     gradient={{ from: "blue.4", to: "blue.7" }}
                   >
-                    {data.name}
+                    {data?.name}
                   </Text>{" "}
                 </Title>
 
@@ -134,14 +136,12 @@ const index = () => {
                     {"O'qtuvchi:"}
                   </Text>
                   <Text fz={"lg"} c="blue.3" ml="sm">
-                    {data.teacher_name}
+                    {data?.teacher_name}
                   </Text>
                 </Box>
 
                 <Text color="dimmed" mt={30}>
-                  Build fully functional accessible web applications with ease –
-                  Mantine includes more than 100 customizable components and
-                  hooks to cover you in any situation
+                  {data?.about}
                 </Text>
                 <Rating defaultValue={2} size="xs" mt="md" />
                 <Button
@@ -161,8 +161,8 @@ const index = () => {
               <Image
                 width={"100%"}
                 radius="md"
-                src={data.photo}
-                alt={data.name}
+                src={`${process.env.NEXT_PUBLIC_URL_BACE}/${data?.photo}`}
+                alt={data?.name}
                 sx={{
                   height: "400px",
                   overflow: "hidden",

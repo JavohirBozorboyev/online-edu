@@ -16,18 +16,6 @@ import NavLinksGroup from "./NavLinksGroup";
 import { SideBarData, UserData } from "@/data/SideBarData";
 import { useSession } from "next-auth/react";
 
-const mockdata = {
-  label: "Releases",
-  icon: IconCalendarStats,
-  url: "/",
-  initiallyOpened: true,
-  links: [
-    { label: "Upcoming releases", link: "/" },
-    { label: "Previous releases", link: "/" },
-    { label: "Releases schedule", link: "/" },
-  ],
-};
-
 type Props = {
   opened: boolean;
   setOpened: any;

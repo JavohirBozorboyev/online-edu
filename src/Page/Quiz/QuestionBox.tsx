@@ -12,7 +12,7 @@ type ListType = {
   answers: {}[];
 };
 
-const HomeQuestionBox = ({ list, close }: Props) => {
+const QuestionBox = ({ list, close }: Props) => {
   return (
     <>
       {list.questions.map((item: ListType, i: number) => {
@@ -62,4 +62,4 @@ const HomeQuestionBox = ({ list, close }: Props) => {
   );
 };
 
-export default HomeQuestionBox;
+export default QuestionBox;

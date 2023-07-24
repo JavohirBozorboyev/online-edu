@@ -3,6 +3,7 @@ import React, { useState, memo, useCallback, useEffect } from "react";
 import { Menu, Avatar, Button, Skeleton } from "@mantine/core";
 import { useRouter } from "next/router";
 import { deleteCookie, hasCookie } from "cookies-next";
+import { UserData } from "@/data/SideBarData";
 import {
   IconLayoutDashboard,
   IconLogout,
@@ -41,14 +42,20 @@ const UserAvatarMenu = () => {
 
           <Menu.Dropdown>
             <Menu.Label>Account</Menu.Label>
-            <Menu.Item
-              onClick={() => {
-                router.push("/dashboard");
-              }}
-              icon={<IconLayoutDashboard size={"1rem"} />}
-            >
-              Dashbaord
-            </Menu.Item>
+            {UserData[0].links.map((item, i) => {
+              return (
+                <Menu.Item
+                  ml={"xs"}
+                  key={i}
+                  onClick={() => {
+                    router.push(item.link);
+                  }}
+                >
+                  {item.label}
+                </Menu.Item>
+              );
+            })}
+
             <Menu.Item
               onClick={SignOut}
               color="blue"

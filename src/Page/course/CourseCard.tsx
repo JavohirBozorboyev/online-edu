@@ -11,12 +11,9 @@ import {
   Text,
 } from "@mantine/core";
 import {
-  IconAlertSquare,
-  IconAlertSquareRounded,
   IconAlertSquareRoundedFilled,
   IconArrowNarrowRight,
-  IconBasket,
-  IconShoppingBag,
+  IconPlayerPlay,
 } from "@tabler/icons-react";
 import Link from "next/link";
 import React from "react";
@@ -83,7 +80,7 @@ const CourseCard = ({ Course }: Props) => {
               >
                 <Card.Section p={"xs"}>
                   <Image
-                    src={item.photo}
+                    src={`${process.env.NEXT_PUBLIC_URL_BACE}/${item.photo}`}
                     height={260}
                     alt="Norway"
                     radius={"xs"}
@@ -111,14 +108,14 @@ const CourseCard = ({ Course }: Props) => {
                 <Grid>
                   <Grid.Col span={"auto"}>
                     <Button
-                      leftIcon={<IconBasket  />}
+                      leftIcon={<IconPlayerPlay />}
                       // variant="light"
                       color="blue"
                       fullWidth
                       mt="md"
                       radius="sm"
                     >
-                      Sotib Olish
+                      Kursni Saqlash
                     </Button>
                   </Grid.Col>
                   <Grid.Col span={"auto"}>

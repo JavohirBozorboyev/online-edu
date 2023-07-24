@@ -26,6 +26,7 @@ import { IMaskInput } from "react-imask";
 import axios from "axios";
 import { setCookie, getCookie } from "cookies-next";
 import { IconUser, IconMail, IconPhone } from "@tabler/icons-react";
+import { signIn } from "next-auth/react";
 
 const index = () => {
   const [segment, setSegment] = useState("pochta");
@@ -73,18 +74,23 @@ const index = () => {
     };
     startTransition(() => {
       axios
-        .post(`${process.env.NEXT_PUBLIC_URL}/api/student/register/`, PostData)
+        .post(`${process.env.NEXT_PUBLIC_URL_BACE}/student/register/`, PostData)
         .then(function (res) {
           if (res.status === 201) {
-            setCookie("_token", `${res?.data.token?.access}`);
-            setCookie("_refresh_token", `${res?.data.token?.refresh}`);
-
-            notifications.show({
-              title: "Assalomu Alaykom",
-              message: "Shaxsiy saxifangizga hush kelibsiz.",
-              icon: <IconUser />,
-            });
-            router.reload();
+            signIn("credentials", {
+              email: value.email,
+              password: value.password,
+              redirect: false,
+            })
+              .then((res) => {
+                if (res?.status === 200) {
+                  router.push("/dashboard");
+                }
+              })
+              .catch(function (error) {
+                formPochta.setFieldError("email", "Noto'gri Email");
+                formPochta.setFieldError("password", "Noto'gri password");
+              });
           }
         })
         .catch(function (error) {
@@ -99,12 +105,6 @@ const index = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    if (getCookie("_token") && getCookie("_refresh_token")) {
-      router.push("/dashboard");
-    }
-  }, [router]);
 
   return (
     <>

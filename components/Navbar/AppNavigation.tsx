@@ -72,7 +72,8 @@ const AppNavigation = ({ opened, setOpened }: Props) => {
         searchIcon={<IconSearch size="1.2rem" />}
         searchPlaceholder="Search..."
         shortcut="/"
-        nothingFoundMessage="Nothing found..."
+        nothingFoundMessage="Kurs Topilmadi!"
+        yOffset={"2rem"}
       >
         <Header
           height={{ base: 60 }}

@@ -2,19 +2,21 @@
 import CourseCard from "@/src/Page/course/CourseCard";
 import { useCardBg } from "@/styles/styleJs/useCardBg";
 import { Paper, ScrollArea, Tabs } from "@mantine/core";
-import {
-  IconPhoto,
-  IconMessageCircle,
-  IconSettings,
-} from "@tabler/icons-react";
-import React from "react";
+
+import React, { useState } from "react";
 
 type Props = {
   course: any;
+  category: any;
 };
 
-const index = ({ course }: Props) => {
+const index = ({ course, category }: Props) => {
   const { classes } = useCardBg();
+  const [activeTab, setActiveTab] = useState<string | null>("all");
+
+  const CourseFind = course.filter(
+    (item: { category_slug: string }) => item.category_slug === activeTab
+  );
 
   return (
     <main>
@@ -23,34 +25,32 @@ const index = ({ course }: Props) => {
         radius={"xs"}
         mb={"sm"}
         // withBorder
+        sx={{ overflow: "hidden" }}
       >
-        <Tabs defaultValue="0">
+        <Tabs value={activeTab} onTabChange={setActiveTab}>
           <ScrollArea
             type="never"
             sx={{ display: "flex", flexDirection: "row" }}
             w={"100%"}
           >
             <Tabs.List sx={{ display: "flex", flexWrap: "nowrap" }}>
-              <Tabs.Tab py={"sm"} value="0">
-                Barcha Kurslar
+              <Tabs.Tab py={"sm"} value={"all"}>
+                Hammasi
               </Tabs.Tab>
-              <Tabs.Tab py={"sm"} value="1">
-                Chet Tillari
-              </Tabs.Tab>
-              <Tabs.Tab py={"sm"} value="2">
-                IT
-              </Tabs.Tab>
-              <Tabs.Tab py={"sm"} value="3">
-                Biznes
-              </Tabs.Tab>
-              <Tabs.Tab py={"sm"} value="4">
-                Fanlar
-              </Tabs.Tab>
+              {category.map(
+                (item: { id: number; name: string; slug: string }) => {
+                  return (
+                    <Tabs.Tab py={"sm"} value={item.slug} key={item.id}>
+                      {item.name}
+                    </Tabs.Tab>
+                  );
+                }
+              )}
             </Tabs.List>{" "}
           </ScrollArea>
         </Tabs>
       </Paper>
-      <CourseCard Course={course} />
+      <CourseCard Course={activeTab === "all" ? course : CourseFind} />
     </main>
   );
 };
@@ -58,12 +58,17 @@ const index = ({ course }: Props) => {
 export default index;
 
 export async function getStaticProps() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/course/course/`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL_BACE}/course/course/`);
+  const res2 = await fetch(
+    `${process.env.NEXT_PUBLIC_URL_BACE}/course/category/`
+  );
   const course = await res.json();
+  const category = await res2.json();
 
   return {
     props: {
       course,
+      category,
     },
 
     revalidate: 10,

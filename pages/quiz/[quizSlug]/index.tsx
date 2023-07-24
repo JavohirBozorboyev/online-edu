@@ -1,10 +1,10 @@
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { Grid, Modal, Skeleton, Text } from "@mantine/core";
-import HomeQuizSlugCard from "@/src/Page/Quiz/HomeQuizSlugCard";
 import { useDisclosure } from "@mantine/hooks";
-import HomeQuestionBox from "@/src/Page/Quiz/HomeQuestionBox";
 import { useState } from "react";
+import QuizSlugCard from "@/src/Page/Quiz/QuizSlugCard";
+import QuestionBox from "@/src/Page/Quiz/QuestionBox";
 
 const QuizSlugPage = () => {
   const router = useRouter();
@@ -59,7 +59,7 @@ const QuizSlugPage = () => {
 
   return (
     <>
-      <HomeQuizSlugCard quiz={quiz} openModal={open} setQuziId={setQuizId} />
+      <QuizSlugCard quiz={quiz} openModal={open} setQuziId={setQuizId} />
       <Modal
         opened={opened}
         onClose={close}
@@ -67,7 +67,7 @@ const QuizSlugPage = () => {
         withCloseButton={false}
         fullScreen
       >
-        <HomeQuestionBox list={testList} close={close} />
+        <QuestionBox list={testList} close={close} />
       </Modal>
     </>
   );
