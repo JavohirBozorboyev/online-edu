@@ -43,30 +43,6 @@ const signin = () => {
     },
   });
 
-  const handleAuth = async (values: any) => {
-    axios
-      .post(`${process.env.NEXT_PUBLIC_URL}/api/student/login/`, {
-        email: values.email,
-        password: values.password,
-      })
-      .then(function (response) {
-        if (response.status === 200) {
-          router.reload();
-          setCookie("_token", `${response.data.token.access}`);
-          setCookie("_refresh_token", `${response.data.token.refresh}`);
-          notifications.show({
-            title: "Assalomu Alaykom",
-            message: "Shaxsiy saxifangizga hush kelibsiz.",
-            icon: <IconUser />,
-          });
-        }
-      })
-      .catch(function (error) {
-        formPochta.setFieldError("email", "Noto'gri Email");
-        formPochta.setFieldError("password", "Noto'gri password");
-      });
-  };
-
   const ClickAuth = async (values: any) => {
     signIn("credentials", {
       email: values.email,
@@ -75,7 +51,7 @@ const signin = () => {
     })
       .then((res) => {
         if (res?.status === 200) {
-          router.push("/dashboard");
+          // router.push("/dashboard");
         }
       })
       .catch(function (error) {

@@ -92,7 +92,7 @@ const index = (data: any) => {
   const router = useRouter();
   const { classes: Bg, theme } = useCardBg();
 
-  console.log(data);
+  
 
   return (
     <>

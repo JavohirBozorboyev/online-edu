@@ -2,7 +2,6 @@
 import CourseCard from "@/src/Page/course/CourseCard";
 import { useCardBg } from "@/styles/styleJs/useCardBg";
 import { Paper, ScrollArea, Tabs } from "@mantine/core";
-
 import React, { useState } from "react";
 
 type Props = {
@@ -26,6 +25,7 @@ const index = ({ course, category }: Props) => {
         mb={"sm"}
         // withBorder
         sx={{ overflow: "hidden" }}
+        m={"-sm"}
       >
         <Tabs value={activeTab} onTabChange={setActiveTab}>
           <ScrollArea

@@ -18,6 +18,7 @@ import useSWR from "swr";
 import { getCookie } from "cookies-next";
 import axios from "axios";
 import { IconChartBar, IconPlayerPlayFilled } from "@tabler/icons-react";
+import { useSession } from "next-auth/react";
 
 type Props = {};
 
@@ -47,8 +48,10 @@ const DashCourseCard = (props: Props) => {
   const [opened, { open, close }] = useDisclosure(false);
   const { classes, theme } = useStyles();
 
+  const { data: session } = useSession();
+
   const { data, error, isLoading } = useSWR(
-    [`https://onlineedu.pythonanywhere.com/api/course/course/`],
+    `${process.env.NEXT_PUBLIC_URL_BACE}/course/my-course/`,
 
     { refreshInterval: 1000 * 60 * 60 }
   );

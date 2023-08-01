@@ -4,13 +4,11 @@ import React from "react";
 
 type Props = {};
 
-const index = (props: Props) => {
+const index = (props: any) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   // const { data, error, isLoading } = useSWR(
   //   "https://splatform.pythonanywhere.com/platform/course/"
   // );
-
-  
 
   return (
     <>
