@@ -34,8 +34,6 @@ export const authOptions = (req: any, res: any) => {
 
           const user = await authResponse.json();
 
-          console.log(user.token.access);
-
           return {
             id: user.user_profile_data.id,
             image: { ...user },
