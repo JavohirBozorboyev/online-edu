@@ -9,6 +9,7 @@ import {
   Modal,
   createStyles,
   Skeleton,
+  Box,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
@@ -50,13 +51,36 @@ const DashCourseCard = (props: Props) => {
 
   const { data: session } = useSession();
 
+  const fetcher = (url: string) =>
+    axios
+      .get(url, { headers: { Authorization: "Bearer " + session?.user?.name } })
+      .then((res) => res.data);
+
   const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_URL_BACE}/course/my-course/`,
-
-    { refreshInterval: 1000 * 60 * 60 }
+    fetcher,
+    { refreshInterval: 100 }
   );
 
-  if (error) return <div>failed to load</div>;
+  if (error)
+    return (
+      <>
+        <Grid>
+          <Grid.Col md={6}>
+            <Skeleton height={300} />
+          </Grid.Col>
+          <Grid.Col md={6}>
+            <Skeleton height={300} />
+          </Grid.Col>
+          <Grid.Col md={6}>
+            <Skeleton height={300} />
+          </Grid.Col>
+          <Grid.Col md={6}>
+            <Skeleton height={300} />
+          </Grid.Col>
+        </Grid>
+      </>
+    );
   if (isLoading)
     return (
       <>
@@ -90,21 +114,31 @@ const DashCourseCard = (props: Props) => {
                 className={classes.cardBg}
               >
                 <Card.Section>
-                  <Image src={item.photo} height={200} alt="Norway" />
+                  <Image
+                    src={`${process.env.NEXT_PUBLIC_URL_BACE}/${item.course_photo}`}
+                    height={200}
+                    alt="Norway"
+                  />
                 </Card.Section>
 
                 <Group position="apart" mt="md" mb="xs">
-                  <Text weight={500}>{item.name}</Text>
+                  <Text weight={500}>{item.course_name}</Text>
                   <Badge variant="light">
                     {item.cost} {"so'm"}
                   </Badge>
                 </Group>
 
-                <Text size="sm" color="dimmed">
-                  With Fjord Tours you can explore more of the magical fjord
-                  landscapes with tours and activities on and around the fjords
-                  of Norway
-                </Text>
+                <Box
+                  sx={{ display: "flex", alignItems: "center", gap: "10px" }}
+                >
+                  <Text size="sm" color="dimmed">
+                    {"O'qtuvchi:"}
+                  </Text>
+                  <Text size="sm" color="blue">
+                    {item.course_teacher_name}
+                  </Text>
+                </Box>
+
                 <Text size={"sm"} c="blue.3" mt={"md"}>
                   {item.teacher_name}
                 </Text>
@@ -123,7 +157,7 @@ const DashCourseCard = (props: Props) => {
                     </Button>
                   </Grid.Col>
                   <Grid.Col span={"auto"}>
-                    <Link href={`/dashboard/course/${item.slug}`}>
+                    <Link href={`/dashboard/course/${item.course_slug}`}>
                       <Button
                         leftIcon={<IconPlayerPlayFilled size={"1.2rem"} />}
                         fullWidth

@@ -34,10 +34,12 @@ export const authOptions = (req: any, res: any) => {
 
           const user = await authResponse.json();
 
+          console.log(user.token.access);
+
           return {
             id: user.user_profile_data.id,
             image: { ...user },
-            name: user.user_profile_data.slug,
+            name: user?.token?.access,
             email: user.user_profile_data.email,
           };
         },
@@ -58,8 +60,12 @@ export const authOptions = (req: any, res: any) => {
         return session;
       },
       async jwt({ token, user, account, profile, isNewUser }: any) {
-        if (account) {
-          token.accessToken = token.picture.token.access;
+        if (account && user) {
+          return {
+            ...token,
+            accessToken: user.token,
+            refreshToken: user.refreshToken,
+          };
         }
 
         return token;

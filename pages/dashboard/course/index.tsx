@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import DashCourseCard from "@/src/Page/Dashboard/DashCourse/DashCourseCard";
+import { useSession } from "next-auth/react";
 
 import React from "react";
 
