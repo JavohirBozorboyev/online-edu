@@ -4,6 +4,8 @@ import AppNavigation from "@/components/Navbar/AppNavigation";
 import { useRouter } from "next/router";
 import BottomNavigation from "@/components/Tabs/BottomNavigation";
 import AppNavbar from "@/components/Navbar/AppNavbar";
+import { useSession } from "next-auth/react";
+import { setCookie } from "cookies-next";
 
 interface LayoutType {
   children: React.ReactElement;
@@ -14,6 +16,14 @@ export default function Layout({ children }: LayoutType) {
   const [opened, setOpened] = useState(false);
   const router = useRouter();
   const act = router.route.startsWith("/dashboard");
+
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session?.user?.name) {
+      setCookie("token", `${session?.user?.name}`);
+    }
+  }, [session, router, act]);
 
   return (
     <AppShell

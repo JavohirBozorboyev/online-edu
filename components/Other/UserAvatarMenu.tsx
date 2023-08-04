@@ -19,6 +19,7 @@ const UserAvatarMenu = () => {
 
   const SignOut = useCallback(() => {
     signOut();
+    deleteCookie("token");
   }, []);
 
   return (

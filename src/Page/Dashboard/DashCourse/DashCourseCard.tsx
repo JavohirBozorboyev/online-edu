@@ -49,11 +49,9 @@ const DashCourseCard = (props: Props) => {
   const [opened, { open, close }] = useDisclosure(false);
   const { classes, theme } = useStyles();
 
-  const { data: session } = useSession();
-
   const fetcher = (url: string) =>
     axios
-      .get(url, { headers: { Authorization: "Bearer " + session?.user?.name } })
+      .get(url, { headers: { Authorization: "Bearer " + getCookie("token") } })
       .then((res) => res.data);
 
   const { data, error, isLoading } = useSWR(
