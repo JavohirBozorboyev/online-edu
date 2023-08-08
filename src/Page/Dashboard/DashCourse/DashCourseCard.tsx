@@ -10,6 +10,7 @@ import {
   createStyles,
   Skeleton,
   Box,
+  Paper,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
@@ -18,7 +19,11 @@ import Link from "next/link";
 import useSWR from "swr";
 import { getCookie } from "cookies-next";
 import axios from "axios";
-import { IconChartBar, IconPlayerPlayFilled } from "@tabler/icons-react";
+import {
+  IconAlertSquareRoundedFilled,
+  IconChartBar,
+  IconPlayerPlayFilled,
+} from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 
 type Props = {};
@@ -63,20 +68,7 @@ const DashCourseCard = (props: Props) => {
   if (error)
     return (
       <>
-        <Grid>
-          <Grid.Col md={6}>
-            <Skeleton height={300} />
-          </Grid.Col>
-          <Grid.Col md={6}>
-            <Skeleton height={300} />
-          </Grid.Col>
-          <Grid.Col md={6}>
-            <Skeleton height={300} />
-          </Grid.Col>
-          <Grid.Col md={6}>
-            <Skeleton height={300} />
-          </Grid.Col>
-        </Grid>
+        <Text>Error</Text>
       </>
     );
   if (isLoading)
@@ -102,76 +94,122 @@ const DashCourseCard = (props: Props) => {
   return (
     <>
       <Grid>
-        {data.map((item: any) => {
-          return (
-            <Grid.Col md={6} key={item.id}>
-              <Card
-                shadow="sm"
-                padding="lg"
-                radius="sm"
+        {data.length == 0 ? (
+          <>
+            <Grid.Col>
+              <Paper
                 className={classes.cardBg}
+                radius={"sm"}
+                p={"md"}
+                sx={{
+                  minHeight: "300px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                }}
               >
-                <Card.Section>
-                  <Image
-                    src={`${process.env.NEXT_PUBLIC_URL_BACE}/${item.course_photo}`}
-                    height={200}
-                    alt="Norway"
-                  />
-                </Card.Section>
-
-                <Group position="apart" mt="md" mb="xs">
-                  <Text weight={500}>{item.course_name}</Text>
-                  <Badge variant="light">
-                    {item.cost} {"so'm"}
-                  </Badge>
-                </Group>
-
-                <Box
-                  sx={{ display: "flex", alignItems: "center", gap: "10px" }}
+                <IconAlertSquareRoundedFilled
+                  style={{
+                    color:
+                      theme.colorScheme === "dark"
+                        ? theme.colors.dark[3]
+                        : theme.colors.gray[6],
+                  }}
+                  size={"6rem"}
+                />
+                <Text
+                  sx={{
+                    color:
+                      theme.colorScheme === "dark"
+                        ? theme.colors.dark[3]
+                        : theme.colors.gray[6],
+                  }}
+                  tt={"uppercase"}
+                  fz={"lg"}
+                  fw={"bolder"}
+                  mt={"sm"}
                 >
-                  <Text size="sm" color="dimmed">
-                    {"O'qtuvchi:"}
-                  </Text>
-                  <Text size="sm" color="blue">
-                    {item.course_teacher_name}
-                  </Text>
-                </Box>
-
-                <Text size={"sm"} c="blue.3" mt={"md"}>
-                  {item.teacher_name}
+                  Saqlangan Kurslar mavjud emas !
                 </Text>
+                <Link href={"/course"}>
+                  <Button mt="xl" size="md" px={"xl"}>
+                    {" Kurslar Qo'shish"}
+                  </Button>
+                </Link>
+              </Paper>
+            </Grid.Col>
+          </>
+        ) : (
+          data.map((item: any) => {
+            return (
+              <Grid.Col md={6} key={item.id}>
+                <Card
+                  shadow="sm"
+                  padding="lg"
+                  radius="sm"
+                  className={classes.cardBg}
+                >
+                  <Card.Section>
+                    <Image
+                      src={`${process.env.NEXT_PUBLIC_URL_BACE}/${item.course_photo}`}
+                      height={200}
+                      alt="Norway"
+                    />
+                  </Card.Section>
 
-                <Grid mt={"md"}>
-                  <Grid.Col span={"auto"}>
-                    <Button
-                      leftIcon={<IconChartBar size={"1.2rem"} />}
-                      onClick={open}
-                      color="teal"
-                      radius="sm"
-                      variant="light"
-                      fullWidth
-                    >
-                      Kurs Statistikasi
-                    </Button>
-                  </Grid.Col>
-                  <Grid.Col span={"auto"}>
-                    <Link href={`/dashboard/course/${item.course_slug}`}>
+                  <Group position="apart" mt="md" mb="xs">
+                    <Text weight={500}>{item.course_name}</Text>
+                    <Badge variant="light">Active</Badge>
+                  </Group>
+
+                  <Box
+                    sx={{ display: "flex", alignItems: "center", gap: "10px" }}
+                  >
+                    <Text size="sm" color="dimmed">
+                      {"O'qtuvchi:"}
+                    </Text>
+                    <Text size="sm" color="blue">
+                      {item.course_teacher_name}
+                    </Text>
+                  </Box>
+
+                  <Text size={"sm"} c="blue.3" mt={"md"}>
+                    {item.teacher_name}
+                  </Text>
+
+                  <Grid mt={"md"}>
+                    <Grid.Col span={"auto"}>
                       <Button
-                        leftIcon={<IconPlayerPlayFilled size={"1.2rem"} />}
-                        fullWidth
-                        color="blue"
+                        leftIcon={<IconChartBar size={"1.2rem"} />}
+                        onClick={open}
+                        color="teal"
                         radius="sm"
                         variant="light"
+                        fullWidth
                       >
-                        Kursni Boshlash
+                        Kurs Statistikasi
                       </Button>
-                    </Link>
-                  </Grid.Col>
-                </Grid>
-              </Card>
-            </Grid.Col>
-          );
-        })}
+                    </Grid.Col>
+                    <Grid.Col span={"auto"}>
+                      <Link href={`/dashboard/course/${item.course_slug}`}>
+                        <Button
+                          leftIcon={<IconPlayerPlayFilled size={"1.2rem"} />}
+                          fullWidth
+                          color="blue"
+                          radius="sm"
+                          variant="light"
+                        >
+                          Kursni Boshlash
+                        </Button>
+                      </Link>
+                    </Grid.Col>
+                  </Grid>
+                </Card>
+              </Grid.Col>
+            );
+          })
+        )}
       </Grid>
 
       <Modal size={"lg"} opened={opened} onClose={close} title="Statistika">

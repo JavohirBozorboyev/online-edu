@@ -36,22 +36,7 @@ const index = (props: Props) => {
   if (error)
     return (
       <>
-        <Grid>
-          <Grid.Col md={6}>
-            <Skeleton height={70} />
-          </Grid.Col>
-        </Grid>
-        <Grid mt="md" gutter="xs">
-          <Grid.Col md={6}>
-            <Skeleton height={380} />
-          </Grid.Col>
-          <Grid.Col md={6}>
-            <Skeleton height={380} />
-          </Grid.Col>
-          <Grid.Col>
-            <Skeleton height={300} />
-          </Grid.Col>
-        </Grid>
+        <Text tt={"uppercase"}>Error</Text>
       </>
     );
   if (isLoading)

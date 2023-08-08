@@ -10,13 +10,16 @@ import {
   Paper,
   Text,
 } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 import {
   IconAlertSquareRoundedFilled,
   IconArrowNarrowRight,
   IconPlayerPlay,
 } from "@tabler/icons-react";
+import axios from "axios";
+import { getCookie } from "cookies-next";
 import Link from "next/link";
-import React from "react";
+import React, { useCallback } from "react";
 
 type Props = {
   Course: any;
@@ -25,6 +28,41 @@ type Props = {
 const CourseCard = ({ Course }: Props) => {
   const { classes, theme } = useCardBg();
 
+  const AddCourse = useCallback((id: any, name: string) => {
+    let config = {
+      headers: {
+        Authorization: "Bearer " + getCookie("token"),
+      },
+    };
+    try {
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_URL_BACE}/course/my-course/`,
+          {
+            course: id,
+          },
+          config
+        )
+        .then((res) => {
+          console.log(res);
+
+          if (res.status == 200 && res.data.message) {
+            notifications.show({
+              title: name,
+              message: res.data.message,
+            });
+          }
+          if (res.data.error) {
+            notifications.show({
+              title: name,
+              message: res.data.error,
+            });
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
   return (
     <>
       <Grid gutter="xs">
@@ -114,6 +152,7 @@ const CourseCard = ({ Course }: Props) => {
                       fullWidth
                       mt="md"
                       radius="sm"
+                      onClick={() => AddCourse(item.id, item.name)}
                     >
                       Kursni Saqlash
                     </Button>

@@ -16,6 +16,7 @@ const index = ({ quiz }: Props) => {
         className={classes.cardBg}
         radius={"xs"}
         mb={"sm"}
+        m={"-sm"}
         // withBorder
 
         sx={{ overflow: "hidden" }}

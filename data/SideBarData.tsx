@@ -31,8 +31,8 @@ export const UserData = [
     initiallyOpened: true,
     links: [
       { label: "Statistika", link: "/dashboard" },
-      { label: "My Course", link: "/dashboard/course" },
-      { label: "Account", link: "/dashboard/account" },
+      { label: "Mening Kurslarim", link: "/dashboard/course" },
+      { label: "Akkaunt", link: "/dashboard/account" },
     ],
   },
 ];
